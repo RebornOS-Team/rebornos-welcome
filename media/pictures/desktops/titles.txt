@@ -1,0 +1,9 @@
+cinnamon.png
+budgie.pngFalsedeepin.pngxfce.png
+mate.png
+lxde.png
+lxqt.png
+i3.png
+openbox.png
+enlightenment.png
+patheon.png

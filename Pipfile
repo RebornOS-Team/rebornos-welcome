@@ -1,0 +1,20 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+fenix-library-running = {git = "https://gitlab.com/rebornos-team/fenix/libraries/running.git"}
+fenix-library-configuration = {git = "https://gitlab.com/rebornos-team/fenix/libraries/configuration.git"}
+numpy = "*"
+pipenv = "*"
+vext = "*"
+"vext.gi" = "*"
+
+[dev-packages]
+sphinx = "*"
+sphinx-rtd-theme = "*"
+sphinxcontrib-mermaid = "*"
+
+[requires]
+python_version = "3.9"
