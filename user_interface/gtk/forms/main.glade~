@@ -177,7 +177,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/discord.svg</property>
+                                        <property name="pixbuf">../../../media/icons/rebornos_wiki.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -239,7 +239,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/discord.svg</property>
+                                        <property name="pixbuf">../../../media/icons/arch_wiki.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -301,7 +301,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/website.svg</property>
+                                        <property name="pixbuf">../../../media/icons/status.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>

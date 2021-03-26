@@ -58,6 +58,7 @@ class Main:
         builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
 
         LogMessage.Info("Displaying the main window...").write(self.logging_handler)
+        builder.get_object("main").set_title("Welcome to RebornOS!")
         builder.get_object("main").show_all() # get the main form object and make it visible
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)

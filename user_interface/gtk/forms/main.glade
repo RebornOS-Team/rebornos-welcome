@@ -4,6 +4,7 @@
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkApplicationWindow" id="main">
     <property name="can-focus">False</property>
+    <property name="icon">../../../media/branding/RebornOS_Logo_2.svg</property>
     <property name="urgency-hint">True</property>
     <child>
       <object class="GtkBox">
