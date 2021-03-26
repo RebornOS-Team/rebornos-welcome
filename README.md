@@ -7,24 +7,26 @@
 
 *Please refer to [`LICENSE`](./LICENSE) for license information.*
 
-<!-- *For a detailed API documentation, please check [this page](https://rebornos-team.gitlab.io/fenix-installer/annotated.html)*
-
-*If you would like to help develop Fenix installer, please check [this page](./CONTRIBUTING.md)* -->
-
 ## Overview
 
-Fenix installer consists of a UI-agnostic core that performs tasks that constitute an operating system installation. It is written in `Python`.
+RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation. 
+It contains basic links to help get started on RebornOS as a new user. Some useful resources that are linked include
 
-Some features:
+- The website
+- Download page
+- Support platforms
+  - Discord
+  - Forum
+  - Facebook
+  - Twitter
+- RebornOS Wiki
+- Arch Wiki
+- Donation links
+- Contribution links
 
-* *Live* logging accomplished using reusable thread pools.
-* Easy configuration by editing `JSON` files.
-* Human-readable code that strives to use names that are clear and unambiguous.
-* `Gtk` front-end.
-
-## [PLEASE CLICK HERE](https://rebornos-team.gitlab.io/fenix/fenix-installer/index.html) for the full documentation
+## [PLEASE CLICK HERE](https://rebornos-team.gitlab.io/applications/rebornos-welcome/index.html) for the full documentation
   
-![](media/screenshots/1.png)
+<!-- ![](media/screenshots/1.png)
 
 ![](media/screenshots/2.png)
 
@@ -36,4 +38,4 @@ Some features:
 
 ![](media/screenshots/console_output.gif)
 
-![](media/screenshots/7.png)
+![](media/screenshots/7.png) -->

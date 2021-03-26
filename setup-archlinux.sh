@@ -9,23 +9,23 @@
 # 2.
 
 # Install Python dev tools
-echo [ Fenix Installer Initial Setup for Arch Linux ]
+echo [ RebornOS Welcome Application ]
 echo "Installing \`python\` and \`pip\`..."
 sudo pacman -S --needed --noconfirm python python-pip
 echo "Installing \`pipenv\` through \`pip\`"...
 sudo pip install pipenv
 
 # Install other packages
-echo "Installing \`git\`, \`linux-headers\`, and \`arch-install-scripts\`..."
-sudo pacman -S --needed --noconfirm git linux-headers arch-install-scripts
+echo "Installing \`xdg-utils\`..."
+sudo pacman -S --needed --noconfirm xdg-utils
 
 # Install runtime dependencies
 echo "Installing runtime dependencies..."
 pipenv install
 
 # Adding permissions
-echo "Giving executable permissions to \`fenix-installer.sh\`..."
-sudo chmod +x fenix-installer.sh
+echo "Giving executable permissions to \`rebornos-welcome.sh\`..."
+sudo chmod +x rebornos-welcome.sh
 
 echo ""
 echo "Setup completed. Please refer to the above messages for any errors..."
