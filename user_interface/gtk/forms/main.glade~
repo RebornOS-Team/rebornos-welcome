@@ -691,7 +691,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/discord.svg</property>
+                                        <property name="pixbuf">../../../media/icons/feedback.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -753,7 +753,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/discord.svg</property>
+                                        <property name="pixbuf">../../../media/icons/donate.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -815,7 +815,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/discord.svg</property>
+                                        <property name="pixbuf">../../../media/icons/project.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -877,7 +877,7 @@
                                         <property name="valign">center</property>
                                         <property name="margin-left">25</property>
                                         <property name="margin-start">25</property>
-                                        <property name="pixbuf">../../../media/icons/discord.svg</property>
+                                        <property name="pixbuf">../../../media/icons/about_us.svg</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -985,6 +985,7 @@
                     <property name="margin-start">5</property>
                     <property name="margin-end">5</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_discord_clicked" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -1011,6 +1012,7 @@
                     <property name="margin-start">5</property>
                     <property name="margin-end">5</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_forum_clicked" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -1035,6 +1037,7 @@
                     <property name="margin-start">5</property>
                     <property name="margin-end">5</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_facebook_clicked" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -1059,6 +1062,7 @@
                     <property name="margin-start">5</property>
                     <property name="margin-end">5</property>
                     <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_twitter_clicked" swapped="no"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
