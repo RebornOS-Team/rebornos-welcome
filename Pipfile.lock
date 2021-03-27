@@ -45,7 +45,7 @@
         "fenix-library-running": {
             "editable": true,
             "git": "https://gitlab.com/rebornos-team/fenix/libraries/running.git",
-            "ref": "add106c13eb81ce4d680510a658af30cd977398e"
+            "ref": "9d52b7ddbcf08d4da7197efe61c299fdf87e9ab5"
         },
         "filelock": {
             "hashes": [

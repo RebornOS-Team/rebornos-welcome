@@ -24,7 +24,7 @@ from types import ModuleType
 
 # FENIX IMPORTS
 from fenix_library.configuration import JSONConfiguration # For reading and writing settings files
-from fenix_library.running import LogMessage, LoggingHandler
+from fenix_library.running import LogMessage, LoggingHandler, Command
 
 class RebornOSWelcome():
     """
@@ -56,6 +56,7 @@ class RebornOSWelcome():
         self.application_settings = JSONConfiguration("configuration/settings.json") # to access the settings stored in 'installer.json'
         self.logger = self.setup_logger() # configure the logger
         self.logging_handler = LoggingHandler(logger=self.logger)
+
         self.set_current_working_directory() # set the base directory of the installer as the current working directory       
         commandline_arguments = self.handle_arguments() # handle command line arguments
         self.load_UI(commandline_arguments) # load_data the user interface
