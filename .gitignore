@@ -1,0 +1,10 @@
+documentation/build/*
+documentation/source/_autosummary
+*.pyc
+__pycache__
+*.glade~
+build/*
+# dist/*
+# *.egg-info/*
+.vscode
+*.log
