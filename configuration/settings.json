@@ -12,5 +12,5 @@
     "log_directory": "log/",
     "auto_start_enabled": true,
     "current_log_file_path": "log/installer-2021-03-29_12_29_38_CDT.log",
-    "current_working_directory": "/run/media/shivanandvp/DATA/Development/RebornOS/rebornos-welcome"
+    "current_working_directory": ""
 }
