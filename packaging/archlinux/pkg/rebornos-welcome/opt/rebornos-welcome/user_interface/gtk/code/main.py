@@ -47,8 +47,8 @@ class Main:
         self.logging_handler = LoggingHandler(logger=logger)
 
         LogMessage.Info("Creating a Gtk Builder and importing the UI from glade files...").write(self.logging_handler)
-        builder = Gtk.Builder()
-        builder.add_from_file( # extract the main form from the glade file
+        self.builder = Gtk.Builder()
+        self.builder.add_from_file( # extract the main form from the glade file
             os.path.join(
                 "user_interface",
                 commandline_arguments.user_interface,
@@ -56,11 +56,11 @@ class Main:
                 "main.glade"
             )
         ) 
-        builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
+        self.builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
 
         LogMessage.Info("Displaying the main window...").write(self.logging_handler)
-        builder.get_object("main").set_title("Welcome to RebornOS!")
-        builder.get_object("main").show_all() # get the main form object and make it visible
+        self.builder.get_object("main").set_title("Welcome to RebornOS!")
+        self.builder.get_object("main").show_all() # get the main form object and make it visible
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
@@ -75,27 +75,31 @@ class Main:
 
         Gtk.main_quit() # Quit from the Gtk UI
 
+    def on_about_clicked(self, _):
+        self.builder.get_object("about").show_all()
+
+    def on_about_close(self, _):
+        self.builder.get_object("about").hide()
+
+    def on_startup_toggle(self, button):
+        if button.get_active:
+            startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop_backup")
+            if startup_file.is_file:
+                os.rename(
+                    "/etc/xdg/autostart/rebornos-welcome.desktop_backup",
+                    "/etc/xdg/autostart/rebornos-welcome.desktop"
+                )
+        else:
+            startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
+            if startup_file.is_file:
+                os.rename(
+                    "/etc/xdg/autostart/rebornos-welcome.desktop",
+                    "/etc/xdg/autostart/rebornos-welcome.desktop_backup"                    
+                )
+
     def on_website_clicked(self, _):
-        # command = Command(["ping", "-c", "5", "www.google.com"])
-        # LogMessage.Info("Before ping...").write(self.logging_handler)
-        # print("Before ping print...")
-        # command.run_and_log(self.logging_handler)
-        # LogMessage.Info("After ping...").write(self.logging_handler)
-        # print("After ping print...")
-
-        # command = Command(["ping", "-c", "5", "www.amazon.com"])
-        # LogMessage.Info("Before ping 2...").write(self.logging_handler)
-        # print("Before ping 2 print...")
-        # command.run_and_log(self.logging_handler)
-        # LogMessage.Info("After ping 2...").write(self.logging_handler)
-        # print("After ping 2 print...")
-
         command = Command(["xdg-open", "https://rebornos.org/"])
-        # LogMessage.Info("Before xdg-open...").write(self.logging_handler)
-        # print("Before xdg-open print...")
         command.run_and_log(self.logging_handler)
-        # LogMessage.Info("After xdg-open...").write(self.logging_handler)
-        # print("After xdg-open print...")
 
     def on_rebornos_wiki_clicked(self, _):
         command = Command(["xdg-open", "https://osdn.net/projects/rebornos/wiki/TitleIndex"])
@@ -140,3 +144,5 @@ class Main:
     def on_about_us_clicked(self, _):
         command = Command(["xdg-open", "https://rebornos.org/about-us/"])
         command.run_and_log(self.logging_handler)
+
+
