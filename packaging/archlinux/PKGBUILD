@@ -39,6 +39,7 @@ package() {
     cd ..
 
     install -D -m 755 rebornos-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
+    install -D -m 777 rebornos-welcome.desktop "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
 
     cd ../..
 
