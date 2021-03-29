@@ -59,6 +59,10 @@ class RebornOSWelcome():
 
         self.set_current_working_directory() # set the base directory of the installer as the current working directory       
         commandline_arguments = self.handle_arguments() # handle command line arguments
+        if commandline_arguments.startup:
+            if not self.application_settings["auto_start_enabled"]:
+                LogMessage.Info("Application not enabled to run at startup. Exiting...").write(logging_handler=self.logging_handler)
+                exit(0)
         self.load_UI(commandline_arguments) # load_data the user interface
 
     def setup_logger(self) -> logging.Logger:
@@ -159,6 +163,13 @@ class RebornOSWelcome():
             choices= self.application_settings.get_available_choices_for_item("ui-toolkits"),
             default= self.application_settings.get_default_choice_for_item("ui-toolkits"),
             help= "specify the UI toolkit."
+        )
+
+        argument_parser.add_argument( # define a command line argument for selecting UI toolkits
+            '-s', '--startup',
+            action='store_true',
+            default=False,
+            help= "Indicate that the application is being launched at starup"
         )
 
         parsed_args = argument_parser.parse_args()

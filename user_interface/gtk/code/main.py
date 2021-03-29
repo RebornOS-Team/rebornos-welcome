@@ -45,6 +45,7 @@ class Main:
         """
 
         self.logging_handler = LoggingHandler(logger=logger)
+        self.application_settings = JSONConfiguration("configuration/settings.json")
 
         LogMessage.Info("Creating a Gtk Builder and importing the UI from glade files...").write(self.logging_handler)
         self.builder = Gtk.Builder()
@@ -63,12 +64,8 @@ class Main:
         self.builder.get_object("main").show_all() # get the main form object and make it visible
 
         LogMessage.Debug("Detecting if the application is enabled at startup...").write(self.logging_handler)
-        startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
-        if startup_file.is_file():
-            if os.path.getsize(startup_file):
-                self.builder.get_object("startup_toggle").set_active(True)
-            else:
-                self.builder.get_object("startup_toggle").set_active(False)
+        if self.application_settings["auto_start_enabled"]:
+            self.builder.get_object("startup_toggle").set_active(True)
         else:
             self.builder.get_object("startup_toggle").set_active(False)
 
@@ -90,29 +87,29 @@ class Main:
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
         self.builder.get_object("about").show_all()
 
+    def on_log_clicked(self, _):
+        LogMessage.Debug("Opening the log on the default editor...").write(self.logging_handler)
+        command = Command(["xdg-open", self.application_settings["current_log_file_path"]])
+        command.run_and_log(self.logging_handler)
+
+    def on_config_clicked(self, _):
+        LogMessage.Debug("Opening the log on the default editor...").write(self.logging_handler)
+        command = Command(["xdg-open", "configuration/settings.json"])
+        command.run_and_log(self.logging_handler)
+
     def on_about_close(self, _):
         LogMessage.Debug("Hiding the \"About\" dialog...").write(self.logging_handler)
         self.builder.get_object("about").hide()
 
     def on_startup_toggle(self, button):
         LogMessage.Debug("Startup checkbox toggled...").write(self.logging_handler)
-        desktop_file = Path("/usr/share/applications/rebornos-welcome.desktop")
-        startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
-        if desktop_file.is_file() and startup_file.is_file():
-            LogMessage.Debug(".desktop file located at " + str(desktop_file.resolve()) + "...").write(self.logging_handler)
-            LogMessage.Debug(".desktop file located at " + str(startup_file.resolve()) + "...").write(self.logging_handler)
-            if button.get_active():
-                LogMessage.Info("Enabling the application at startup...").write(self.logging_handler)
-                with open(desktop_file, "r") as source_file:
-                    with open(startup_file, "w") as destination_file:
-                        for line in source_file:
-                            destination_file.write(line) 
-            else:
-                LogMessage.Info("Disabling the application at startup...").write(self.logging_handler)
-                open(startup_file, 'w').close()
+        if button.get_active():
+            LogMessage.Debug("Enabling auto start...").write(self.logging_handler)
+            self.application_settings["auto_start_enabled"] = True
         else:
-            LogMessage.Debug(".desktop file not found at either " + str(desktop_file.resolve()) + \
-                "or " + str(startup_file.resolve()) + ". Ignoring checkbox toggle...").write(self.logging_handler)
+            LogMessage.Debug("Disabling auto start...").write(self.logging_handler)
+            self.application_settings["auto_start_enabled"] = False
+        self.application_settings.write_data()
 
     def on_website_clicked(self, _):
         LogMessage.Debug("Opening the RebornOS website on the default browser...").write(self.logging_handler)

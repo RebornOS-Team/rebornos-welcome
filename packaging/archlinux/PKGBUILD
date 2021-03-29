@@ -1,6 +1,6 @@
 # Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
 pkgname='rebornos-welcome'
-pkgver=0.0.2
+pkgver=0.0.3
 pkgrel=1
 pkgdesc='RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation'
 arch=('any')
@@ -40,7 +40,7 @@ package() {
     cd ..
 
     install -D -m 755 rebornos-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
-    install -D -m 777 rebornos-welcome.desktop "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
+    install -D -m 755 rebornos-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
 
     cd ../..
 
