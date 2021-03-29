@@ -1,10 +1,10 @@
 # Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
 pkgname='rebornos-welcome'
-pkgver=0.0.5
+pkgver=0.0.6
 pkgrel=1
 pkgdesc='RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation'
 arch=('any')
-url='https://rebornos-team.gitlab.io/applications/rebornos-welcome'
+url='https://gitlab.com/rebornos-team/applications/rebornos-welcome'
 license=('AGPL3')
 groups=('rebornos')
 depends=('python'
