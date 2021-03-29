@@ -81,6 +81,22 @@ class Main:
     def on_about_close(self, _):
         self.builder.get_object("about").hide()
 
+    def on_startup_toggle(self, button):
+        if button.get_active:
+            startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop_backup")
+            if startup_file.is_file:
+                os.rename(
+                    "/etc/xdg/autostart/rebornos-welcome.desktop_backup",
+                    "/etc/xdg/autostart/rebornos-welcome.desktop"
+                )
+        else:
+            startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
+            if startup_file.is_file:
+                os.rename(
+                    "/etc/xdg/autostart/rebornos-welcome.desktop",
+                    "/etc/xdg/autostart/rebornos-welcome.desktop_backup"                    
+                )
+
     def on_website_clicked(self, _):
         command = Command(["xdg-open", "https://rebornos.org/"])
         command.run_and_log(self.logging_handler)

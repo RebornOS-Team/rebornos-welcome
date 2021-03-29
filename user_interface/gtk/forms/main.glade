@@ -1147,6 +1147,7 @@ See the &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;GNU Affero Ge
                     <property name="receives-default">False</property>
                     <property name="active">True</property>
                     <property name="draw-indicator">True</property>
+                    <signal name="toggled" handler="on_startup_toggle" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
