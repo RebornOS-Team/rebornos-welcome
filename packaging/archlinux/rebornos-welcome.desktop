@@ -25,7 +25,7 @@ Icon=/opt/rebornos-welcome/media/branding/RebornOS_Logo_2.svg
 Terminal=false
 
 # Describes the categories in which this entry should be shown
-Categories=System;Utility;
+Categories=System;Utility;Accessibility;GTK;
 
 # A list of strings which may be used in addition to other metadata to describe this entry. This can be useful e.g. to facilitate searching through entries
 Keywords=RebornOS;Welcome;Start;Help;Get Started;
