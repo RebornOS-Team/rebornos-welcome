@@ -13,7 +13,7 @@
     <property name="skip-taskbar-hint">True</property>
     <property name="deletable">False</property>
     <property name="program-name">RebornOS Welcome Application</property>
-    <property name="version">0.0.4</property>
+    <property name="version">0.0.5</property>
     <property name="copyright" translatable="yes">Copyright © 2021, RebornOS</property>
     <property name="website">https://rebornos.org/</property>
     <property name="website-label" translatable="yes">Website</property>

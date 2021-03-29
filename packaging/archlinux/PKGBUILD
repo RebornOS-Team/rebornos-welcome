@@ -1,6 +1,6 @@
 # Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
 pkgname='rebornos-welcome'
-pkgver=0.0.4
+pkgver=0.0.5
 pkgrel=1
 pkgdesc='RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation'
 arch=('any')

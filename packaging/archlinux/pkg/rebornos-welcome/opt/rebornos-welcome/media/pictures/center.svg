@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,10 +60,10 @@
        id="guide830" />
   </sodipodi:namedview>
   <rect
-     style="fill:#f1f1f1;fill-opacity:1;stroke:none;stroke-width:2.07729;stroke-linecap:round;stroke-linejoin:bevel"
+     style="fill:#f1f1f1;fill-opacity:1;stroke:none;stroke-width:2.14583;stroke-linecap:round;stroke-linejoin:bevel"
      id="rect838"
-     width="178.94624"
+     width="190.94984"
      height="105.33354"
-     x="-0.97988266"
+     x="-12.98349"
      y="-1.6622487" />
 </svg>
