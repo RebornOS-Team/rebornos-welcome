@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1000.0007"
-   height="500"
-   viewBox="0 0 264.52383 132.26182"
+   width="660"
+   height="370"
+   viewBox="0 0 174.58561 97.873747"
    version="1.1"
    id="svg10"
    sodipodi:docname="center.svg"
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -42,8 +42,8 @@
      id="namedview12"
      showgrid="false"
      inkscape:zoom="1"
-     inkscape:cx="512.60468"
-     inkscape:cy="294.41601"
+     inkscape:cx="271.89559"
+     inkscape:cy="294.87849"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -60,10 +60,10 @@
        id="guide830" />
   </sodipodi:namedview>
   <rect
-     style="fill:#f1f1f1;fill-opacity:1;stroke:none;stroke-width:2.99001;stroke-linecap:round;stroke-linejoin:bevel"
+     style="fill:#f1f1f1;fill-opacity:1;stroke:none;stroke-width:2.07729;stroke-linecap:round;stroke-linejoin:bevel"
      id="rect838"
-     width="275.99097"
-     height="141.49658"
-     x="-6.4900579"
-     y="0" />
+     width="178.94624"
+     height="105.33354"
+     x="-0.97988266"
+     y="-1.6622487" />
 </svg>

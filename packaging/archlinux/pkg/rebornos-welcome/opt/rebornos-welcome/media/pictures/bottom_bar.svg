@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1000.0007"
-   height="126.42799"
-   viewBox="0 0 264.52383 33.443192"
+   width="660"
+   height="83.442467"
+   viewBox="0 0 174.58561 22.072504"
    version="1.1"
    id="svg10"
    sodipodi:docname="bottom_bar.svg"
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -41,9 +41,9 @@
      inkscape:window-height="1004"
      id="namedview12"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="512.60468"
-     inkscape:cy="294.41601"
+     inkscape:zoom="4"
+     inkscape:cx="44.488589"
+     inkscape:cy="39.396679"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -54,10 +54,10 @@
      fit-margin-bottom="0"
      inkscape:document-rotation="0" />
   <rect
-     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:1.45363;stroke-linecap:round;stroke-linejoin:bevel"
+     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:1.2875;stroke-linecap:round;stroke-linejoin:bevel"
      id="rect838"
-     width="275.99097"
-     height="33.443192"
-     x="-6.4900579"
-     y="0" />
+     width="197.12379"
+     height="36.732628"
+     x="-0.33245343"
+     y="-6.8441691" />
 </svg>

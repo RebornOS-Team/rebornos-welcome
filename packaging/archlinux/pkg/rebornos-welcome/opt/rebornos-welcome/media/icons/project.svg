@@ -11,12 +11,12 @@
    version="1.1"
    x="0px"
    y="0px"
-   viewBox="0 0 50 50"
+   viewBox="0 0 33 33"
    xml:space="preserve"
    id="svg37"
    sodipodi:docname="project.svg"
-   width="50"
-   height="50"
+   width="33"
+   height="33"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)"><metadata
    id="metadata43"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
@@ -34,13 +34,14 @@
    inkscape:window-height="1004"
    id="namedview39"
    showgrid="false"
-   inkscape:zoom="5.5957066"
-   inkscape:cx="53.244338"
-   inkscape:cy="13.317905"
+   inkscape:zoom="22.382826"
+   inkscape:cx="19.252358"
+   inkscape:cy="14.979697"
    inkscape:window-x="0"
    inkscape:window-y="0"
    inkscape:window-maximized="1"
-   inkscape:current-layer="svg37" />
+   inkscape:current-layer="logo_art"
+   inkscape:document-rotation="0" />
 <style
    type="text/css"
    id="style2">
@@ -75,9 +76,10 @@
 </style>
 <g
    id="logo_art"
-   transform="matrix(0.14765414,0,0,0.14765414,-18.314477,-16.298402)">
+   transform="matrix(0.14765414,0,0,0.14765414,-18.2598,-18.224631)">
 	<g
-   id="g13">
+   id="g13"
+   transform="matrix(0.65895156,0,0,0.65895156,42.537346,51.529435)">
 		<path
    id="path50_2_"
    class="st3"
@@ -100,11 +102,11 @@
    d="m 442.346,243.662 h -87.12 l 37.425,-115.224 c 1.919,-5.895 10.282,-5.895 12.27,0 z" />
 		<polygon
    class="st5"
-   points="355.225,243.662 442.346,243.662 293.026,434.983 "
+   points="442.346,243.662 293.026,434.983 355.225,243.662 "
    id="polygon9" />
 		<polygon
    class="st5"
-   points="143.798,243.662 230.918,243.662 293.026,434.983 "
+   points="230.918,243.662 293.026,434.983 143.798,243.662 "
    id="polygon11" />
 	</g>
 </g>

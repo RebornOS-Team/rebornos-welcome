@@ -2,12 +2,12 @@
 # using fakeroot version 1.25.3
 pkgname = rebornos-welcome
 pkgbase = rebornos-welcome
-pkgver = 0.0.3-1
+pkgver = 0.0.4-1
 pkgdesc = RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation
 url = https://rebornos-team.gitlab.io/applications/rebornos-welcome
-builddate = 1617041336
+builddate = 1617048945
 packager = Unknown Packager
-size = 10718159
+size = 10716917
 arch = any
 license = AGPL3
 group = rebornos

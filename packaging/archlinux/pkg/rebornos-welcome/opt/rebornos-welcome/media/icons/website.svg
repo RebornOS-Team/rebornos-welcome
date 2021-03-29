@@ -9,11 +9,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    id="svg3263"
-   viewBox="0 0 49.999999 49.999998"
+   viewBox="0 0 32.999999 32.999999"
    version="1.1"
    sodipodi:docname="website.svg"
-   width="50"
-   height="50"
+   width="33"
+   height="33"
    inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -28,13 +28,14 @@
      inkscape:window-height="1004"
      id="namedview115"
      showgrid="false"
-     inkscape:zoom="9.6384944"
-     inkscape:cx="27.740171"
-     inkscape:cy="19.354855"
+     inkscape:zoom="19.276989"
+     inkscape:cx="18.511377"
+     inkscape:cy="16.832752"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg3263" />
+     inkscape:current-layer="svg3263"
+     inkscape:document-rotation="0" />
   <title
      id="title3639">World Wide Web</title>
   <defs
@@ -261,7 +262,7 @@
   </defs>
   <g
      id="layer1-0"
-     transform="matrix(1.2501665,0,0,1.2501665,-5.7548844,-4.3480847)">
+     transform="matrix(0.82607543,0,0,0.82607543,-3.7690135,-2.9064734)">
     <path
        id="path3214"
        d="m 43.96,23.485 c 0,10.71 -8.6821,19.392 -19.39,19.392 -10.709,0 -19.391,-8.6821 -19.391,-19.392 0,-10.709 8.6816,-19.39 19.391,-19.39 10.708,0 19.39,8.6811 19.39,19.39 z"
