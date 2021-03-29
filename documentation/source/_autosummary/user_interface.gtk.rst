@@ -29,5 +29,4 @@ user\_interface.gtk
    :recursive:
 
    user_interface.gtk.code
-   user_interface.gtk.utilities
 

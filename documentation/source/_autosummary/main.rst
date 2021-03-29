@@ -19,7 +19,7 @@
       :toctree:                                          
       :template: custom-class-template.rst               
    
-      FenixInstaller
+      RebornOSWelcome
    
    
 

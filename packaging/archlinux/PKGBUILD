@@ -15,6 +15,7 @@ depends=('python'
          'xdg-utils')
 makedepends=('git'
              'python-setuptools'
+             'python-pip'
              'python-pipenv')
 provides=("${pkgname}")
 conflicts=("${pkgname}")
@@ -27,8 +28,7 @@ noextract=()
 md5sums=('SKIP')
 
 build() {
-    cd '..' && rm -rf pkg/* src/* *.pkg.tar
-    cd '../..' && python setup.py build
+    :
 }
 
 check() {
@@ -36,5 +36,32 @@ check() {
 }
 
 package() {
-    cd '../../..' && python setup.py install --root="$pkgdir" --optimize=1 --skip-build && rm -rf build *.egg-info
+    cd ..
+
+    install -m 755 rebornos-welcome.desktop "${pkgdir}/usr/share/applications"
+
+    cd ../..
+
+    install -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-welcome/configuration"
+
+    cp -rf documentation "${pkgdir}/opt/rebornos-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-welcome/documentation"
+
+    install -d -m 666 "${pkgdir}/opt/rebornos-welcome/log"
+
+    cp -rf media "${pkgdir}/opt/rebornos-welcome"
+    chmod -R 644 "${pkgdir}/opt/rebornos-welcome/media"
+
+    cp -rf scripts "${pkgdir}/opt/rebornos-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-welcome/scripts"
+
+    cp -rf user_interface "${pkgdir}/opt/rebornos-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-welcome/user_interface"
+
+    install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-welcome"
+
+    install -m 755 main.py rebornos-welcome.sh setup-archlinux.sh "${pkgdir}/opt/rebornos-welcome"
+    ln -s rebornos-welcome.sh "${pkgdir}/usr/bin/rebornos-welcome.sh"
+
+    install -m 666 Pipfile.lock "${pkgdir}/opt/rebornos-welcome"
 }

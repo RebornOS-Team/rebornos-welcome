@@ -1,4 +1,4 @@
-user\_interface.gtk.code.main.Main
+﻿user\_interface.gtk.code.main.Main
 ==================================
 
 .. currentmodule:: user_interface.gtk.code.main
@@ -24,10 +24,19 @@ user\_interface.gtk.code.main.Main
    .. autosummary::
    
       ~Main.__init__
-      ~Main.main_consoleResized
-      ~Main.main_onBackClicked
-      ~Main.main_onClose
-      ~Main.main_onNextClicked
+      ~Main.on_about_us_clicked
+      ~Main.on_arch_wiki_clicked
+      ~Main.on_close
+      ~Main.on_discord_clicked
+      ~Main.on_donate_clicked
+      ~Main.on_facebook_clicked
+      ~Main.on_feedback_clicked
+      ~Main.on_forum_clicked
+      ~Main.on_project_clicked
+      ~Main.on_rebornos_wiki_clicked
+      ~Main.on_service_status_clicked
+      ~Main.on_twitter_clicked
+      ~Main.on_website_clicked
    
    
 

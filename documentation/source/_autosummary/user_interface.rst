@@ -28,6 +28,5 @@
    :template: custom-module-template.rst                
    :recursive:
 
-   user_interface.command_line
    user_interface.gtk
 
