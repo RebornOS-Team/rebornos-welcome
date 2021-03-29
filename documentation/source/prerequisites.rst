@@ -44,11 +44,11 @@ Manual Setup
         
         sudo pip install pipenv
 
-3. **Install other packages**: :code:`xdg-utils`, :code:`git`, :code:`linux-headers`, and :code:`arch-install-scripts`
+3. **Install other packages**: :code:`xdg-utils` and :code:`git`
 
     .. code-block:: bash
             
-        sudo pacman -S --needed git linux-headers arch-install-scripts xdg-utils
+        sudo pacman -S --needed git xdg-utils
 
 4. **The program itself**: Download **Fenix Installer** into a directory of your choice
 

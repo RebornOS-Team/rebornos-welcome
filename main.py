@@ -88,9 +88,9 @@ class RebornOSWelcome():
         logger.propagate = False
         
         # Set up file-based logging
-        log_file_path = pathlib.Path("log/" + "installer-" + RebornOSWelcome.get_time_stamp() + ".log")
+        log_file_path = pathlib.Path(self.application_settings["log_directory"]) / ("installer-" + RebornOSWelcome.get_time_stamp() + ".log")
         print("Logging to " + str(log_file_path.resolve()) + "...\n")
-        self.application_settings["log_file_path"] = str(log_file_path)
+        self.application_settings["current_log_file_path"] = str(log_file_path)
         self.application_settings.write_data()
         log_file_handler = logging.FileHandler(log_file_path) # for logging onto files
         log_file_handler.setLevel(logging.DEBUG) # log debug messages and higher

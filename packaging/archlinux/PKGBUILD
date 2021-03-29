@@ -1,0 +1,40 @@
+# Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
+pkgname='rebornos-welcome'
+pkgver=0.0.1
+pkgrel=1
+pkgdesc='RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation'
+arch=('any')
+url='https://rebornos-team.gitlab.io/applications/rebornos-welcome'
+license=('AGPL3')
+groups=('rebornos')
+depends=('python'
+         'python-fenix_library-running>=0.0.7'
+         'python-fenix_library-configuration>=0.0.3'
+         'python-gobject'
+         'python-numpy'
+         'xdg-utils')
+makedepends=('git'
+             'python-setuptools'
+             'python-pipenv')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+replaces=()
+backup=()
+options=()
+install=
+source=()
+noextract=()
+md5sums=('SKIP')
+
+build() {
+    cd '..' && rm -rf pkg/* src/* *.pkg.tar
+    cd '../..' && python setup.py build
+}
+
+check() {
+    :
+}
+
+package() {
+    cd '../../..' && python setup.py install --root="$pkgdir" --optimize=1 --skip-build && rm -rf build *.egg-info
+}

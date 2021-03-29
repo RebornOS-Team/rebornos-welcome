@@ -1,0 +1,4 @@
+fenix-library-running>=0.0.7
+fenix-library-configuration>=0.0.3
+pygobject
+numpy
