@@ -62,6 +62,16 @@ class Main:
         self.builder.get_object("main").set_title("Welcome to RebornOS!")
         self.builder.get_object("main").show_all() # get the main form object and make it visible
 
+        LogMessage.Debug("Detecting if the application is enabled at startup...").write(self.logging_handler)
+        startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
+        if startup_file.is_file():
+            if os.path.getsize(startup_file):
+                self.builder.get_object("startup_toggle").set_active(True)
+            else:
+                self.builder.get_object("startup_toggle").set_active(False)
+        else:
+            self.builder.get_object("startup_toggle").set_active(False)
+
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
 
@@ -73,75 +83,94 @@ class Main:
         Called when the application is closedMainFormHandler
         """
 
+        LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
         Gtk.main_quit() # Quit from the Gtk UI
 
     def on_about_clicked(self, _):
+        LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
         self.builder.get_object("about").show_all()
 
     def on_about_close(self, _):
+        LogMessage.Debug("Hiding the \"About\" dialog...").write(self.logging_handler)
         self.builder.get_object("about").hide()
 
     def on_startup_toggle(self, button):
-        if button.get_active:
-            startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop_backup")
-            if startup_file.is_file:
-                os.rename(
-                    "/etc/xdg/autostart/rebornos-welcome.desktop_backup",
-                    "/etc/xdg/autostart/rebornos-welcome.desktop"
-                )
+        LogMessage.Debug("Startup checkbox toggled...").write(self.logging_handler)
+        desktop_file = Path("/usr/share/applications/rebornos-welcome.desktop")
+        startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
+        if desktop_file.is_file() and startup_file.is_file():
+            LogMessage.Debug(".desktop file located at " + str(desktop_file.resolve()) + "...").write(self.logging_handler)
+            LogMessage.Debug(".desktop file located at " + str(startup_file.resolve()) + "...").write(self.logging_handler)
+            if button.get_active():
+                LogMessage.Info("Enabling the application at startup...").write(self.logging_handler)
+                with open(desktop_file, "r") as source_file:
+                    with open(startup_file, "w") as destination_file:
+                        for line in source_file:
+                            destination_file.write(line) 
+            else:
+                LogMessage.Info("Disabling the application at startup...").write(self.logging_handler)
+                open(startup_file, 'w').close()
         else:
-            startup_file = Path("/etc/xdg/autostart/rebornos-welcome.desktop")
-            if startup_file.is_file:
-                os.rename(
-                    "/etc/xdg/autostart/rebornos-welcome.desktop",
-                    "/etc/xdg/autostart/rebornos-welcome.desktop_backup"                    
-                )
+            LogMessage.Debug(".desktop file not found at either " + str(desktop_file.resolve()) + \
+                "or " + str(startup_file.resolve()) + ". Ignoring checkbox toggle...").write(self.logging_handler)
 
     def on_website_clicked(self, _):
+        LogMessage.Debug("Opening the RebornOS website on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/"])
         command.run_and_log(self.logging_handler)
 
     def on_rebornos_wiki_clicked(self, _):
+        LogMessage.Debug("Opening RebornOS Wiki on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://osdn.net/projects/rebornos/wiki/TitleIndex"])
         command.run_and_log(self.logging_handler)
     
     def on_arch_wiki_clicked(self, _):
+        LogMessage.Debug("Opening Arch Wiki on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://wiki.archlinux.org/"])
         command.run_and_log(self.logging_handler)
 
     def on_service_status_clicked(self, _):
+        LogMessage.Debug("Opening Service Status page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://status.rebornos.org/"])
         command.run_and_log(self.logging_handler)
 
     def on_discord_clicked(self, _):
+        LogMessage.Debug("Opening the Discord Server on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://discord.gg/cU5s6MPpQH"])
         command.run_and_log(self.logging_handler)
 
     def on_forum_clicked(self, _):
+        LogMessage.Debug("Opening the RebornOS Forum page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.discourse.group/"])
         command.run_and_log(self.logging_handler)
 
     def on_facebook_clicked(self, _):
+        LogMessage.Debug("Opening the Facebook page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://www.facebook.com/rebornos/"])
         command.run_and_log(self.logging_handler)
     
     def on_twitter_clicked(self, _):
+        LogMessage.Debug("Opening the Twitter page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://twitter.com/rebornoslinux"])
         command.run_and_log(self.logging_handler)
 
     def on_feedback_clicked(self, _):
+        LogMessage.Debug("Opening the Feedback page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/pixpopup-item/feedback/"])
         command.run_and_log(self.logging_handler)
 
     def on_donate_clicked(self, _):
+        LogMessage.Debug("Opening the donation page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/donate/"])
         command.run_and_log(self.logging_handler)
 
     def on_project_clicked(self, _):
+        LogMessage.Debug("Opening the Gitlab page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://gitlab.com/rebornos-team"])
         command.run_and_log(self.logging_handler)
 
     def on_about_us_clicked(self, _):
+        LogMessage.Debug("Opening the \"About us\" page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/about-us/"])
         command.run_and_log(self.logging_handler)
 

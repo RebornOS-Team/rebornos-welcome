@@ -1141,7 +1141,7 @@ See the &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;GNU Affero Ge
                 <property name="margin-bottom">15</property>
                 <property name="hexpand">True</property>
                 <child>
-                  <object class="GtkCheckButton">
+                  <object class="GtkCheckButton" id="startup_toggle">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">False</property>
