@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Prerequisites - What you need to run Fenix Installer &mdash; Fenix Installer 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Welcome to Fenix Installer’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Fenix Installer
+          
+
+          
+            
+            <img src="_static/rebornos.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Help:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Welcome</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Prerequisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-setup-script">Using the Setup Script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-setup">Manual Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api_documentation.html">Fenix Installer</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Fenix Installer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Prerequisites - What you need to run Fenix Installer</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/prerequisites.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Fenix Installer’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+  </div>
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <style type="text/css">
+  span.underlined {
+    text-decoration: underline;
+  }
+</style><div class="section" id="prerequisites-what-you-need-to-run-fenix-installer">
+<span id="prerequisites"></span><h1>Prerequisites - What you need to run Fenix Installer<a class="headerlink" href="#prerequisites-what-you-need-to-run-fenix-installer" title="Permalink to this headline">¶</a></h1>
+<p><strong>Note</strong>: Currently, <strong>Fenix Installer</strong> only supports <strong>Arch Linux</strong> and its derivatives (like <em>RebornOS</em>, <em>EndeavourOS</em>, <em>Manjaro</em>, etc.). Your build system (where you run <strong>Fenix Installer</strong>) should be booted into  <strong>Arch Linux</strong> or one of its derivates before proceeding.</p>
+<p>Follow <span class="underlined">one</span> of the below sections to set up <strong>Fenix Installer</strong> before running. The below commands must be run on a <strong>terminal</strong>.</p>
+<div class="section" id="using-the-setup-script">
+<h2>Using the Setup Script<a class="headerlink" href="#using-the-setup-script" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>Download the project</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://gitlab.com/rebornos-team/fenix/fenix-installer.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Run the setup script</strong>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> fenix-installer
+sh setup-archlinux.sh
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>If the script ran successfully, congratulations! You are ready to run <strong>Fenix Installer</strong>. Proceed to <a class="reference internal" href="usage.html#usage"><span class="std std-ref">Usage</span></a> for further steps.</p>
+</div>
+<div class="section" id="manual-setup">
+<h2>Manual Setup<a class="headerlink" href="#manual-setup" title="Permalink to this headline">¶</a></h2>
+<p><strong>Warning</strong>: Please skip this section if you have already run the setup script successfully.</p>
+<ol class="arabic">
+<li><p><strong>Install python dev tools</strong>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Install the packages <code class="code docutils literal notranslate"><span class="pre">python</span></code> and <code class="code docutils literal notranslate"><span class="pre">pip</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo pacman -S --needed python python-pip
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Install <code class="code docutils literal notranslate"><span class="pre">pipenv</span></code> through <code class="code docutils literal notranslate"><span class="pre">pip</span></code></p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo pip install pipenv
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" start="3">
+<li><p><strong>Install other packages</strong>: <code class="code docutils literal notranslate"><span class="pre">xdg-utils</span></code> and <code class="code docutils literal notranslate"><span class="pre">git</span></code></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo pacman -S --needed git xdg-utils
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>The program itself</strong>: Download <strong>Fenix Installer</strong> into a directory of your choice</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://gitlab.com/rebornos-team/fenix/fenix-installer.git
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Runtime dependencies</strong>: Install the <em>python modules</em> required by <strong>Fenix Installer</strong></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> fenix-installer
+pipenv install
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><strong>Executable permissions</strong>: Provide executable permissions to the installer script</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo chmod +x fenix-installer.sh
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p>If you performed all the above steps successfully, congratulations! You are ready to run <strong>Fenix Installer</strong>. Proceed to <a class="reference internal" href="usage.html#usage"><span class="std std-ref">Usage</span></a> for further steps.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Fenix Installer’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, RebornOS.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>user_interface.gtk.code.main &mdash; Fenix Installer 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../../index.html" class="icon icon-home"> Fenix Installer
+          
+
+          
+            
+            <img src="../../../../_static/rebornos.svg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Help:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">Welcome</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../prerequisites.html">Prerequisites</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../configuration.html">Customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a></li>
+</ul>
+<p class="caption"><span class="caption-text">API Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_documentation.html">Fenix Installer</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Fenix Installer</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+        
+      <li>user_interface.gtk.code.main</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for user_interface.gtk.code.main</h1><div class="highlight"><pre>
+<span></span><span class="c1"># RebornOS Welcome</span>
+<span class="c1"># Please refer to the file `LICENSE` in the main directory for license information. </span>
+<span class="c1"># For a high level documentation, please visit https://gitlab.com/rebornos-team/applications/rebornos-welcome</span>
+
+<span class="c1"># AUTHORS</span>
+<span class="c1"># 1. Shivanand Pattanshetti (shivanand.pattanshetti@gmail.com)</span>
+<span class="c1"># 2. </span>
+
+<span class="c1"># IMPORTS</span>
+<span class="kn">import</span> <span class="nn">os</span> <span class="c1"># for filepath related methods</span>
+<span class="kn">import</span> <span class="nn">gi</span> <span class="c1"># Python GObject introspection module which contains Python bindings and support for Gtk</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Gtk&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0&#39;</span><span class="p">)</span> <span class="c1"># make sure that the Gtk version is at the required level</span>
+<span class="kn">from</span> <span class="nn">gi.repository</span> <span class="kn">import</span> <span class="n">Gtk</span><span class="p">,</span> <span class="n">GLib</span> <span class="c1"># Gtk related modules for the graphical interface</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">Namespace</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># FENIX IMPORTS</span>
+<span class="kn">from</span> <span class="nn">fenix_library.configuration</span> <span class="kn">import</span> <span class="n">JSONConfiguration</span>
+<span class="kn">from</span> <span class="nn">fenix_library.running</span> <span class="kn">import</span> <span class="n">LoggingHandler</span><span class="p">,</span> <span class="n">LogMessage</span><span class="p">,</span> <span class="n">Command</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;rebornos_welcome.ui.gtk.code&#39;</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="p">)</span>
+
+<span class="c1"># THE EVENT HANDLER</span>
+<div class="viewcode-block" id="Main"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main">[docs]</a><span class="k">class</span> <span class="nc">Main</span><span class="p">:</span>  
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specify how this particular Gtk container handles user interaction events. </span>
+<span class="sd">    The names of handler functions (also called `signals` in Gtk) can be assigned in `Glade` under &quot;Signals</span>
+
+<span class="sd">    TODO</span>
+<span class="sd">    ----</span>
+<span class="sd">    - Splash screen before loading the pages and the main window, to avoid delay in getting some UI up for the user</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Main.__init__"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commandline_arguments</span><span class="p">:</span> <span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the main window in Gtk</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        commandline_arguments: Namespace</span>
+<span class="sd">            Contains the command line arguments</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+
+        <span class="n">LogMessage</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span><span class="s2">&quot;Creating a Gtk Builder and importing the UI from glade files...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">Gtk</span><span class="o">.</span><span class="n">Builder</span><span class="p">()</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">add_from_file</span><span class="p">(</span> <span class="c1"># extract the main form from the glade file</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                <span class="s2">&quot;user_interface&quot;</span><span class="p">,</span>
+                <span class="n">commandline_arguments</span><span class="o">.</span><span class="n">user_interface</span><span class="p">,</span>
+                <span class="s2">&quot;forms&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;main.glade&quot;</span>
+            <span class="p">)</span>
+        <span class="p">)</span> 
+        <span class="n">builder</span><span class="o">.</span><span class="n">connect_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="c1"># connect the signals from the Gtk forms to our event handlers (which are all defined in a class)</span>
+
+        <span class="n">LogMessage</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span><span class="s2">&quot;Displaying the main window...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Welcome to RebornOS!&quot;</span><span class="p">)</span>
+        <span class="n">builder</span><span class="o">.</span><span class="n">get_object</span><span class="p">(</span><span class="s2">&quot;main&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show_all</span><span class="p">()</span> <span class="c1"># get the main form object and make it visible</span>
+
+        <span class="n">LogMessage</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span><span class="s2">&quot;Starting the event loop...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span>
+        <span class="n">Gtk</span><span class="o">.</span><span class="n">main</span><span class="p">()</span> <span class="c1"># start the GUI event loop</span></div>
+
+<div class="viewcode-block" id="Main.on_close"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_close">[docs]</a>    <span class="k">def</span> <span class="nf">on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Quit the graphical interface</span>
+
+<span class="sd">        Called when the application is closedMainFormHandler</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Gtk</span><span class="o">.</span><span class="n">main_quit</span><span class="p">()</span> <span class="c1"># Quit from the Gtk UI</span></div>
+
+<div class="viewcode-block" id="Main.on_website_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_website_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_website_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="c1"># command = Command([&quot;ping&quot;, &quot;-c&quot;, &quot;5&quot;, &quot;www.google.com&quot;])</span>
+        <span class="c1"># LogMessage.Info(&quot;Before ping...&quot;).write(self.logging_handler)</span>
+        <span class="c1"># print(&quot;Before ping print...&quot;)</span>
+        <span class="c1"># command.run_and_log(self.logging_handler)</span>
+        <span class="c1"># LogMessage.Info(&quot;After ping...&quot;).write(self.logging_handler)</span>
+        <span class="c1"># print(&quot;After ping print...&quot;)</span>
+
+        <span class="c1"># command = Command([&quot;ping&quot;, &quot;-c&quot;, &quot;5&quot;, &quot;www.amazon.com&quot;])</span>
+        <span class="c1"># LogMessage.Info(&quot;Before ping 2...&quot;).write(self.logging_handler)</span>
+        <span class="c1"># print(&quot;Before ping 2 print...&quot;)</span>
+        <span class="c1"># command.run_and_log(self.logging_handler)</span>
+        <span class="c1"># LogMessage.Info(&quot;After ping 2...&quot;).write(self.logging_handler)</span>
+        <span class="c1"># print(&quot;After ping 2 print...&quot;)</span>
+
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://rebornos.org/&quot;</span><span class="p">])</span>
+        <span class="c1"># LogMessage.Info(&quot;Before xdg-open...&quot;).write(self.logging_handler)</span>
+        <span class="c1"># print(&quot;Before xdg-open print...&quot;)</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+        <span class="c1"># LogMessage.Info(&quot;After xdg-open...&quot;).write(self.logging_handler)</span>
+        <span class="c1"># print(&quot;After xdg-open print...&quot;)</span>
+
+<div class="viewcode-block" id="Main.on_rebornos_wiki_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_rebornos_wiki_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_rebornos_wiki_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://osdn.net/projects/rebornos/wiki/TitleIndex&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Main.on_arch_wiki_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_arch_wiki_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_arch_wiki_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://wiki.archlinux.org/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_service_status_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_service_status_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_service_status_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://status.rebornos.org/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_discord_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_discord_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_discord_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://discord.gg/cU5s6MPpQH&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_forum_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_forum_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_forum_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://rebornos.discourse.group/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_facebook_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_facebook_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_facebook_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://www.facebook.com/rebornos/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Main.on_twitter_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_twitter_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_twitter_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://twitter.com/rebornoslinux&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_feedback_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_feedback_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_feedback_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://rebornos.org/pixpopup-item/feedback/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_donate_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_donate_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_donate_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://rebornos.org/donate/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_project_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_project_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_project_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://gitlab.com/rebornos-team&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Main.on_about_us_clicked"><a class="viewcode-back" href="../../../../_autosummary/user_interface.gtk.code.main.Main.html#user_interface.gtk.code.main.Main.on_about_us_clicked">[docs]</a>    <span class="k">def</span> <span class="nf">on_about_us_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">command</span> <span class="o">=</span> <span class="n">Command</span><span class="p">([</span><span class="s2">&quot;xdg-open&quot;</span><span class="p">,</span> <span class="s2">&quot;https://rebornos.org/about-us/&quot;</span><span class="p">])</span>
+        <span class="n">command</span><span class="o">.</span><span class="n">run_and_log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, RebornOS.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

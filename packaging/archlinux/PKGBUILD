@@ -38,11 +38,11 @@ check() {
 package() {
     cd ..
 
-    install -m 755 rebornos-welcome.desktop "${pkgdir}/usr/share/applications"
+    install -D -m 755 rebornos-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
 
     cd ../..
 
-    install -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-welcome/configuration"
+    install -D -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-welcome/configuration/settings.json"
 
     cp -rf documentation "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/documentation"
@@ -61,7 +61,9 @@ package() {
     install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-welcome"
 
     install -m 755 main.py rebornos-welcome.sh setup-archlinux.sh "${pkgdir}/opt/rebornos-welcome"
-    ln -s rebornos-welcome.sh "${pkgdir}/usr/bin/rebornos-welcome.sh"
+    mkdir temp && ln -s "${pkgdir}/opt/rebornos-welcome/rebornos-welcome.sh" temp/rebornos-welcome.sh
+    install -D -m 755 temp/rebornos-welcome.sh "${pkgdir}/usr/bin/rebornos-welcome.sh"
+    rm -rf temp
 
     install -m 666 Pipfile.lock "${pkgdir}/opt/rebornos-welcome"
 }
