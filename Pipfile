@@ -5,14 +5,16 @@ name = "pypi"
 
 [packages]
 pygobject = "*"
-pipenv = "*"
 numpy = "*"
 vext = "*"
 "vext.gi" = "*"
-fenix-library-configuration = {editable = true, git = "https://gitlab.com/rebornos-team/fenix/libraries/configuration.git"}
 fenix-library-running = {editable = true, git = "https://gitlab.com/rebornos-team/fenix/libraries/running.git"}
+fenix-library-configuration = {editable = true, git = "https://gitlab.com/rebornos-team/fenix/libraries/configuration.git"}
 
 [dev-packages]
+pipenv = "*"
+setuptools = "*"
+build = "*"
 sphinx = "*"
 sphinx-rtd-theme = "*"
 sphinxcontrib-mermaid = "*"

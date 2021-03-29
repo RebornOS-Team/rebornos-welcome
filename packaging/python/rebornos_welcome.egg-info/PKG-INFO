@@ -1,0 +1,50 @@
+Metadata-Version: 2.1
+Name: rebornos-welcome
+Version: 0.0.1
+Summary: RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation
+Home-page: https://gitlab.com/rebornos-team/applications/rebornos-welcome
+Author: Shivanand Pattanshetti
+Author-email: shivanandvp@rebornos.org
+License: UNKNOWN
+Download-URL: https://gitlab.com/rebornos-team/applications/rebornos-welcome
+Project-URL: Documentation, https://rebornos-team.gitlab.io/applications/rebornos-welcome/
+Project-URL: Source, https://gitlab.com/rebornos-team/applications/rebornos-welcome
+Project-URL: Tracker, https://gitlab.com/rebornos-team/applications/rebornos-welcome/issues
+Description: 
+        # RebornOS Welcome
+        
+        *Documentation by @shivanandvp (shivanandvp@rebornos.org, shivanand.pattanshetti@gmail.com)*  
+        
+        *Please refer to [`LICENSE`](./LICENSE) for license information.*
+        
+        ## Overview
+        
+        RebornOS Welcome is the application that would display on the RebornOS ISO and on first use of RebornOS after installation. 
+        It contains basic links to help get started on RebornOS as a new user.
+        
+        ## [PLEASE CLICK HERE](https://rebornos-team.gitlab.io/applications/rebornos-welcome/index.html) for the full documentation
+          
+        <!-- ![](media/screenshots/1.png)
+        
+        ![](media/screenshots/2.png)
+        
+        ![](media/screenshots/3.png)
+        
+        ![](media/screenshots/4.png)
+        
+        ![](media/screenshots/5.png)
+        
+        ![](media/screenshots/console_output.gif)
+        
+        ![](media/screenshots/7.png) -->
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)
+Classifier: Operating System :: POSIX :: Linux
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Natural Language :: English
+Classifier: Topic :: System :: Operating System
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
