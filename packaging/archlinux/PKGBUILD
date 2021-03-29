@@ -43,15 +43,16 @@ package() {
 
     cd ../..
 
-    install -D -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-welcome/configuration/settings.json"
+    install -d -m 755 "${pkgdir}/opt/rebornos-welcome/configuration"
+    install -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-welcome/configuration"
 
     cp -rf documentation "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/documentation"
 
-    install -d -m 666 "${pkgdir}/opt/rebornos-welcome/log"
+    install -d -m 777 "${pkgdir}/opt/rebornos-welcome/log"
 
     cp -rf media "${pkgdir}/opt/rebornos-welcome"
-    chmod -R 644 "${pkgdir}/opt/rebornos-welcome/media"
+    chmod -R 755 "${pkgdir}/opt/rebornos-welcome/media"
 
     cp -rf scripts "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/scripts"
