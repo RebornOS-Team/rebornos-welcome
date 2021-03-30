@@ -93,7 +93,7 @@ class Main:
         command.run_and_log(self.logging_handler)
 
     def on_config_clicked(self, _):
-        LogMessage.Debug("Opening the log on the default editor...").write(self.logging_handler)
+        LogMessage.Debug("Opening the configuration file on the default editor...").write(self.logging_handler)
         command = Command(["xdg-open", "configuration/settings.json"])
         command.run_and_log(self.logging_handler)
 
