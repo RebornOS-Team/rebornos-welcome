@@ -1,0 +1,72 @@
+# Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
+pkgname='rebornos-iso-welcome'
+pkgver=0.0.8
+pkgrel=1
+pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
+arch=('any')
+url='https://gitlab.com/rebornos-team/applications/rebornos-welcome'
+license=('AGPL3')
+groups=('rebornos')
+depends=('python'
+         'python-fenix_library-running>=0.0.7'
+         'python-fenix_library-configuration>=0.0.3'
+         'python-gobject'
+         'python-numpy'
+         'xdg-utils')
+makedepends=('git'
+             'python-setuptools'
+             'python-pip'
+             'python-pipenv')
+provides=("${pkgname}")
+conflicts=("${pkgname}")
+replaces=()
+backup=()
+options=()
+install=
+source=()
+noextract=()
+md5sums=('SKIP')
+
+build() {
+    cd '..' && rm -rf pkg/* src/* *.pkg.tar*
+}
+
+check() {
+    :
+}
+
+package() {
+    cd ..
+
+    install -D -m 755 rebornos-iso-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-iso-welcome.desktop"
+    install -D -m 755 rebornos-iso-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-iso-welcome.desktop"
+
+    cd ../..
+
+    install -d -m 755 "${pkgdir}/opt/rebornos-iso-welcome/configuration"
+    install -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-iso-welcome/configuration"
+
+    cp -rf documentation "${pkgdir}/opt/rebornos-iso-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/documentation"
+
+    install -d -m 777 "${pkgdir}/opt/rebornos-iso-welcome/log"
+
+    cp -rf media "${pkgdir}/opt/rebornos-iso-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/media"
+
+    cp -rf scripts "${pkgdir}/opt/rebornos-iso-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/scripts"
+
+    cp -rf user_interface "${pkgdir}/opt/rebornos-iso-welcome"
+    chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/user_interface"
+
+    install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-iso-welcome"
+
+    install -m 755 main.py "${pkgdir}/opt/rebornos-iso-welcome"
+    install -D -m 755 rebornos-welcome.sh "${pkgdir}/opt/rebornos-iso-welcome/rebornos-iso-welcome.sh" # Note that the script's name is changed
+    mkdir temp && ln -s "${pkgdir}/opt/rebornos-iso-welcome/rebornos-iso-welcome.sh" temp/rebornos-iso-welcome.sh
+    install -D -m 755 temp/rebornos-iso-welcome.sh "${pkgdir}/usr/bin/rebornos-iso-welcome.sh"
+    rm -rf temp
+
+    install -m 666 Pipfile.lock "${pkgdir}/opt/rebornos-iso-welcome"
+}

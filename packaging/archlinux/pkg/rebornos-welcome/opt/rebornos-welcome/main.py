@@ -172,6 +172,13 @@ class RebornOSWelcome():
             help= "Indicate that the application is being launched at starup"
         )
 
+        argument_parser.add_argument( # define a command line argument for selecting UI toolkits
+            '-i', '--iso',
+            action='store_true',
+            default=False,
+            help= "Indicate that the application is being launched from an ISO"
+        )
+
         parsed_args = argument_parser.parse_args()
 
         return parsed_args

@@ -62,7 +62,7 @@ package() {
 
     install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-welcome"
 
-    install -m 755 main.py rebornos-welcome.sh setup-archlinux.sh "${pkgdir}/opt/rebornos-welcome"
+    install -m 755 main.py rebornos-welcome.sh "${pkgdir}/opt/rebornos-welcome"
     mkdir temp && ln -s "${pkgdir}/opt/rebornos-welcome/rebornos-welcome.sh" temp/rebornos-welcome.sh
     install -D -m 755 temp/rebornos-welcome.sh "${pkgdir}/usr/bin/rebornos-welcome.sh"
     rm -rf temp

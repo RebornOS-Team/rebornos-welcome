@@ -10,7 +10,7 @@
 import os # for filepath related methods
 import gi # Python GObject introspection module which contains Python bindings and support for Gtk
 gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
-from gi.repository import Gtk, GLib # Gtk related modules for the graphical interface
+from gi.repository import Gtk, GLib, GdkPixbuf # Gtk related modules for the graphical interface
 from argparse import Namespace
 from typing import List
 from pathlib import Path
@@ -68,6 +68,19 @@ class Main:
             self.builder.get_object("startup_toggle").set_active(True)
         else:
             self.builder.get_object("startup_toggle").set_active(False)
+
+        if commandline_arguments.iso:
+            about_dialog = self.builder.get_object("about")
+            about_dialog.set_logo(
+                GdkPixbuf.Pixbuf.new_from_file_at_size(
+                    filename= "media/icons/rebornos_iso_welcome_logo.svg",
+                    width= -1,
+                    height= -1
+                )
+            )
+            about_dialog.set_program_name("RebornOS ISO Welcome Application")
+            about_dialog.set_icon_from_file("media/icons/rebornos_iso_welcome_logo.svg")
+            self.builder.get_object("main").set_icon_from_file("media/icons/rebornos_iso_welcome_logo.svg")
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
