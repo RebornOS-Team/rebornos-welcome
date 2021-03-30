@@ -21,6 +21,7 @@ import subprocess
 import pathlib
 from typing import Optional
 from types import ModuleType
+import shutil
 
 # FENIX IMPORTS
 from fenix_library.configuration import JSONConfiguration # For reading and writing settings files
@@ -53,7 +54,20 @@ class RebornOSWelcome():
         """ 
 
         print("\nRebornOS Welcome Application")
-        self.application_settings = JSONConfiguration("configuration/settings.json") # to access the settings stored in 'installer.json'
+
+        user_settings_filepath = pathlib.Path.home() / ".rebornos-welcome" / "configuration" / "settings.json"
+        if not os.path.isfile(user_settings_filepath):
+            user_settings_filepath.parents[0].mkdir(parents=True, exist_ok=True)
+            os.chmod(user_settings_filepath.parents[0], 0o755)
+            shutil.copy2(
+                pathlib.Path("configuration/settings.json"),
+                user_settings_filepath
+            )
+            os.chmod(user_settings_filepath, 0o666)
+        self.application_settings = JSONConfiguration(
+            str(user_settings_filepath.resolve())
+        ) # to access the settings stored in 'installer.json'
+
         self.logger = self.setup_logger() # configure the logger
         self.logging_handler = LoggingHandler(logger=self.logger)
 
@@ -227,7 +241,7 @@ class RebornOSWelcome():
             )
         ) # search for and import user_interface/<ui_toolkit>/code/main.py
         LogMessage.Info("Loading the user-interface: " + commandline_arguments.user_interface + "...").write(self.logging_handler)
-        _ = ui_module.Main(commandline_arguments) # initialize the Main class of the main script for the chosen user interface toolkit
+        _ = ui_module.Main(commandline_arguments, self.application_settings) # initialize the Main class of the main script for the chosen user interface toolkit
 
     @staticmethod
     def get_time_stamp() -> str:
