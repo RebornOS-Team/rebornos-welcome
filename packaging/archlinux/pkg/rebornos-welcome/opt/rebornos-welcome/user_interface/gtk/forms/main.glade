@@ -8,19 +8,19 @@
     <property name="default-width">200</property>
     <property name="default-height">250</property>
     <property name="destroy-with-parent">True</property>
-    <property name="icon">../../../media/branding/RebornOS_Logo_2.svg</property>
+    <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="type-hint">dialog</property>
     <property name="skip-taskbar-hint">True</property>
     <property name="deletable">False</property>
     <property name="program-name">RebornOS Welcome Application</property>
-    <property name="version">0.0.6</property>
+    <property name="version">0.0.7</property>
     <property name="copyright" translatable="yes">Copyright © 2021, RebornOS</property>
     <property name="website">https://rebornos.org/</property>
     <property name="website-label" translatable="yes">Website</property>
     <property name="license" translatable="yes">This program comes with absolutely no warranty.
 See the &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;GNU Affero General Public License, version 3 or later&lt;/a&gt; for details.</property>
     <property name="authors">Shivanand Pattanshetti (shivanandvp@rebornos.org)</property>
-    <property name="logo">../../../media/branding/RebornOS_Logo_2.svg</property>
+    <property name="logo">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="wrap-license">True</property>
     <property name="license-type">agpl-3-0</property>
     <child internal-child="vbox">
@@ -149,7 +149,7 @@ See the &lt;a href="https://www.gnu.org/licenses/agpl-3.0.html"&gt;GNU Affero Ge
   <object class="GtkApplicationWindow" id="main">
     <property name="can-focus">False</property>
     <property name="resizable">False</property>
-    <property name="icon">../../../media/branding/RebornOS_Logo_2.svg</property>
+    <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="urgency-hint">True</property>
     <property name="deletable">False</property>
     <child>
