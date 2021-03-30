@@ -19,7 +19,7 @@ Path=/opt/rebornos-welcome
 Exec=python /opt/rebornos-welcome/main.py
 
 # The name of the icon that will be used to display this entry
-Icon=/opt/rebornos-welcome/media/branding/RebornOS_Logo_2.svg
+Icon=/opt/rebornos-welcome/media/icons/rebornos_welcome_logo.svg
 
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false
