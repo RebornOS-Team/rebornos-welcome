@@ -34,7 +34,7 @@ class Main:
 
     """
 
-    def __init__(self, commandline_arguments: Namespace) -> None:
+    def __init__(self, commandline_arguments: Namespace, application_settings: JSONConfiguration) -> None:
         """
         Initialize the main window in Gtk
 
@@ -45,7 +45,7 @@ class Main:
         """
 
         self.logging_handler = LoggingHandler(logger=logger)
-        self.application_settings = JSONConfiguration("configuration/settings.json")
+        self.application_settings = application_settings
 
         LogMessage.Info("Creating a Gtk Builder and importing the UI from glade files...").write(self.logging_handler)
         self.builder = Gtk.Builder()
@@ -107,7 +107,13 @@ class Main:
 
     def on_config_clicked(self, _):
         LogMessage.Debug("Opening the configuration file on the default editor...").write(self.logging_handler)
-        command = Command(["xdg-open", "configuration/settings.json"])
+        user_settings_filepath = Path.home() / ".rebornos-welcome" / "configuration" / "settings.json"
+        command = Command(
+            [
+                "xdg-open",
+                str(user_settings_filepath.resolve())
+            ]
+        )
         command.run_and_log(self.logging_handler)
 
     def on_about_close(self, _):
