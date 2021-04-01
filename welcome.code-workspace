@@ -10,7 +10,102 @@
 		"files.autoGuessEncoding": true,
 		"git.postCommitCommand": "sync",
 		"editor.wordWrap": "off",
-		"restructuredtext.confPath": "${workspaceFolder}/documentation/source"
+		"restructuredtext.confPath": "${workspaceFolder}/documentation/source",
+		"psi-header.config": {
+			"forceToTop": true,
+			"blankLinesAfter": 6,
+			"license": "AGPL-3.0-only"
+		},
+		"psi-header.changes-tracking": {
+			"isActive": true,
+			"modAuthor": "Modified By: ",
+			"modDate": "Last Modified: ",
+			"modDateFormat": "date",
+			"include": [],
+			"exclude": [
+				"markdown",
+				"json",
+				"jsonc"
+			],
+			"excludeGlob": [
+				"out/**",
+				"src/**/*.xyz",
+				"pkg/**",
+				"build/**",
+				"dist/**"
+			],
+			"autoHeader": "manualSave"
+		},
+		"psi-header.license-text": [
+			"All shall be well and all shall be well and all manner of things shall be well.",
+			"Nope...we're doomed!"
+		],
+		"psi-header.variables": [
+			["company", "RebornOS"],
+			["author", "Shivanand Pattanshetti"],
+			["authoremail", "shivanandvp@rebornos.org"],
+			["projectname", ]
+		],
+		"psi-header.lang-config": [
+			{
+				"language": "python",
+				"begin": "###",
+				"prefix": "# ",
+				"end": "###",
+				"blankLinesAfter": 0,
+				"beforeHeader": [
+					"#!/usr/bin/env python3",
+					"# -*- coding:utf-8 -*-"
+				]
+			},
+		],
+		"psi-header.templates": [
+			{
+				"language": "*",
+				"template": [
+					"File: <<filerelativepath>>",
+					"Project: <<projectpath>>",
+					"Created Date: <<filecreated('dddd, MMMM Do YYYY, h:mm:ss a')>>",
+					"Author: <<author>>",
+					"-----",
+					"Last Modified: ",
+					"Modified By: ",
+					"-----",
+					"Copyright (c) <<year>> <<company>>"
+					"",
+					"<<licensetext>>",
+					"-----"
+					"HISTORY:",
+					"Date      \tBy\tComments",
+					"----------\t---\t----------------------------------------------------------"
+				],
+				"changeLogCaption": "HISTORY:",
+				"changeLogHeaderLineCount": 2,
+				"changeLogEntryTemplate": [
+					"<<dateformat('YYYY-MM-DD')>>\t<<initials>>\t"
+				]
+			},
+			{
+				"language": "javascript",
+				"template": [
+					"File: <<filepath>>",
+					"Project: <<projectpath>>",
+					"Created Date: <<filecreated('dddd, MMMM Do YYYY, h:mm:ss a')>>",
+					"Author: <<author>>",
+					"-----",
+					"Last Modified: ",
+					"Modified By: ",
+					"-----",
+					"Copyright (c) <<year>> <<company>>",
+					"------------------------------------",
+					"Javascript will save your soul!"
+				]
+			},
+			{
+				"language": "typescript",
+				"mapTo": "javascript"
+			}
+		]
 	},
 	"extensions": {
 		"recommendations": [
@@ -20,6 +115,7 @@
 			"lextudio.restructuredtext",
 			"yzhang.markdown-all-in-one",
 			"davidanson.vscode-markdownlint",
+			"psioniq.psi-header",
 		]
 	},
 }

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0f84ee1c9062bb3184bc174a37d09c11a78398023680ccdd0e285ecfca575c9d"
+            "sha256": "06c76828d956f2062cc21f30e80b5ee357ae2570310c82fb9c0817959ab1ee46"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -19,12 +19,12 @@
         "fenix-library-configuration": {
             "editable": true,
             "git": "https://gitlab.com/rebornos-team/fenix/libraries/configuration.git",
-            "ref": "f74060f7249a3cadce2d702cf878f24087c57755"
+            "ref": "7f4dcf3bef36dd34253e2cf9ed1c251e6e0f2843"
         },
         "fenix-library-running": {
             "editable": true,
             "git": "https://gitlab.com/rebornos-team/fenix/libraries/running.git",
-            "ref": "9f9c40c4e297b0564f9a310dd35bb3772986545e"
+            "ref": "4376f76e38efb0ec401d80c6bce56f8aab4b2c0d"
         },
         "numpy": {
             "hashes": [
@@ -73,17 +73,18 @@
         },
         "pygobject": {
             "hashes": [
-                "sha256:98d83f71e6313dadc29793450fec23b2eaa5c3f1c4b073d0a4f9c31b5cdb5fca"
+                "sha256:6fb599aa59ceb9dd05fafb0d72b3862943e7d5e85c8ef6c74856bc6d4321cbab"
             ],
             "index": "pypi",
-            "version": "==3.40.0"
+            "version": "==3.40.1"
         },
         "ruamel.yaml": {
             "hashes": [
-                "sha256:3572505e63dd35b5dea62cd0386d03c4f2a53da29a3af09f428114cc85c564aa",
-                "sha256:3a41b30235cc6ff7baee0321ffa99e7f94bbc7c7e0f2cac1d75b6b24fc24f202"
+                "sha256:0850def9ebca23b3a8c64c4b4115ebb6b364a10d49f89d289a26ee965e1e7d9d",
+                "sha256:8f1e15421668b9edf30ed02899f5f81aff9808a4271935776f61a99a569a13da"
             ],
-            "version": "==0.17.0"
+            "markers": "python_version >= '3'",
+            "version": "==0.17.2"
         },
         "ruamel.yaml.clib": {
             "hashes": [

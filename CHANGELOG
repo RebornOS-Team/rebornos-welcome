@@ -1,0 +1,7 @@
+Version 0.0.9
+-------------
+1. Removed the top right "hidden" `Close` button.
+2. Fixed the text color of headings: `Documentation`, `Support`, and `Contribute`
+3. Added Screenshots
+4. Rename scripts
+5. Create a new, custom "About" Dialog box

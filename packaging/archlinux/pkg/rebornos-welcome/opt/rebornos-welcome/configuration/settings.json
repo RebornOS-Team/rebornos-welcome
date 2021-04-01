@@ -1,10 +1,7 @@
 {
     "ui-toolkits": {
         "available": [
-            "gtk",
-            "qt",
-            "qtquick",
-            "command_line"
+            "gtk"
         ],
         "default": "gtk",
         "current": "gtk"
