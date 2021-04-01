@@ -53,6 +53,7 @@ package() {
 
     cp -rf media "${pkgdir}/opt/rebornos-iso-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/media"
+    rm -rf "${pkgdir}/opt/rebornos-iso-welcome/media/screenshots"
 
     cp -rf scripts "${pkgdir}/opt/rebornos-iso-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/scripts"
