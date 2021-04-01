@@ -93,7 +93,7 @@ class Main:
         """
 
         LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
-        self.logging_handler.abort(wait=False)
+        # self.logging_handler.abort(wait=False)
         Gtk.main_quit() # Quit from the Gtk UI
         # exit(0)
 
@@ -104,7 +104,8 @@ class Main:
     def on_log_clicked(self, _):
         LogMessage.Debug("Opening the log on the default editor...").write(self.logging_handler)
         command = Command(["xdg-open", self.application_settings["current_log_file_path"]])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_config_clicked(self, _):
         LogMessage.Debug("Opening the configuration file on the default editor...").write(self.logging_handler)
@@ -115,7 +116,8 @@ class Main:
                 str(user_settings_filepath.resolve())
             ]
         )
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_about_close(self, _):
         LogMessage.Debug("Hiding the \"About\" dialog...").write(self.logging_handler)
@@ -124,12 +126,15 @@ class Main:
     def on_shivanandvp_mail(self, button):
         LogMessage.Debug("Opening mailing application for shivanandvp's email...").write(self.logging_handler)
         command = Command(["xdg-email", "shivanandvp@rebornos.org"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
+
 
     def on_shivanandvp_git(self, button):
         LogMessage.Debug("Opening the git page for shivanandvp...").write(self.logging_handler)
         command = Command(["xdg-open", "https://gitlab.com/shivanandvp"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_startup_toggle(self, button):
         LogMessage.Debug("Startup checkbox toggled...").write(self.logging_handler)
@@ -144,61 +149,73 @@ class Main:
     def on_website_clicked(self, _):
         LogMessage.Debug("Opening the RebornOS website on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_rebornos_wiki_clicked(self, _):
         LogMessage.Debug("Opening RebornOS Wiki on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://osdn.net/projects/rebornos/wiki/TitleIndex"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
     
     def on_arch_wiki_clicked(self, _):
         LogMessage.Debug("Opening Arch Wiki on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://wiki.archlinux.org/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_service_status_clicked(self, _):
         LogMessage.Debug("Opening Service Status page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://status.rebornos.org/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_discord_clicked(self, _):
         LogMessage.Debug("Opening the Discord Server on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://discord.gg/cU5s6MPpQH"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_forum_clicked(self, _):
         LogMessage.Debug("Opening the RebornOS Forum page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.discourse.group/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_facebook_clicked(self, _):
         LogMessage.Debug("Opening the Facebook page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://www.facebook.com/rebornos/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
     
     def on_twitter_clicked(self, _):
         LogMessage.Debug("Opening the Twitter page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://twitter.com/rebornoslinux"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_feedback_clicked(self, _):
         LogMessage.Debug("Opening the Feedback page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/pixpopup-item/feedback/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_donate_clicked(self, _):
         LogMessage.Debug("Opening the donation page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/donate/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_project_clicked(self, _):
         LogMessage.Debug("Opening the Gitlab page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://gitlab.com/rebornos-team"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_about_us_clicked(self, _):
         LogMessage.Debug("Opening the \"About us\" page on the default browser...").write(self.logging_handler)
         command = Command(["xdg-open", "https://rebornos.org/about-us/"])
-        command.run_and_log(self.logging_handler)
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
 
