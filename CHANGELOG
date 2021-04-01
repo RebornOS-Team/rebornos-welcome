@@ -4,4 +4,4 @@ Version 0.0.9
 2. Fixed the text color of headings: `Documentation`, `Support`, and `Contribute`
 3. Added Screenshots
 4. Rename scripts
-5. Create a new, custom "About" Dialog box
+5. Create a new, custom "About" Dialog box (from `GtkWindow` instead of `Gtk.AboutDialog`) to fix ghost buttons appearing on the Gnome Desktop. 
