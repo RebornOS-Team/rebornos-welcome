@@ -78,6 +78,8 @@ class Main:
 
             self.builder.get_object("about_application_name").set_label("RebornOS ISO Welcome Application")
             self.builder.get_object("about_logo").set_from_file(rebornos_iso_welcome_icon_path)
+        else:
+            self.builder.get_object("about").set_title("About RebornOS Welcome Application")
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
@@ -92,6 +94,7 @@ class Main:
 
         LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
         Gtk.main_quit() # Quit from the Gtk UI
+        exit(0)
 
     def on_about_clicked(self, _):
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
