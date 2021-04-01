@@ -1,7 +1,15 @@
 Version 0.0.9
--------------
+=============
+
+GUI Changes
+-----------
 1. Removed the top right "hidden" `Close` button.
 2. Fixed the text color of headings: `Documentation`, `Support`, and `Contribute`
-3. Added Screenshots
-4. Rename scripts
-5. Create a new, custom "About" Dialog box (from `GtkWindow` instead of `Gtk.AboutDialog`) to fix ghost buttons appearing on the Gnome Desktop. 
+3. Recreated from scratch a new, custom "About" Dialog box (from `GtkWindow` instead of `Gtk.AboutDialog`) to fix ghost buttons appearing on the Gnome Desktop. 
+4. Fixed a bug which caused the application to become unresponsive when closed while links are open in a web-browser
+5. Better credits with clickable links (email links only work if you have a mail client installed)
+
+Backend
+--------
+1. Added Screenshots
+2. Rename scripts
