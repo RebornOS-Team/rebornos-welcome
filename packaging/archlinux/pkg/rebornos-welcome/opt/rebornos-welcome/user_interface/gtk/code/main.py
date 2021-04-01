@@ -93,8 +93,9 @@ class Main:
         """
 
         LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
+        self.logging_handler.abort(wait=False)
         Gtk.main_quit() # Quit from the Gtk UI
-        exit(0)
+        # exit(0)
 
     def on_about_clicked(self, _):
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
