@@ -1,11 +1,11 @@
 format = 1
 pkgname = rebornos-welcome
 pkgbase = rebornos-welcome
-pkgver = 0.0.9-1
+pkgver = 0.0.10-1
 pkgarch = any
-pkgbuild_sha256sum = f1305b1beaca0a42f8f403aad049700402cef6ff1657d0faae93c6d7f85234a5
+pkgbuild_sha256sum = a79c8ac7fc8ce8bb8badac5e92c44ddc0b763ed969c8a7fc48432fdf5e132dd0
 packager = Unknown Packager
-builddate = 1617269977
+builddate = 1617329486
 builddir = /run/media/shivanandvp/DATA/Development/RebornOS/rebornos-welcome/packaging/archlinux
 buildenv = !distcc
 buildenv = color

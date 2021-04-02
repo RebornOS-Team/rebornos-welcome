@@ -59,7 +59,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.9</property>
+                    <property name="label" translatable="yes">0.0.10</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -576,15 +576,31 @@
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkStackSwitcher">
+          <object class="GtkOverlay">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-top">10</property>
-            <property name="icon-size">10</property>
-            <property name="stack">stack1</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="pixbuf">../../../media/pictures/about_title_bar.svg</property>
+              </object>
+              <packing>
+                <property name="index">-1</property>
+              </packing>
+            </child>
+            <child type="overlay">
+              <object class="GtkStackSwitcher">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">10</property>
+                <property name="icon-size">10</property>
+                <property name="stack">stack1</property>
+              </object>
+            </child>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>

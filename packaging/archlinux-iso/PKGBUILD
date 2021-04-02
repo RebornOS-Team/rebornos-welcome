@@ -1,6 +1,6 @@
 # Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.9
+pkgver=0.0.10
 pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
