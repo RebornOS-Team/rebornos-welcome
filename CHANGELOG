@@ -13,3 +13,10 @@ Backend
 --------
 1. Added Screenshots
 2. Rename scripts
+
+Version 0.0.10
+==============
+
+GUI Changes
+-----------
+1. Due to problems with users who have transparent title bars for the about window, added a dark overlay. 
