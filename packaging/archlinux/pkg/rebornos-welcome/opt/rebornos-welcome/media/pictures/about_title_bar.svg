@@ -7,9 +7,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="442"
+   width="500"
    height="40"
-   viewBox="0 0 116.91947 10.580946"
+   viewBox="0 0 132.26185 10.580946"
    version="1.1"
    id="svg10"
    sodipodi:docname="about_title_bar.svg"
@@ -54,10 +54,10 @@
      fit-margin-bottom="0"
      inkscape:document-rotation="0" />
   <rect
-     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:0.650466;stroke-linecap:round;stroke-linejoin:bevel"
+     style="fill:#363636;fill-opacity:1;stroke:none;stroke-width:0.805333;stroke-linecap:round;stroke-linejoin:bevel"
      id="rect838"
-     width="123.28731"
-     height="14.990929"
-     x="-2.7796934"
-     y="-2.0981705" />
+     width="148.66777"
+     height="19.056026"
+     x="-5.4443851"
+     y="-4.9678583" />
 </svg>
