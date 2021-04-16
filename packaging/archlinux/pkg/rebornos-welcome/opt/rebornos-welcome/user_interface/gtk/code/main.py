@@ -108,6 +108,10 @@ class Main:
             buttons= Gtk.ButtonsType.YES_NO,
             message_format= message
         )
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_DIALOG_QUESTION, Gtk.IconSize.DIALOG)
+        image.show()
+        message_dialog.set_image(image)
         user_response = message_dialog.run()
         message_dialog.destroy()
         return user_response == Gtk.ResponseType.YES
@@ -117,32 +121,35 @@ class Main:
         package_name: str,
         executable_name: str
     ):
-        if self.get_confirmation_from_dialog("This will install `" + package_name + "` if not present already. Do you want to continue?"):
-            output = Command(
-                [
-                    "pacman",
-                    "-Q",
-                    package_name
-                ]
-            ).run_and_wait()
+        output = Command(
+            [
+                "pacman",
+                "-Q",
+                package_name
+            ]
+        ).run_and_wait()
 
-            if not "was not found" in output:
-                LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
-                command = Command([executable_name])
-                command.run_and_log(self.logging_handler)
-            else:
-                batch_job = BatchJob(logging_handler= self.logging_handler)
-                batch_job += LogMessage.Info("`" + package_name + "` not found. Trying to install...")
-                batch_job += Command.Shell(
-                    "pkexec bash -c \"sudo pacman -S --needed --noconfirm " + package_name + "\""
-                )
-                batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
-                batch_job += Command(
-                    [
-                        executable_name
-                    ]
-                )
-                batch_job.start()
+        if not "was not found" in output:
+            LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
+            command = Command([executable_name])
+            command.run_and_log(self.logging_handler)
+        else:
+            LogMessage.Warning("Could not find `" + package_name + "` on your system...").write(self.logging_handler)
+            if not self.get_confirmation_from_dialog("`" + package_name + "` is not installed. Do you want to install it?"):
+                LogMessage.Info("User declined to install `" + package_name + "`. Doing nothing...").write(self.logging_handler)
+                return
+            batch_job = BatchJob(logging_handler= self.logging_handler)
+            batch_job += LogMessage.Info("Trying to install `" + package_name + "`...")
+            batch_job += Command.Shell(
+                "pkexec bash -c \"sudo pacman -S --needed --noconfirm " + package_name + "\""
+            )
+            batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
+            batch_job += Command(
+                [
+                    executable_name
+                ]
+            )
+            batch_job.start()
 
     def log_console(
         self,
@@ -185,7 +192,7 @@ class Main:
                     "".join(
                         (
                             message,
-                            "(", loginfo_filename, " > ", loginfo_function_name, "; ", "Line ", str(loginfo_line_number), ")"
+                            # "(", loginfo_filename, " > ", loginfo_function_name, "; ", "Line ", str(loginfo_line_number), ")"
                             "\n"
                         )
                     )
