@@ -13,7 +13,8 @@ depends=('python'
          'python-gobject'
          'python-numpy'
          'xdg-utils'
-         'reflector')
+         'polkit'
+         'pamac')
 makedepends=('git'
              'python-setuptools'
              'python-pip'

@@ -15,10 +15,11 @@ from argparse import Namespace
 from typing import List
 from pathlib import Path
 import logging
+import functools
 
 # FENIX IMPORTS
 from fenix_library.configuration import JSONConfiguration
-from fenix_library.running import LoggingHandler, LogMessage, Command, LoggingLevel
+from fenix_library.running import LoggingHandler, LogMessage, Command, LoggingLevel, BatchJob
 
 logger = logging.getLogger('rebornos_welcome.ui.gtk.code'+'.'+ Path(__file__).stem)
 
@@ -33,6 +34,18 @@ class Main:
     - Splash screen before loading the pages and the main window, to avoid delay in getting some UI up for the user
 
     """
+
+    log_color: dict = {
+        "CRITICAL": "#a40000" ,
+        "ERROR": "#ff0000",
+        "EXCEPTION": "#ff0000",
+        "WARNING": "#ffa500",
+        "INFO": "#0000ff",
+        "DEBUG": "#808080",
+        "NOTSET": "#808080",
+        "": "#808080",
+        None: "#808080"
+    }
 
     def __init__(self, commandline_arguments: Namespace, application_settings: JSONConfiguration) -> None:
         """
@@ -87,6 +100,57 @@ class Main:
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
 
+    def get_confirmation_from_dialog(self, message: str) -> bool:
+        message_dialog = Gtk.MessageDialog(
+            parent= self.builder.get_object("main"),
+            flags= Gtk.DialogFlags.DESTROY_WITH_PARENT,
+            type= Gtk.MessageType.QUESTION,
+            buttons= Gtk.ButtonsType.YES_NO,
+            message_format= message
+        )
+        image = Gtk.Image()
+        image.set_from_stock(Gtk.STOCK_DIALOG_QUESTION, Gtk.IconSize.DIALOG)
+        image.show()
+        message_dialog.set_image(image)
+        user_response = message_dialog.run()
+        message_dialog.destroy()
+        return user_response == Gtk.ResponseType.YES
+
+    def launch_third_party_utility(
+        self,
+        package_name: str,
+        executable_name: str
+    ):
+        output = Command(
+            [
+                "pacman",
+                "-Q",
+                package_name
+            ]
+        ).run_and_wait()
+
+        if not "was not found" in output:
+            LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
+            command = Command([executable_name])
+            command.run_and_log(self.logging_handler)
+        else:
+            LogMessage.Warning("Could not find `" + package_name + "` on your system...").write(self.logging_handler)
+            if not self.get_confirmation_from_dialog("`" + package_name + "` is not installed. Do you want to install it?"):
+                LogMessage.Info("User declined to install `" + package_name + "`. Doing nothing...").write(self.logging_handler)
+                return
+            batch_job = BatchJob(logging_handler= self.logging_handler)
+            batch_job += LogMessage.Info("Trying to install `" + package_name + "`...")
+            batch_job += Command.Shell(
+                "pkexec bash -c \"sudo pacman -S --needed --noconfirm " + package_name + "\""
+            )
+            batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
+            batch_job += Command(
+                [
+                    executable_name
+                ]
+            )
+            batch_job.start()
+
     def log_console(
         self,
         logging_level: int,
@@ -98,17 +162,62 @@ class Main:
         loginfo_stack_info= None,
         **kwargs
     ):
-        if logging_level < LoggingLevel.WARNING.value:
-            # Needed because Gtk doesn't prefer adding stuff on a different thread
-            GLib.idle_add(
-                lambda any_text: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
-                    FenixInstallerPage.console_buffer.insert(
-                        FenixInstallerPage.console_buffer.get_end_iter(),
-                        message
+
+        console_buffer = self.builder.get_object("console_text_view").get_buffer()
+        logging_level_name = LoggingLevel(logging_level).name
+
+        # Needed because Gtk doesn't prefer adding stuff on a different thread
+        GLib.idle_add(
+            lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
+                console_buffer.insert_markup(
+                    console_buffer.get_end_iter(),
+                    "".join(
+                        (
+                            "- ",
+                            "<span color=\"{:s}\">",
+                            logging_level_name.rjust(8, " "),
+                            ": ",
+                            "</span>"
+                        )
+                    ).format(self.log_color[logging_level_name]),
+                    -1
+                )
+            )
+        ) 
+        # Needed because Gtk doesn't prefer adding stuff on a different thread
+        GLib.idle_add(
+            lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
+                console_buffer.insert(
+                    console_buffer.get_end_iter(),
+                    "".join(
+                        (
+                            message,
+                            # "(", loginfo_filename, " > ", loginfo_function_name, "; ", "Line ", str(loginfo_line_number), ")"
+                            "\n"
+                        )
                     )
-                ),
-                "".join(("- ", message, "\n"))
-            )     
+                )
+            )
+        )    
+
+    # def on_refresh_pacman_mirrors(self, _):
+    #     LogMessage.Info("Refreshing pacman mirrors...").write(self.logging_handler)
+    #     command = Command(
+    #         command_strings= [
+    #             "pkexec",
+    #             "sudo",
+    #             "reflector",
+    #             "--latest", "50",
+    #             "--protocol", "https",
+    #             "--sort", "rate",
+    #             "--save", "/etc/pacman.d/mirrorlist",
+    #         ],
+    #         post_run_function= functools.partial(
+    #             LogMessage.Info("Reflector finished... Please check the above messages for errors").write,
+    #             self.logging_handler
+    #         )
+    #     )
+    #     command.run_and_log(self.logging_handler)
 
     def on_close(self, _):
 
@@ -243,4 +352,32 @@ class Main:
         # command.run_and_log(self.logging_handler)
         command.start()
 
+    def on_pamac(self, _):
+        LogMessage.Info("Starting pamac through `pamac-manager`...").write(self.logging_handler)
+        command = Command(["pamac-manager"])
+        command.run_and_log(self.logging_handler)
+        # command.start()
 
+    def on_reflector_simple(self, _):
+        self.launch_third_party_utility(
+            package_name= "reflector-simple",
+            executable_name = "reflector-simple"
+        )   
+
+    def on_pace(self, _): 
+        self.launch_third_party_utility(
+            package_name= "pace",
+            executable_name = "pace"
+        ) 
+
+    def on_pyakm(self, _): 
+        self.launch_third_party_utility(
+            package_name= "pyakm",
+            executable_name = "pyakm-manager"
+        )   
+    
+    def on_bleachbit(self, _): 
+        self.launch_third_party_utility(
+            package_name= "bleachbit",
+            executable_name = "bleachbit"
+        ) 

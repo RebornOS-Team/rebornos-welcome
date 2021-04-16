@@ -2,12 +2,12 @@
 # using fakeroot version 1.25.3
 pkgname = rebornos-welcome
 pkgbase = rebornos-welcome
-pkgver = 0.0.10-1
+pkgver = 0.0.11-1
 pkgdesc = RebornOS Welcome contains basic links to help get one started on RebornOS as a new user
 url = https://gitlab.com/rebornos-team/applications/rebornos-welcome
-builddate = 1617345320
+builddate = 1618569708
 packager = Unknown Packager
-size = 10802770
+size = 10859227
 arch = any
 license = AGPL3
 group = rebornos
@@ -19,6 +19,8 @@ depend = python-fenix_library-configuration>=0.0.3
 depend = python-gobject
 depend = python-numpy
 depend = xdg-utils
+depend = polkit
+depend = pamac
 makedepend = git
 makedepend = python-setuptools
 makedepend = python-pip
