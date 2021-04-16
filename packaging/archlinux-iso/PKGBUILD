@@ -1,6 +1,6 @@
 # Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.10
+pkgver=0.0.11
 pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
@@ -12,7 +12,8 @@ depends=('python'
          'python-fenix_library-configuration>=0.0.3'
          'python-gobject'
          'python-numpy'
-         'xdg-utils')
+         'xdg-utils'
+         'reflector')
 makedepends=('git'
              'python-setuptools'
              'python-pip'

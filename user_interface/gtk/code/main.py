@@ -18,7 +18,7 @@ import logging
 
 # FENIX IMPORTS
 from fenix_library.configuration import JSONConfiguration
-from fenix_library.running import LoggingHandler, LogMessage, Command
+from fenix_library.running import LoggingHandler, LogMessage, Command, LoggingLevel
 
 logger = logging.getLogger('rebornos_welcome.ui.gtk.code'+'.'+ Path(__file__).stem)
 
@@ -44,7 +44,10 @@ class Main:
             Contains the command line arguments
         """
 
-        self.logging_handler = LoggingHandler(logger=logger)
+        self.logging_handler = LoggingHandler(
+            logger=logger,
+            logging_functions=[self.log_console]
+        )
         self.application_settings = application_settings
 
         LogMessage.Info("Creating a Gtk Builder and importing the UI from glade files...").write(self.logging_handler)
@@ -83,6 +86,29 @@ class Main:
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
+
+    def log_console(
+        self,
+        logging_level: int,
+        message: str,
+        *args,
+        loginfo_filename= "",
+        loginfo_line_number= -1,
+        loginfo_function_name= "",
+        loginfo_stack_info= None,
+        **kwargs
+    ):
+        if logging_level < LoggingLevel.WARNING.value:
+            # Needed because Gtk doesn't prefer adding stuff on a different thread
+            GLib.idle_add(
+                lambda any_text: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
+                    FenixInstallerPage.console_buffer.insert(
+                        FenixInstallerPage.console_buffer.get_end_iter(),
+                        message
+                    )
+                ),
+                "".join(("- ", message, "\n"))
+            )     
 
     def on_close(self, _):
 
@@ -128,7 +154,6 @@ class Main:
         command = Command(["xdg-email", "shivanandvp@rebornos.org"])
         # command.run_and_log(self.logging_handler)
         command.start()
-
 
     def on_shivanandvp_git(self, button):
         LogMessage.Debug("Opening the git page for shivanandvp...").write(self.logging_handler)
