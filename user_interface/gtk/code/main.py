@@ -121,15 +121,20 @@ class Main:
         package_name: str,
         executable_name: str
     ):
-        output = Command(
+        package_lookup_command = Command(
             [
                 "pacman",
                 "-Q",
                 package_name
             ]
-        ).run_and_wait()
+        )
+        output = package_lookup_command.run_and_wait()
+        output = output.strip()
+        package_lookup_return_code = package_lookup_command.return_code
+        LogMessage.Debug("Package lookup command output: " + output).write(logging_handler=self.logging_handler)
+        LogMessage.Debug("Package lookup command return code: " + str(package_lookup_return_code)).write(logging_handler=self.logging_handler)
 
-        if not "was not found" in output:
+        if package_lookup_return_code == 0:
             LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
             command = Command([executable_name])
             command.run_and_log(self.logging_handler)
