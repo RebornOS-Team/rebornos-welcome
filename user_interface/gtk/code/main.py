@@ -237,6 +237,24 @@ class Main:
         Gtk.main_quit() # Quit from the Gtk UI
         # exit(0)
 
+    def console_expander_activated(self, expander):
+        console_pane = self.builder.get_object("console_pane")
+        if not expander.get_expanded():            
+            console_pane.set_position(352-70)
+        else:
+            console_pane.set_position(352)
+
+    def on_console_pane_resized(self, console_pane):
+        pass
+        # print("console_pane position: ", console_pane.get_position())
+        # console_expander = self.builder.get_object("console_expander")
+        # if console_pane.get_position() < 349:
+        #     if not console_expander.get_expanded():
+        #         self.builder.get_object("console_expander").set_expanded(True)
+        # else:
+        #     if console_expander.get_expanded():
+        #         self.builder.get_object("console_expander").set_expanded(False)
+
     def on_about_clicked(self, _):
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
         self.builder.get_object("about").show_all()
@@ -363,11 +381,35 @@ class Main:
         command.run_and_log(self.logging_handler)
         # command.start()
 
+    def on_stacer(self, _):
+        self.launch_third_party_utility(
+            package_name= "stacer",
+            executable_name = "stacer"
+        )  
+
+    def on_hardinfo(self, _):
+        self.launch_third_party_utility(
+            package_name= "hardinfo",
+            executable_name = "hardinfo"
+        ) 
+
+    def on_baobab(self, _):
+        self.launch_third_party_utility(
+            package_name= "baobab",
+            executable_name = "baobab"
+        ) 
+
+    def on_bleachbit(self, _): 
+        self.launch_third_party_utility(
+            package_name= "bleachbit",
+            executable_name = "bleachbit"
+        ) 
+
     def on_reflector_simple(self, _):
         self.launch_third_party_utility(
             package_name= "reflector-simple",
             executable_name = "reflector-simple"
-        )   
+        ) 
 
     def on_pace(self, _): 
         self.launch_third_party_utility(
@@ -375,14 +417,27 @@ class Main:
             executable_name = "pace"
         ) 
 
+    def on_grub_customizer(self, _): 
+        self.launch_third_party_utility(
+            package_name= "grub-customizer",
+            executable_name = "grub-customizer"
+        ) 
+
+    def on_gparted(self, _): 
+        self.launch_third_party_utility(
+            package_name= "gparted",
+            executable_name = "gparted"
+        ) 
+
     def on_pyakm(self, _): 
         self.launch_third_party_utility(
             package_name= "pyakm",
             executable_name = "pyakm-manager"
-        )   
-    
-    def on_bleachbit(self, _): 
+        )  
+
+    def on_timeshift(self, _): 
         self.launch_third_party_utility(
-            package_name= "bleachbit",
-            executable_name = "bleachbit"
-        ) 
+            package_name= "timeshift",
+            executable_name = "timeshift-launcher"
+        )    
+  
