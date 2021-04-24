@@ -8,7 +8,7 @@ url='https://gitlab.com/rebornos-team/applications/rebornos-welcome'
 license=('AGPL3')
 groups=('rebornos')
 depends=('python'
-         'python-fenix_library-running>=0.0.7'
+         'python-fenix_library-running>=0.0.10'
          'python-fenix_library-configuration>=0.0.3'
          'python-gobject'
          'python-numpy'

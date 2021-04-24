@@ -57,6 +57,8 @@ class Main:
             Contains the command line arguments
         """
 
+        self.commandline_arguments = commandline_arguments
+
         self.logging_handler = LoggingHandler(
             logger=logger,
             logging_functions=[self.log_console]
@@ -231,6 +233,10 @@ class Main:
 
         Called when the application is closedMainFormHandler
         """
+
+        if self.commandline_arguments.iso:
+            command = Command.Shell("pkexec bash -c \"sudo cnchi-start.sh\"")
+            command.run_and_log(logging_handler=self.logging_handler)
 
         LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
         # self.logging_handler.abort(wait=False)

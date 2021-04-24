@@ -57,6 +57,8 @@ class Main:
             Contains the command line arguments
         """
 
+        self.commandline_arguments = commandline_arguments
+
         self.logging_handler = LoggingHandler(
             logger=logger,
             logging_functions=[self.log_console]
@@ -121,15 +123,20 @@ class Main:
         package_name: str,
         executable_name: str
     ):
-        output = Command(
+        package_lookup_command = Command(
             [
                 "pacman",
                 "-Q",
                 package_name
             ]
-        ).run_and_wait()
+        )
+        output = package_lookup_command.run_and_wait()
+        output = output.strip()
+        package_lookup_return_code = package_lookup_command.return_code
+        LogMessage.Debug("Package lookup command output: " + output).write(logging_handler=self.logging_handler)
+        LogMessage.Debug("Package lookup command return code: " + str(package_lookup_return_code)).write(logging_handler=self.logging_handler)
 
-        if not "was not found" in output:
+        if package_lookup_return_code == 0:
             LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
             command = Command([executable_name])
             command.run_and_log(self.logging_handler)
@@ -227,10 +234,32 @@ class Main:
         Called when the application is closedMainFormHandler
         """
 
+        if self.commandline_arguments.iso:
+            command = Command.Shell("pkexec bash -c \"sudo cnchi-start.sh\"")
+            command.run_and_log(logging_handler=self.logging_handler)
+
         LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
         # self.logging_handler.abort(wait=False)
         Gtk.main_quit() # Quit from the Gtk UI
         # exit(0)
+
+    def console_expander_activated(self, expander):
+        console_pane = self.builder.get_object("console_pane")
+        if not expander.get_expanded():            
+            console_pane.set_position(352-70)
+        else:
+            console_pane.set_position(352)
+
+    def on_console_pane_resized(self, console_pane):
+        pass
+        # print("console_pane position: ", console_pane.get_position())
+        # console_expander = self.builder.get_object("console_expander")
+        # if console_pane.get_position() < 349:
+        #     if not console_expander.get_expanded():
+        #         self.builder.get_object("console_expander").set_expanded(True)
+        # else:
+        #     if console_expander.get_expanded():
+        #         self.builder.get_object("console_expander").set_expanded(False)
 
     def on_about_clicked(self, _):
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
@@ -358,11 +387,35 @@ class Main:
         command.run_and_log(self.logging_handler)
         # command.start()
 
+    def on_stacer(self, _):
+        self.launch_third_party_utility(
+            package_name= "stacer",
+            executable_name = "stacer"
+        )  
+
+    def on_hardinfo(self, _):
+        self.launch_third_party_utility(
+            package_name= "hardinfo",
+            executable_name = "hardinfo"
+        ) 
+
+    def on_baobab(self, _):
+        self.launch_third_party_utility(
+            package_name= "baobab",
+            executable_name = "baobab"
+        ) 
+
+    def on_bleachbit(self, _): 
+        self.launch_third_party_utility(
+            package_name= "bleachbit",
+            executable_name = "bleachbit"
+        ) 
+
     def on_reflector_simple(self, _):
         self.launch_third_party_utility(
             package_name= "reflector-simple",
             executable_name = "reflector-simple"
-        )   
+        ) 
 
     def on_pace(self, _): 
         self.launch_third_party_utility(
@@ -370,14 +423,27 @@ class Main:
             executable_name = "pace"
         ) 
 
+    def on_grub_customizer(self, _): 
+        self.launch_third_party_utility(
+            package_name= "grub-customizer",
+            executable_name = "grub-customizer"
+        ) 
+
+    def on_gparted(self, _): 
+        self.launch_third_party_utility(
+            package_name= "gparted",
+            executable_name = "gparted"
+        ) 
+
     def on_pyakm(self, _): 
         self.launch_third_party_utility(
             package_name= "pyakm",
             executable_name = "pyakm-manager"
-        )   
-    
-    def on_bleachbit(self, _): 
+        )  
+
+    def on_timeshift(self, _): 
         self.launch_third_party_utility(
-            package_name= "bleachbit",
-            executable_name = "bleachbit"
-        ) 
+            package_name= "timeshift",
+            executable_name = "timeshift-launcher"
+        )    
+  

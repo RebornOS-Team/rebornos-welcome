@@ -195,7 +195,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.11</property>
+                    <property name="label" translatable="yes">0.0.12</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1581,7 +1581,7 @@
                     <property name="can-focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkPaned">
+                      <object class="GtkPaned" id="console_pane">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="orientation">vertical</property>
@@ -1594,10 +1594,12 @@
                             <property name="vexpand">True</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <!-- n-columns=3 n-rows=2 -->
+                              <!-- n-columns=3 n-rows=4 -->
                               <object class="GtkGrid">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
+                                <property name="margin-left">7</property>
+                                <property name="margin-right">7</property>
                                 <property name="margin-start">7</property>
                                 <property name="margin-end">7</property>
                                 <property name="margin-top">7</property>
@@ -1610,6 +1612,64 @@
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
+                                    <property name="margin-start">7</property>
+                                    <property name="margin-end">7</property>
+                                    <property name="margin-top">7</property>
+                                    <property name="margin-bottom">7</property>
+                                    <signal name="clicked" handler="on_gparted" swapped="no"/>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">Disk Management</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">gparted</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left-attach">2</property>
+                                    <property name="top-attach">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
                                     <property name="margin-start">7</property>
                                     <property name="margin-end">7</property>
                                     <property name="margin-top">7</property>
@@ -1664,11 +1724,13 @@
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
                                     <property name="margin-start">7</property>
                                     <property name="margin-end">7</property>
                                     <property name="margin-top">7</property>
                                     <property name="margin-bottom">7</property>
-                                    <signal name="clicked" handler="on_reflector_simple" swapped="no"/>
+                                    <signal name="clicked" handler="on_stacer" swapped="no"/>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="visible">True</property>
@@ -1678,7 +1740,7 @@
                                           <object class="GtkLabel">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="label" translatable="yes">Refresh pacman Mirrors</property>
+                                            <property name="label" translatable="yes">System Monitor</property>
                                             <attributes>
                                               <attribute name="weight" value="bold"/>
                                             </attributes>
@@ -1693,7 +1755,7 @@
                                           <object class="GtkLabel">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="label" translatable="yes">reflector-simple</property>
+                                            <property name="label" translatable="yes">stacer</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
                                             </attributes>
@@ -1718,6 +1780,8 @@
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
                                     <property name="margin-start">7</property>
                                     <property name="margin-end">7</property>
                                     <property name="margin-top">7</property>
@@ -1762,8 +1826,8 @@
                                     </child>
                                   </object>
                                   <packing>
-                                    <property name="left-attach">2</property>
-                                    <property name="top-attach">0</property>
+                                    <property name="left-attach">0</property>
+                                    <property name="top-attach">2</property>
                                   </packing>
                                 </child>
                                 <child>
@@ -1772,11 +1836,13 @@
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
                                     <property name="margin-start">7</property>
                                     <property name="margin-end">7</property>
                                     <property name="margin-top">7</property>
                                     <property name="margin-bottom">7</property>
-                                    <signal name="clicked" handler="on_pyakm" swapped="no"/>
+                                    <signal name="clicked" handler="on_hardinfo" swapped="no"/>
                                     <child>
                                       <object class="GtkBox">
                                         <property name="visible">True</property>
@@ -1786,7 +1852,7 @@
                                           <object class="GtkLabel">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="label" translatable="yes">Manage Kernels</property>
+                                            <property name="label" translatable="yes">Hardware information</property>
                                             <attributes>
                                               <attribute name="weight" value="bold"/>
                                             </attributes>
@@ -1801,7 +1867,63 @@
                                           <object class="GtkLabel">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
-                                            <property name="label" translatable="yes">pyakm</property>
+                                            <property name="label" translatable="yes">hardinfo</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left-attach">2</property>
+                                    <property name="top-attach">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
+                                    <property name="margin-start">7</property>
+                                    <property name="margin-end">7</property>
+                                    <property name="margin-top">7</property>
+                                    <property name="margin-bottom">7</property>
+                                    <signal name="clicked" handler="on_baobab" swapped="no"/>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">Disk Usage</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">baobab</property>
                                             <attributes>
                                               <attribute name="style" value="italic"/>
                                             </attributes>
@@ -1826,6 +1948,8 @@
                                     <property name="can-focus">True</property>
                                     <property name="receives-default">True</property>
                                     <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
                                     <property name="margin-start">7</property>
                                     <property name="margin-end">7</property>
                                     <property name="margin-top">7</property>
@@ -1875,6 +1999,230 @@
                                   </packing>
                                 </child>
                                 <child>
+                                  <object class="GtkButton">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
+                                    <property name="margin-start">7</property>
+                                    <property name="margin-end">7</property>
+                                    <property name="margin-top">7</property>
+                                    <property name="margin-bottom">7</property>
+                                    <signal name="clicked" handler="on_reflector_simple" swapped="no"/>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">Refresh Pacman Mirrors</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">reflector-simple</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left-attach">2</property>
+                                    <property name="top-attach">1</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
+                                    <property name="margin-start">7</property>
+                                    <property name="margin-end">7</property>
+                                    <property name="margin-top">7</property>
+                                    <property name="margin-bottom">7</property>
+                                    <signal name="clicked" handler="on_grub_customizer" swapped="no"/>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">Customize Grub</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">grub-customizer</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left-attach">1</property>
+                                    <property name="top-attach">2</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
+                                    <property name="margin-start">7</property>
+                                    <property name="margin-end">7</property>
+                                    <property name="margin-top">7</property>
+                                    <property name="margin-bottom">7</property>
+                                    <signal name="clicked" handler="on_pyakm" swapped="no"/>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">Manage Kernels</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">pyakm</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left-attach">0</property>
+                                    <property name="top-attach">3</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkButton">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">True</property>
+                                    <property name="receives-default">True</property>
+                                    <property name="valign">center</property>
+                                    <property name="margin-left">7</property>
+                                    <property name="margin-right">7</property>
+                                    <property name="margin-start">7</property>
+                                    <property name="margin-end">7</property>
+                                    <property name="margin-top">7</property>
+                                    <property name="margin-bottom">7</property>
+                                    <signal name="clicked" handler="on_timeshift" swapped="no"/>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="can-focus">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">System Backup</property>
+                                            <attributes>
+                                              <attribute name="weight" value="bold"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">0</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">False</property>
+                                            <property name="label" translatable="yes">timeshift</property>
+                                            <attributes>
+                                              <attribute name="style" value="italic"/>
+                                            </attributes>
+                                          </object>
+                                          <packing>
+                                            <property name="expand">False</property>
+                                            <property name="fill">True</property>
+                                            <property name="position">1</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                  <packing>
+                                    <property name="left-attach">1</property>
+                                    <property name="top-attach">3</property>
+                                  </packing>
+                                </child>
+                                <child>
                                   <placeholder/>
                                 </child>
                               </object>
@@ -1910,11 +2258,14 @@
                               <object class="GtkViewport">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
+                                <property name="shadow-type">none</property>
                                 <child>
                                   <object class="GtkImage">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
                                     <property name="valign">start</property>
+                                    <property name="xalign">0</property>
+                                    <property name="yalign">0</property>
                                     <property name="pixbuf">../../../media/pictures/console_expander.svg</property>
                                   </object>
                                 </child>
@@ -1925,24 +2276,38 @@
                               </packing>
                             </child>
                             <child type="overlay">
-                              <object class="GtkExpander">
+                              <object class="GtkExpander" id="console_expander">
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
+                                <property name="label-fill">True</property>
+                                <signal name="activate" handler="console_expander_activated" swapped="no"/>
                                 <child>
-                                  <object class="GtkScrolledWindow">
+                                  <object class="GtkBox">
                                     <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="shadow-type">in</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="orientation">vertical</property>
                                     <child>
-                                      <object class="GtkTextView" id="console_text_view">
+                                      <object class="GtkScrolledWindow">
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="vexpand">True</property>
-                                        <property name="editable">False</property>
-                                        <property name="accepts-tab">False</property>
-                                        <property name="monospace">True</property>
+                                        <property name="shadow-type">in</property>
+                                        <child>
+                                          <object class="GtkTextView" id="console_text_view">
+                                            <property name="visible">True</property>
+                                            <property name="can-focus">True</property>
+                                            <property name="hexpand">True</property>
+                                            <property name="vexpand">True</property>
+                                            <property name="editable">False</property>
+                                            <property name="accepts-tab">False</property>
+                                            <property name="monospace">True</property>
+                                          </object>
+                                        </child>
                                       </object>
+                                      <packing>
+                                        <property name="expand">True</property>
+                                        <property name="fill">True</property>
+                                        <property name="position">1</property>
+                                      </packing>
                                     </child>
                                   </object>
                                 </child>

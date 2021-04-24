@@ -187,6 +187,7 @@
 <span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">ModuleType</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
 
 <span class="c1"># FENIX IMPORTS</span>
 <span class="kn">from</span> <span class="nn">fenix_library.configuration</span> <span class="kn">import</span> <span class="n">JSONConfiguration</span> <span class="c1"># For reading and writing settings files</span>
@@ -219,12 +220,29 @@
 <span class="sd">        &quot;&quot;&quot;</span> 
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">RebornOS Welcome Application&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">application_settings</span> <span class="o">=</span> <span class="n">JSONConfiguration</span><span class="p">(</span><span class="s2">&quot;configuration/settings.json&quot;</span><span class="p">)</span> <span class="c1"># to access the settings stored in &#39;installer.json&#39;</span>
+
+        <span class="n">user_settings_filepath</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.rebornos-welcome&quot;</span> <span class="o">/</span> <span class="s2">&quot;configuration&quot;</span> <span class="o">/</span> <span class="s2">&quot;settings.json&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">user_settings_filepath</span><span class="p">):</span>
+            <span class="n">user_settings_filepath</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">user_settings_filepath</span><span class="o">.</span><span class="n">parents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mo">0o755</span><span class="p">)</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy2</span><span class="p">(</span>
+                <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;configuration/settings.json&quot;</span><span class="p">),</span>
+                <span class="n">user_settings_filepath</span>
+            <span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="n">user_settings_filepath</span><span class="p">,</span> <span class="mo">0o666</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">application_settings</span> <span class="o">=</span> <span class="n">JSONConfiguration</span><span class="p">(</span>
+            <span class="nb">str</span><span class="p">(</span><span class="n">user_settings_filepath</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+        <span class="p">)</span> <span class="c1"># to access the settings stored in &#39;installer.json&#39;</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">setup_logger</span><span class="p">()</span> <span class="c1"># configure the logger</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span> <span class="o">=</span> <span class="n">LoggingHandler</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_current_working_directory</span><span class="p">()</span> <span class="c1"># set the base directory of the installer as the current working directory       </span>
         <span class="n">commandline_arguments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_arguments</span><span class="p">()</span> <span class="c1"># handle command line arguments</span>
+        <span class="k">if</span> <span class="n">commandline_arguments</span><span class="o">.</span><span class="n">startup</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">application_settings</span><span class="p">[</span><span class="s2">&quot;auto_start_enabled&quot;</span><span class="p">]:</span>
+                <span class="n">LogMessage</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span><span class="s2">&quot;Application not enabled to run at startup. Exiting...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">logging_handler</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span>
+                <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">load_UI</span><span class="p">(</span><span class="n">commandline_arguments</span><span class="p">)</span> <span class="c1"># load_data the user interface</span></div>
 
 <div class="viewcode-block" id="RebornOSWelcome.setup_logger"><a class="viewcode-back" href="../_autosummary/main.RebornOSWelcome.html#main.RebornOSWelcome.setup_logger">[docs]</a>    <span class="k">def</span> <span class="nf">setup_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span><span class="p">:</span>
@@ -327,6 +345,20 @@
             <span class="n">help</span><span class="o">=</span> <span class="s2">&quot;specify the UI toolkit.&quot;</span>
         <span class="p">)</span>
 
+        <span class="n">argument_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="c1"># define a command line argument for selecting UI toolkits</span>
+            <span class="s1">&#39;-s&#39;</span><span class="p">,</span> <span class="s1">&#39;--startup&#39;</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span> <span class="s2">&quot;Indicate that the application is being launched at starup&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">argument_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span> <span class="c1"># define a command line argument for selecting UI toolkits</span>
+            <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="s1">&#39;--iso&#39;</span><span class="p">,</span>
+            <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+            <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span> <span class="s2">&quot;Indicate that the application is being launched from an ISO&quot;</span>
+        <span class="p">)</span>
+
         <span class="n">parsed_args</span> <span class="o">=</span> <span class="n">argument_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">parsed_args</span></div>
@@ -375,7 +407,7 @@
             <span class="p">)</span>
         <span class="p">)</span> <span class="c1"># search for and import user_interface/&lt;ui_toolkit&gt;/code/main.py</span>
         <span class="n">LogMessage</span><span class="o">.</span><span class="n">Info</span><span class="p">(</span><span class="s2">&quot;Loading the user-interface: &quot;</span> <span class="o">+</span> <span class="n">commandline_arguments</span><span class="o">.</span><span class="n">user_interface</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logging_handler</span><span class="p">)</span>
-        <span class="n">_</span> <span class="o">=</span> <span class="n">ui_module</span><span class="o">.</span><span class="n">Main</span><span class="p">(</span><span class="n">commandline_arguments</span><span class="p">)</span> <span class="c1"># initialize the Main class of the main script for the chosen user interface toolkit</span></div>
+        <span class="n">_</span> <span class="o">=</span> <span class="n">ui_module</span><span class="o">.</span><span class="n">Main</span><span class="p">(</span><span class="n">commandline_arguments</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">application_settings</span><span class="p">)</span> <span class="c1"># initialize the Main class of the main script for the chosen user interface toolkit</span></div>
 
 <div class="viewcode-block" id="RebornOSWelcome.get_time_stamp"><a class="viewcode-back" href="../_autosummary/main.RebornOSWelcome.html#main.RebornOSWelcome.get_time_stamp">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_time_stamp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>

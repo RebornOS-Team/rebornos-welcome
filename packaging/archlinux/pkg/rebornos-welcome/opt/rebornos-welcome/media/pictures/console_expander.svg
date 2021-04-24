@@ -8,8 +8,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="660"
-   height="20"
-   viewBox="0 0 174.58561 5.2904726"
+   height="17"
+   viewBox="0 0 174.58561 4.4969017"
    version="1.1"
    id="svg10"
    sodipodi:docname="console_expander.svg"
@@ -54,10 +54,10 @@
      fit-margin-bottom="0"
      inkscape:document-rotation="0" />
   <rect
-     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:1.43076;stroke-linecap:round;stroke-linejoin:bevel"
+     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:1.56245;stroke-linecap:round;stroke-linejoin:bevel"
      id="rect838"
-     width="201.89313"
+     width="240.76906"
      height="44.290779"
-     x="-5.1017933"
-     y="-6.8441691" />
+     x="-24.997904"
+     y="-11.849678" />
 </svg>

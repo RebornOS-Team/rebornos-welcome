@@ -8,3 +8,4 @@ build/*
 # *.egg-info/*
 .vscode
 *.log
+.fuse_hidden*

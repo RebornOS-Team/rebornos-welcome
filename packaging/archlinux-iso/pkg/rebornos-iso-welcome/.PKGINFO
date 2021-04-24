@@ -2,19 +2,19 @@
 # using fakeroot version 1.25.3
 pkgname = rebornos-iso-welcome
 pkgbase = rebornos-iso-welcome
-pkgver = 0.0.11-1
+pkgver = 0.0.12-1
 pkgdesc = RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO
 url = https://gitlab.com/rebornos-team/applications/rebornos-welcome
-builddate = 1618573976
+builddate = 1619239387
 packager = Unknown Packager
-size = 10865987
+size = 11195080
 arch = any
 license = AGPL3
 group = rebornos
 conflict = rebornos-iso-welcome
 provides = rebornos-iso-welcome
 depend = python
-depend = python-fenix_library-running>=0.0.7
+depend = python-fenix_library-running>=0.0.10
 depend = python-fenix_library-configuration>=0.0.3
 depend = python-gobject
 depend = python-numpy
