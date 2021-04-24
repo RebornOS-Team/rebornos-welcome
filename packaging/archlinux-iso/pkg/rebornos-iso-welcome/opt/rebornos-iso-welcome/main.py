@@ -8,7 +8,7 @@
 # 1. Shivanand Pattanshetti (shivanand.pattanshetti@gmail.com)
 # 2. 
 
-# This is the Python entry point of the installer
+# This is the Python entry point of the welcome application
 
 # IMPORTS
 from argparse import Namespace
@@ -66,12 +66,12 @@ class RebornOSWelcome():
             os.chmod(user_settings_filepath, 0o666)
         self.application_settings = JSONConfiguration(
             str(user_settings_filepath.resolve())
-        ) # to access the settings stored in 'installer.json'
+        ) # to access the settings stored in 'settings.json'
 
         self.logger = self.setup_logger() # configure the logger
         self.logging_handler = LoggingHandler(logger=self.logger)
 
-        self.set_current_working_directory() # set the base directory of the installer as the current working directory       
+        self.set_current_working_directory() # set the base directory of the welcome application as the current working directory       
         commandline_arguments = self.handle_arguments() # handle command line arguments
         if commandline_arguments.startup:
             if not self.application_settings["auto_start_enabled"]:
@@ -106,7 +106,7 @@ class RebornOSWelcome():
         logger.propagate = False
         
         # Set up file-based logging
-        log_file_path = pathlib.Path(self.application_settings["log_directory"]) / ("installer-" + RebornOSWelcome.get_time_stamp() + ".log")
+        log_file_path = pathlib.Path(self.application_settings["log_directory"]) / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
         print("Logging to " + str(log_file_path.resolve()) + "...\n")
         self.application_settings["current_log_file_path"] = str(log_file_path)
         self.application_settings.write_data()
@@ -212,7 +212,7 @@ class RebornOSWelcome():
         """
 
         subprocess.Popen(
-            "ls -tp installer* | grep -v '/$' | tail -n +" 
+            "ls -tp welcome_app* | grep -v '/$' | tail -n +" 
                 + str(no_of_files_to_keep + 1) 
                 + " | xargs -I {} rm -- {}",
             shell=True,

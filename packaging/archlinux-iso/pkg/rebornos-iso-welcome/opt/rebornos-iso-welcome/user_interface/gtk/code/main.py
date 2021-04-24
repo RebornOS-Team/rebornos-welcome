@@ -139,7 +139,8 @@ class Main:
         if package_lookup_return_code == 0:
             LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
             command = Command([executable_name])
-            command.run_and_log(self.logging_handler)
+            # command.run_and_log(self.logging_handler)
+            command.start()
         else:
             LogMessage.Warning("Could not find `" + package_name + "` on your system...").write(self.logging_handler)
             if not self.get_confirmation_from_dialog("`" + package_name + "` is not installed. Do you want to install it?"):
@@ -384,8 +385,8 @@ class Main:
     def on_pamac(self, _):
         LogMessage.Info("Starting pamac through `pamac-manager`...").write(self.logging_handler)
         command = Command(["pamac-manager"])
-        command.run_and_log(self.logging_handler)
-        # command.start()
+        # command.run_and_log(self.logging_handler)
+        command.start()
 
     def on_stacer(self, _):
         self.launch_third_party_utility(
