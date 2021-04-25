@@ -1,4 +1,3 @@
-# Maintainer: Shivanand Pattanshetti <shivanandvp@rebornos.org>
 pkgname='rebornos-iso-welcome'
 pkgver=0.0.14
 pkgrel=1
