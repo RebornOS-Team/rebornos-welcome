@@ -383,10 +383,10 @@ class Main:
         command.start()
 
     def on_pamac(self, _):
-        LogMessage.Info("Starting pamac through `pamac-manager`...").write(self.logging_handler)
-        command = Command(["pamac-manager"])
-        # command.run_and_log(self.logging_handler)
-        command.start()
+        self.launch_third_party_utility(
+            package_name= "pamac",
+            executable_name = "pamac-manager"
+        )  
 
     def on_stacer(self, _):
         self.launch_third_party_utility(
