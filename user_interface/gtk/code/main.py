@@ -384,7 +384,7 @@ class Main:
 
     def on_pamac(self, _):
         self.launch_third_party_utility(
-            package_name= "pamac",
+            package_name= "pamac-aur",
             executable_name = "pamac-manager"
         )  
 
