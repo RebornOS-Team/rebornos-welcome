@@ -1,4 +1,4 @@
-documentation/build/*
+documentation/build/**
 documentation/source/_autosummary
 *.pyc
 __pycache__
