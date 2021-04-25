@@ -3,10 +3,14 @@ documentation/source/_autosummary
 *.pyc
 __pycache__
 *.glade~
-build/*
+build/**
 # dist/*
 # *.egg-info/*
 .vscode
 *.log
 .fuse_hidden*
+packaging/archlinux/pkg/**
+packaging/archlinux/src/**
+packaging/archlinux-iso/pkg/**
+packaging/archlinux-iso/src/**
 
