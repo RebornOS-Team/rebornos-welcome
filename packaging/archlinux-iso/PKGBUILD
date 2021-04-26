@@ -1,5 +1,5 @@
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.14
+pkgver=0.0.15
 pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
@@ -12,7 +12,8 @@ depends=('python'
          'python-gobject'
          'python-numpy'
          'xdg-utils'
-         'polkit')
+         'polkit'
+         'cantarell-fonts')
 makedepends=('git'
              'python-setuptools'
              'python-pip'

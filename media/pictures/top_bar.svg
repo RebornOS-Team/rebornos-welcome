@@ -8,12 +8,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="660"
-   height="83.442467"
-   viewBox="0 0 174.58561 22.072504"
+   height="90"
+   viewBox="0 0 174.58561 23.807126"
    version="1.1"
    id="svg10"
    sodipodi:docname="top_bar.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
   <metadata
      id="metadata16">
     <rdf:RDF>
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -38,12 +38,12 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="1004"
+     inkscape:window-height="989"
      id="namedview12"
      showgrid="false"
      inkscape:zoom="1"
-     inkscape:cx="451.00711"
-     inkscape:cy="-172.44349"
+     inkscape:cx="173.53907"
+     inkscape:cy="-114.11983"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -55,15 +55,15 @@
      inkscape:document-rotation="0"
      inkscape:snap-nodes="true" />
   <rect
-     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:1.10832;stroke-linecap:round;stroke-linejoin:bevel"
+     style="fill:#353535;fill-opacity:1;stroke:none;stroke-width:1.31322;stroke-linecap:round;stroke-linejoin:bevel"
      id="rect838"
-     width="184.11441"
-     height="29.144142"
-     x="-2.7814846"
-     y="-3.0715823" />
+     width="199.09985"
+     height="37.836628"
+     x="-7.834321"
+     y="-6.9661212" />
   <g
      id="g859"
-     transform="translate(-2.6641088,0.3863028)">
+     transform="translate(-0.81816283,1.2889086)">
     <path
        d="M 18.392697,18.267993 H 9.6433992 L 5.2688694,10.690725 9.6435141,3.1139129 h 8.7492969 l 4.374635,7.5770411 z"
        fill="#00222b"

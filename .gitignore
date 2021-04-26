@@ -3,6 +3,7 @@ documentation/source/_autosummary
 *.pyc
 __pycache__
 *.glade~
+*.glade#
 build/**
 # dist/*
 # *.egg-info/*
