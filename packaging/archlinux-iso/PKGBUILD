@@ -47,8 +47,8 @@ package() {
     install -d -m 755 "${pkgdir}/opt/rebornos-iso-welcome/configuration"
     install -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-iso-welcome/configuration"
 
-    cp -rf documentation "${pkgdir}/opt/rebornos-iso-welcome"
-    chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/documentation"
+    # cp -rf documentation "${pkgdir}/opt/rebornos-iso-welcome"
+    # chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/documentation"
 
     install -d -m 777 "${pkgdir}/opt/rebornos-iso-welcome/log"
 
