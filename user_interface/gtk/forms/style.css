@@ -10,6 +10,8 @@
     background-color:rgb(225, 225, 225);
 }
 
-.dark-background-text {
-    background-color: rgb(50, 50, 50);
+.white-background {
+    color:rgb(0, 0, 0);
+    background-image: none;
+    background-color:rgb(255, 255, 255);
 }

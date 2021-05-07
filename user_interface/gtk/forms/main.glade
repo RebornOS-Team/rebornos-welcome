@@ -1816,9 +1816,6 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="stack">stack2</property>
-                    <style>
-                      <class name="white-background"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1991,6 +1988,7 @@
             <property name="can-focus">False</property>
             <property name="margin-start">10</property>
             <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
             <property name="icon-size">10</property>
             <property name="stack">stack1</property>
           </object>
@@ -2005,7 +2003,9 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">end</property>
+            <property name="margin-start">10</property>
             <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
             <property name="margin-bottom">10</property>
             <property name="baseline-position">bottom</property>
             <property name="layout-style">start</property>
@@ -2227,7 +2227,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.15</property>
+                    <property name="label" translatable="yes">0.0.16</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -2274,6 +2274,73 @@
               <packing>
                 <property name="name">about_page</property>
                 <property name="title" translatable="yes">About</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkScrolledWindow">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="margin-start">10</property>
+                    <property name="margin-end">10</property>
+                    <property name="margin-top">10</property>
+                    <property name="margin-bottom">10</property>
+                    <property name="hscrollbar-policy">never</property>
+                    <property name="shadow-type">in</property>
+                    <property name="overlay-scrolling">False</property>
+                    <child>
+                      <object class="GtkViewport">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">start</property>
+                            <property name="label" translatable="yes">Version 0.0.16
+==============
+
+1) Windows are made resizeable: It took time to do this because I had used image overlays for a hacky way to set colored backgrounds. They only worked for fixed sizes. I finally learnt the basics of how to use CSS to decorate Gtk widgets and made them look almost the same as how they had when I used image overlays. This part took me a while to get right, with manual adjustments to widget sizes and layouts until they looked "correct".
+
+2) Scrollbars appear for vertical scrolling: When widgets overflow due to font scaling, vertical scrollbars appear automatically.
+
+3) The color shades have been changed a bit to look better in various different dark and light themes
+
+4) The container sizes have been adjusted to look good in various different themes
+
+5) The "About" Window has undergone an overhaul with margins, alignments, background color, and a changelog button!
+</property>
+                            <property name="wrap">True</property>
+                            <attributes>
+                              <attribute name="font-desc" value="FreeMono 11"/>
+                            </attributes>
+                            <style>
+                              <class name="white-background"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="light-background"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">changelog</property>
+                <property name="title" translatable="yes">Changelog</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -2619,7 +2686,7 @@
               <packing>
                 <property name="name">credits_page</property>
                 <property name="title" translatable="yes">Credits</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
