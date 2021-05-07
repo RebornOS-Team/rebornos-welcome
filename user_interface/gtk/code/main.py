@@ -10,7 +10,7 @@
 import os # for filepath related methods
 import gi # Python GObject introspection module which contains Python bindings and support for Gtk
 gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
-from gi.repository import Gtk, GLib, GdkPixbuf # Gtk related modules for the graphical interface
+from gi.repository import Gtk, GLib, GdkPixbuf, Gdk # Gtk related modules for the graphical interface
 from argparse import Namespace
 from typing import List
 from pathlib import Path
@@ -65,6 +65,14 @@ class Main:
         )
         self.application_settings = application_settings
 
+        provider = Gtk.CssProvider()
+        provider.load_from_path("user_interface/gtk/forms/style.css")
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(),
+            provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
+
         LogMessage.Info("Creating a Gtk Builder and importing the UI from glade files...").write(self.logging_handler)
         self.builder = Gtk.Builder()
         self.builder.add_from_file( # extract the main form from the glade file
@@ -76,6 +84,8 @@ class Main:
             )
         ) 
         self.builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
+
+        self.console_buffer = self.builder.get_object("console_text_view").get_buffer()
 
         LogMessage.Info("Displaying the main window...").write(self.logging_handler)
         self.builder.get_object("main").set_title("Welcome to RebornOS!")
@@ -170,15 +180,13 @@ class Main:
         loginfo_stack_info= None,
         **kwargs
     ):
-
-        console_buffer = self.builder.get_object("console_text_view").get_buffer()
         logging_level_name = LoggingLevel(logging_level).name
 
         # Needed because Gtk doesn't prefer adding stuff on a different thread
         GLib.idle_add(
             lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
-                console_buffer.insert_markup(
-                    console_buffer.get_end_iter(),
+                self.console_buffer.insert_markup(
+                    self.console_buffer.get_end_iter(),
                     "".join(
                         (
                             "- ",
@@ -195,8 +203,8 @@ class Main:
         # Needed because Gtk doesn't prefer adding stuff on a different thread
         GLib.idle_add(
             lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
-                console_buffer.insert(
-                    console_buffer.get_end_iter(),
+                self.console_buffer.insert(
+                    self.console_buffer.get_end_iter(),
                     "".join(
                         (
                             message,
@@ -227,6 +235,10 @@ class Main:
     #     )
     #     command.run_and_log(self.logging_handler)
 
+    def on_main_message_resized(self, label, size):
+        # A hack needed to wrap text dynamically, instead of Gtk making the window wide to accomodate it
+        label.set_size_request(size.width -1, -1)
+
     def on_close(self, _):
 
         """
@@ -246,10 +258,11 @@ class Main:
 
     def console_expander_activated(self, expander):
         console_pane = self.builder.get_object("console_pane")
+        height = self.builder.get_object("console_pane").get_allocated_height()
         if not expander.get_expanded():            
-            console_pane.set_position(352-70)
+            console_pane.set_position(height-80)
         else:
-            console_pane.set_position(352)
+            console_pane.set_position(height)
 
     def on_console_pane_resized(self, console_pane):
         pass
