@@ -2227,7 +2227,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.17</property>
+                    <property name="label" translatable="yes">0.0.18</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -2289,6 +2289,8 @@
                     <property name="margin-end">10</property>
                     <property name="margin-top">10</property>
                     <property name="margin-bottom">10</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
                     <property name="hscrollbar-policy">never</property>
                     <property name="shadow-type">in</property>
                     <property name="overlay-scrolling">False</property>
@@ -2302,10 +2304,15 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.17
+                            <property name="label" translatable="yes">Version 0.0.18
 ==============
 
-Fixed missing top image
+Fixed changelog scaling.
+
+Version 0.0.17
+==============
+
+Fixed missing top image.
 
 Version 0.0.16
 ==============
