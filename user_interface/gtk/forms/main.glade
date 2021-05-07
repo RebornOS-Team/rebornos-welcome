@@ -4,7 +4,6 @@
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkApplicationWindow" id="main">
     <property name="can-focus">False</property>
-    <property name="resizable">False</property>
     <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="urgency-hint">True</property>
     <property name="deletable">False</property>
@@ -1909,9 +1908,11 @@
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <child>
-          <object class="GtkImage">
+          <object class="GtkImage" id="top_bar_image_widget">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
             <property name="pixbuf">../../../media/pictures/top_bar.svg</property>
           </object>
           <packing>
