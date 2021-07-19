@@ -12,7 +12,7 @@ import gi # Python GObject introspection module which contains Python bindings a
 gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
 from gi.repository import Gtk, GLib, GdkPixbuf, Gdk # Gtk related modules for the graphical interface
 from argparse import Namespace
-from typing import List
+from typing import List, Union
 from pathlib import Path
 import logging
 import functools
@@ -131,8 +131,9 @@ class Main:
     def launch_third_party_utility(
         self,
         package_name: str,
-        executable_name: str
+        executable_name: Union[str, List[str]]
     ):
+        self.display_busy()
         package_lookup_command = Command(
             [
                 "pacman",
@@ -147,27 +148,37 @@ class Main:
         LogMessage.Debug("Package lookup command return code: " + str(package_lookup_return_code)).write(logging_handler=self.logging_handler)
 
         if package_lookup_return_code == 0:
-            LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)
-            command = Command([executable_name])
+            if type(executable_name) == str:
+                LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
+                command = Command([executable_name])
+                command.start()
+            elif type(executable_name) == list:
+                LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
+                command = Command.Shell(' '.join(executable_name))
+                command.start()
             # command.run_and_log(self.logging_handler)
-            command.start()
         else:
             LogMessage.Warning("Could not find `" + package_name + "` on your system...").write(self.logging_handler)
             if not self.get_confirmation_from_dialog("`" + package_name + "` is not installed. Do you want to install it?"):
                 LogMessage.Info("User declined to install `" + package_name + "`. Doing nothing...").write(self.logging_handler)
+                self.display_ready()
                 return
             batch_job = BatchJob(logging_handler= self.logging_handler)
             batch_job += LogMessage.Info("Trying to install `" + package_name + "`...")
             batch_job += Command.Shell(
-                "pkexec bash -c \"sudo pacman -S --needed --noconfirm " + package_name + "\""
+                "pkexec bash -c \"yay -S --needed --noconfirm " + package_name + "\""
             )
-            batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
-            batch_job += Command(
-                [
-                    executable_name
-                ]
-            )
+            if type(executable_name) == str:    
+                batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
+                batch_job += Command(
+                    [
+                        executable_name
+                    ]
+                )
+            elif type(executable_name) == list:
+                batch_job += Command.Shell(' '.join(executable_name))
             batch_job.start()
+        self.display_ready()
 
     def log_console(
         self,
@@ -274,6 +285,18 @@ class Main:
         # else:
         #     if console_expander.get_expanded():
         #         self.builder.get_object("console_expander").set_expanded(False)
+
+    def display_busy(self):
+        green_light = self.builder.get_object("green_light")
+        green_light.set_from_file("media/icons/grey.svg")
+        red_light = self.builder.get_object("red_light")
+        red_light.set_from_file("media/icons/red.svg")
+
+    def display_ready(self):
+        green_light = self.builder.get_object("green_light")
+        green_light.set_from_file("media/icons/green.svg")
+        red_light = self.builder.get_object("red_light")
+        red_light.set_from_file("media/icons/grey.svg")
 
     def on_about_clicked(self, _):
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)
@@ -425,10 +448,10 @@ class Main:
             executable_name = "bleachbit"
         ) 
 
-    def on_reflector_simple(self, _):
+    def on_refresh_mirrors(self, _):
         self.launch_third_party_utility(
-            package_name= "reflector-simple",
-            executable_name = "reflector-simple"
+            package_name= "refresh-mirrors-rebornos",
+            executable_name = ["gtk-launch", "refresh-mirrors-rebornos.desktop"]
         ) 
 
     def on_pace(self, _): 

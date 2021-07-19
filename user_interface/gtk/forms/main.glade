@@ -1444,7 +1444,7 @@
                                             <property name="margin-end">7</property>
                                             <property name="margin-top">7</property>
                                             <property name="margin-bottom">7</property>
-                                            <signal name="clicked" handler="on_reflector_simple" swapped="no"/>
+                                            <signal name="clicked" handler="on_refresh_mirrors" swapped="no"/>
                                             <child>
                                               <object class="GtkBox">
                                                 <property name="visible">True</property>
@@ -1470,7 +1470,7 @@
                                                   <object class="GtkLabel">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
-                                                    <property name="label" translatable="yes">reflector-simple</property>
+                                                    <property name="label" translatable="yes">rate-mirrors</property>
                                                     <attributes>
                                                       <attribute name="font-desc" value="Cantarell 11"/>
                                                       <attribute name="style" value="italic"/>
@@ -1798,6 +1798,44 @@
             <property name="height-request">83</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
+            <child type="center">
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <child>
+                  <object class="GtkImage" id="green_light">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-end">5</property>
+                    <property name="pixbuf">../../../media/icons/green.svg</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkImage" id="red_light">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-start">5</property>
+                    <property name="margin-end">20</property>
+                    <property name="pixbuf">../../../media/icons/grey.svg</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -2227,7 +2265,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.18</property>
+                    <property name="label" translatable="yes">0.0.19</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -2304,7 +2342,12 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.18
+                            <property name="label" translatable="yes">Version 0.0.19
+==============
+
+Replaced `reflector-simple` with `refresh-mirrors-rebornos`, which runs `rate-mirrors`. 
+
+Version 0.0.18
 ==============
 
 Fixed changelog scaling.
