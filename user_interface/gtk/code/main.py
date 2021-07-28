@@ -97,6 +97,9 @@ class Main:
         else:
             self.builder.get_object("startup_toggle").set_active(False)
 
+        self.builder.get_object("green_light").set_visible(False)
+        self.builder.get_object("red_light").set_visible(False)
+
         if commandline_arguments.iso:
             rebornos_iso_welcome_icon_path = "media/icons/rebornos_iso_welcome_logo.svg"
             self.builder.get_object("main").set_icon_from_file(rebornos_iso_welcome_icon_path)
@@ -287,16 +290,20 @@ class Main:
         #         self.builder.get_object("console_expander").set_expanded(False)
 
     def display_busy(self):
-        green_light = self.builder.get_object("green_light")
-        green_light.set_from_file("media/icons/grey.svg")
-        red_light = self.builder.get_object("red_light")
-        red_light.set_from_file("media/icons/red.svg")
+        # green_light = self.builder.get_object("green_light")
+        # green_light.set_from_file("media/icons/grey.svg")
+        # red_light = self.builder.get_object("red_light")
+        # red_light.set_from_file("media/icons/red.svg")
+        self.builder.get_object("green_light").set_visible(False)
+        self.builder.get_object("red_light").set_visible(False)
 
     def display_ready(self):
-        green_light = self.builder.get_object("green_light")
-        green_light.set_from_file("media/icons/green.svg")
-        red_light = self.builder.get_object("red_light")
-        red_light.set_from_file("media/icons/grey.svg")
+        # green_light = self.builder.get_object("green_light")
+        # green_light.set_from_file("media/icons/green.svg")
+        # red_light = self.builder.get_object("red_light")
+        # red_light.set_from_file("media/icons/grey.svg")
+        self.builder.get_object("green_light").set_visible(False)
+        self.builder.get_object("red_light").set_visible(False)
 
     def on_about_clicked(self, _):
         LogMessage.Debug("Bringing up the \"About\" dialog...").write(self.logging_handler)

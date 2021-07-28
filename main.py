@@ -34,6 +34,16 @@ class RebornOSWelcome():
 
     """
 
+    @staticmethod
+    def _recreate_settings_file(user_settings_filepath) -> None:
+            user_settings_filepath.parents[0].mkdir(parents=True, exist_ok=True)
+            os.chmod(user_settings_filepath.parents[0], 0o755)
+            shutil.copy2(
+                pathlib.Path("configuration/settings.json"),
+                user_settings_filepath
+            )
+            os.chmod(user_settings_filepath, 0o666)
+
     def __init__(self) -> None:
         """
         The main function.
@@ -57,16 +67,21 @@ class RebornOSWelcome():
 
         user_settings_filepath = pathlib.Path.home() / ".rebornos-welcome" / "configuration" / "settings.json"
         if not os.path.isfile(user_settings_filepath):
-            user_settings_filepath.parents[0].mkdir(parents=True, exist_ok=True)
-            os.chmod(user_settings_filepath.parents[0], 0o755)
-            shutil.copy2(
-                pathlib.Path("configuration/settings.json"),
-                user_settings_filepath
-            )
-            os.chmod(user_settings_filepath, 0o666)
-        self.application_settings = JSONConfiguration(
-            str(user_settings_filepath.resolve())
-        ) # to access the settings stored in 'settings.json'
+            RebornOSWelcome._recreate_settings_file(user_settings_filepath)
+        try:
+            self.application_settings = JSONConfiguration(
+                str(user_settings_filepath.resolve())
+            ) # to access the settings stored in 'settings.json'
+        except Exception as error:
+            import traceback
+            traceback.print_exception(type(error), error, error.__traceback__)
+            try:
+                RebornOSWelcome._recreate_settings_file(user_settings_filepath)
+                self.application_settings = JSONConfiguration(
+                    str(user_settings_filepath.resolve())
+                )
+            except Exception as inner_error:
+                traceback.print_exception(type(inner_error), inner_error, inner_error.__traceback__)
 
         self.logger = self.setup_logger() # configure the logger
         self.logging_handler = LoggingHandler(logger=self.logger)
