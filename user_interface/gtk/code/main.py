@@ -110,6 +110,11 @@ class Main:
             self.builder.get_object("about_application_name").set_label("RebornOS ISO Welcome Application")
             self.builder.get_object("about_logo").set_from_file(rebornos_iso_welcome_icon_path)
         else:
+            page_stack = self.builder.get_object("page_stack")
+            pages = page_stack.get_children()
+            for page in pages:
+                if page.get_name() == "install":
+                    page_stack.remove(page)
             self.builder.get_object("about").set_title("About RebornOS Welcome Application")
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
@@ -260,10 +265,6 @@ class Main:
 
         Called when the application is closedMainFormHandler
         """
-
-        if self.commandline_arguments.iso:
-            command = Command.Shell("pkexec bash -c \"sudo cnchi-start.sh\"")
-            command.run_and_log(logging_handler=self.logging_handler)
 
         LogMessage.Info("User closed the application. Exiting...").write(self.logging_handler)
         # self.logging_handler.abort(wait=False)

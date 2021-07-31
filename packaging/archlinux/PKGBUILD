@@ -1,5 +1,5 @@
 pkgname='rebornos-welcome'
-pkgver=0.0.20
+pkgver=0.0.21
 pkgrel=1
 pkgdesc='RebornOS Welcome contains basic links to help get one started on RebornOS as a new user'
 arch=('any')
@@ -14,7 +14,8 @@ depends=('python'
          'xdg-utils'
          'polkit'
          'cantarell-fonts'
-         'gtk3')
+         'gtk3'
+         'ttf-righteous-regular')
 makedepends=('git'
              'python-setuptools'
              'python-pip'

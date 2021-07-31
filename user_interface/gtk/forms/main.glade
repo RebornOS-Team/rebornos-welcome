@@ -3,10 +3,10 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkApplicationWindow" id="main">
-    <property name="width-request">660</property>
+    <property name="width-request">500</property>
     <property name="height-request">430</property>
     <property name="can-focus">False</property>
-    <property name="default-width">662</property>
+    <property name="default-width">500</property>
     <property name="default-height">432</property>
     <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="urgency-hint">True</property>
@@ -17,12 +17,168 @@
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkStack" id="stack2">
+          <object class="GtkStack" id="page_stack">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="transition-type">slide-left-right</property>
+            <property name="interpolate-size">True</property>
             <child>
-              <object class="GtkScrolledWindow">
+              <object class="GtkBox" id="install">
+                <property name="name">install</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-start">15</property>
+                <property name="margin-end">15</property>
+                <property name="margin-top">15</property>
+                <property name="margin-bottom">15</property>
+                <property name="spacing">15</property>
+                <property name="homogeneous">True</property>
+                <child>
+                  <object class="GtkButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="always-show-image">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">../../../media/branding/RebornOS_Logo_4.svg</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">Install RebornOS</property>
+                            <property name="justify">center</property>
+                            <property name="wrap">True</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell Bold 20"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">( Let Cnchi handle the mirrors )</property>
+                            <property name="justify">center</property>
+                            <property name="wrap">True</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell Italic 11"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="always-show-image">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="pixbuf">../../../media/branding/RebornOS_Logo_5.svg</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">Install RebornOS</property>
+                            <property name="justify">center</property>
+                            <property name="wrap">True</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell Bold 20"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="label" translatable="yes">( Use mirrors from the environment )</property>
+                            <property name="justify">center</property>
+                            <property name="wrap">True</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell Italic 11"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="name">install</property>
+                <property name="title" translatable="yes">Install</property>
+                <property name="needs-attention">True</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="links">
+                <property name="name">links</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="hscrollbar-policy">never</property>
@@ -975,10 +1131,12 @@
               <packing>
                 <property name="name">links</property>
                 <property name="title" translatable="yes">Links</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="utilities">
+                <property name="name">utilities</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
@@ -1779,7 +1937,7 @@
               <packing>
                 <property name="name">utilities</property>
                 <property name="title" translatable="yes">Utilities</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <style>
@@ -1853,7 +2011,7 @@
                   <object class="GtkStackSwitcher">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="stack">stack2</property>
+                    <property name="stack">page_stack</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1982,7 +2140,7 @@
     </child>
     <child type="titlebar">
       <object class="GtkBox">
-        <property name="width-request">660</property>
+        <property name="width-request">500</property>
         <property name="height-request">90</property>
         <property name="visible">True</property>
         <property name="can-focus">False</property>
