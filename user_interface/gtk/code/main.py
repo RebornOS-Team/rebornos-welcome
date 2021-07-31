@@ -65,6 +65,7 @@ class Main:
         )
         self.application_settings = application_settings
 
+        LogMessage.Info("Loading CSS styles...").write(self.logging_handler)
         provider = Gtk.CssProvider()
         provider.load_from_path("user_interface/gtk/forms/style.css")
         Gtk.StyleContext.add_provider_for_screen(
@@ -100,7 +101,18 @@ class Main:
         self.builder.get_object("green_light").set_visible(False)
         self.builder.get_object("red_light").set_visible(False)
 
+        page_stack = self.builder.get_object("page_stack")
+
         if commandline_arguments.iso:
+            LogMessage.Info("Running in the 'ISO' mode...").write(self.logging_handler)
+            LogMessage.Info("Loading the 'Install' tab...").write(self.logging_handler)
+            install_page = self.builder.get_object("install_page")
+            page_stack.add_titled(
+                child = install_page,
+                name = "install_page",
+                title = "Install"
+            )
+
             rebornos_iso_welcome_icon_path = "media/icons/rebornos_iso_welcome_logo.svg"
             self.builder.get_object("main").set_icon_from_file(rebornos_iso_welcome_icon_path)
             about_dialog = self.builder.get_object("about")
@@ -109,13 +121,24 @@ class Main:
 
             self.builder.get_object("about_application_name").set_label("RebornOS ISO Welcome Application")
             self.builder.get_object("about_logo").set_from_file(rebornos_iso_welcome_icon_path)
-        else:
-            page_stack = self.builder.get_object("page_stack")
-            pages = page_stack.get_children()
-            for page in pages:
-                if page.get_name() == "install":
-                    page_stack.remove(page)
+        else:            
             self.builder.get_object("about").set_title("About RebornOS Welcome Application")
+
+        LogMessage.Info("Loading the 'Links' tab...").write(self.logging_handler)
+        links_page = self.builder.get_object("links_page")
+        page_stack.add_titled(
+            child = links_page,
+            name = "links_page",
+            title = "Links"
+        )
+
+        LogMessage.Info("Loading the 'Utilities' tab...").write(self.logging_handler)
+        utilities_page = self.builder.get_object("utilities_page")        
+        page_stack.add_titled(
+            child = utilities_page,
+            name = "utilities_page",
+            title = "Utilities"
+        )
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
@@ -492,3 +515,14 @@ class Main:
             executable_name = "timeshift-launcher"
         )    
   
+    def on_installer1(self, _):
+        self.launch_third_party_utility(
+            package_name= "gtk3",
+            executable_name = ["gtk-launch", "rebornos-install.desktop"]
+        ) 
+
+    def on_installer2(self, _):
+        self.launch_third_party_utility(
+            package_name= "gtk3",
+            executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
+        ) 
