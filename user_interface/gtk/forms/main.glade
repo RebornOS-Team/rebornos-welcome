@@ -59,8 +59,8 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-bottom">36</property>
-                <property name="label" translatable="yes">( Let Cnchi handle the mirrors )</property>
+                <property name="margin-bottom">20</property>
+                <property name="label" translatable="yes">( Use this option to start fresh with the default mirrorlist )</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
                 <attributes>
@@ -129,7 +129,8 @@
               <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">( Use mirrors from the environment, for example, after running `reflector` or `rate-mirrors`)</property>
+                <property name="margin-bottom">10</property>
+                <property name="label" translatable="yes">( Use this option if you run `reflector` or `rate-mirrors`. You might also want to tell Cnchi to "leave the mirror lists as they are")</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
                 <attributes>
@@ -1609,7 +1610,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.21</property>
+                    <property name="label" translatable="yes">0.0.22</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1686,7 +1687,11 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.21
+                            <property name="label" translatable="yes">Version 0.0.22
+==============
+Fixed the installer selection text in the ISO mode
+
+Version 0.0.21
 ==============
 
 1) Font for the RebornOS and Welcome logo (ttf-righteous-regular) added as a dependency
