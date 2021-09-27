@@ -252,6 +252,7 @@ class Main:
                         executable_name,
                         shell=True,
                         start_new_session=True
+                    )
             batch_job.start()
         self.display_ready()
 
