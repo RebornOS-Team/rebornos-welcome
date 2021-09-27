@@ -16,7 +16,7 @@ Comment=An application that contains basic links to help one get started on Rebo
 Path=/opt/rebornos-welcome
 
 # The executable of the application, possibly with arguments.
-Exec=python /opt/rebornos-welcome/main.py --startup
+Exec=cd /opt/rebornos-welcome && python main.py --startup
 
 # The name of the icon that will be used to display this entry
 Icon=/opt/rebornos-welcome/media/icons/rebornos_welcome_logo.svg
