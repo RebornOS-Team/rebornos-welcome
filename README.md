@@ -1,7 +1,7 @@
 
 # RebornOS Welcome
 
-*Documentation by @shivanandvp (shivanandvp@rebornos.org, shivanand.pattanshetti@gmail.com)*  
+*Documentation by @shivanandvp (shivanandvp@rebornos.org)*  
 
 *Please refer to [`LICENSE`](./LICENSE) for license information.*
 
