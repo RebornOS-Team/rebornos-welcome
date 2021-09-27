@@ -75,6 +75,9 @@
             </child>
           </object>
         </child>
+        <style>
+          <class name="button"/>
+        </style>
       </object>
       <packing>
         <property name="expand">True</property>
@@ -145,6 +148,9 @@
             </child>
           </object>
         </child>
+        <style>
+          <class name="button"/>
+        </style>
       </object>
       <packing>
         <property name="expand">True</property>
@@ -153,7 +159,7 @@
       </packing>
     </child>
     <style>
-      <class name="light-background"/>
+      <class name="inner-background"/>
     </style>
   </object>
   <object class="GtkScrolledWindow" id="links_page">
@@ -307,6 +313,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -368,6 +377,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -429,6 +441,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -490,6 +505,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -600,6 +618,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -661,6 +682,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -722,6 +746,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -783,6 +810,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -891,6 +921,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -952,6 +985,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1013,6 +1049,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1074,6 +1113,9 @@
                                 </child>
                               </object>
                             </child>
+                            <style>
+                              <class name="button"/>
+                            </style>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -1102,13 +1144,13 @@
                 <property name="position">1</property>
               </packing>
             </child>
+            <style>
+              <class name="inner-background"/>
+            </style>
           </object>
         </child>
       </object>
     </child>
-    <style>
-      <class name="light-background"/>
-    </style>
   </object>
   <object class="GtkApplicationWindow" id="main">
     <property name="width-request">500</property>
@@ -1134,7 +1176,7 @@
               <placeholder/>
             </child>
             <style>
-              <class name="light-background"/>
+              <class name="inner-background"/>
             </style>
           </object>
           <packing>
@@ -1259,7 +1301,7 @@
                       <attribute name="foreground" value="#ffffffffffff"/>
                     </attributes>
                     <style>
-                      <class name="dark-background"/>
+                      <class name="button"/>
                     </style>
                   </object>
                   <packing>
@@ -1320,7 +1362,7 @@
               </packing>
             </child>
             <style>
-              <class name="dark-background"/>
+              <class name="outer-background"/>
             </style>
           </object>
           <packing>
@@ -1353,7 +1395,7 @@
           </packing>
         </child>
         <style>
-          <class name="dark-background"/>
+          <class name="outer-background"/>
         </style>
       </object>
     </child>
@@ -1372,198 +1414,35 @@
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkStackSwitcher">
+          <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="margin-start">10</property>
-            <property name="margin-top">10</property>
-            <property name="margin-bottom">10</property>
-            <property name="icon-size">10</property>
-            <property name="stack">stack1</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButtonBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">end</property>
-            <property name="margin-start">10</property>
-            <property name="margin-end">10</property>
-            <property name="margin-top">10</property>
-            <property name="margin-bottom">10</property>
-            <property name="baseline-position">bottom</property>
-            <property name="layout-style">start</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkStackSwitcher">
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="relief">half</property>
-                <signal name="clicked" handler="on_log_clicked" swapped="no"/>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="icon-name">gtk-dnd</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="pack-type">end</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-left">2</property>
-                        <property name="margin-start">2</property>
-                        <property name="label" translatable="yes">Log</property>
-                        <attributes>
-                          <attribute name="font-desc" value="Cantarell 11"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
+                <property name="can-focus">False</property>
+                <property name="margin-left">10</property>
+                <property name="margin-start">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
+                <property name="icon-size">10</property>
+                <property name="stack">stack1</property>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">False</property>
-                <property name="pack-type">end</property>
                 <property name="position">0</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkButton">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="relief">half</property>
-                <signal name="clicked" handler="on_config_clicked" swapped="no"/>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="icon-name">gtk-index</property>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="pack-type">end</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="margin-left">2</property>
-                        <property name="margin-start">2</property>
-                        <property name="label" translatable="yes">Config</property>
-                        <attributes>
-                          <attribute name="font-desc" value="Cantarell 11"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton">
-                <property name="width-request">70</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="margin-start">10</property>
-                <property name="relief">half</property>
-                <property name="image-position">right</property>
-                <property name="always-show-image">True</property>
-                <signal name="clicked" handler="on_about_close" swapped="no"/>
-                <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="icon-name">gtk-ok</property>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="pack-type">end</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="halign">center</property>
-                        <property name="margin-left">2</property>
-                        <property name="margin-start">5</property>
-                        <property name="margin-end">5</property>
-                        <property name="label" translatable="yes">OK</property>
-                        <attributes>
-                          <attribute name="font-desc" value="Cantarell 11"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">False</property>
-                        <property name="pack-type">end</property>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="padding">15</property>
-                <property name="pack-type">end</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
+            <style>
+              <class name="outer-background"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="pack-type">end</property>
-            <property name="position">1</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
@@ -2119,11 +1998,215 @@ Version 0.0.16
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkButtonBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">end</property>
+                <property name="margin-left">10</property>
+                <property name="margin-right">10</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
+                <property name="baseline-position">bottom</property>
+                <property name="layout-style">start</property>
+                <child>
+                  <object class="GtkButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_log_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="icon-name">gtk-dnd</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="pack-type">end</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="margin-left">2</property>
+                            <property name="margin-start">2</property>
+                            <property name="label" translatable="yes">Log</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell 11"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="pack-type">end</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="clicked" handler="on_config_clicked" swapped="no"/>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="icon-name">gtk-index</property>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="pack-type">end</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="margin-left">2</property>
+                            <property name="margin-start">2</property>
+                            <property name="label" translatable="yes">Config</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell 11"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">True</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="width-request">70</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="margin-left">10</property>
+                    <property name="margin-start">10</property>
+                    <property name="image-position">right</property>
+                    <property name="always-show-image">True</property>
+                    <signal name="clicked" handler="on_about_close" swapped="no"/>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="icon-name">gtk-ok</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="pack-type">end</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="margin-left">5</property>
+                            <property name="margin-right">5</property>
+                            <property name="margin-start">5</property>
+                            <property name="margin-end">5</property>
+                            <property name="label" translatable="yes">OK</property>
+                            <attributes>
+                              <attribute name="font-desc" value="Cantarell 11"/>
+                            </attributes>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">False</property>
+                            <property name="pack-type">end</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                    </child>
+                    <style>
+                      <class name="button"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">15</property>
+                    <property name="pack-type">end</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="pack-type">end</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <style>
+              <class name="outer-background"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
         </child>
         <style>
-          <class name="light-background"/>
+          <class name="inner-background"/>
         </style>
       </object>
     </child>
@@ -2145,7 +2228,7 @@ Version 0.0.16
             <property name="margin-start">15</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
-            <property name="label" translatable="yes">About the Application</property>
+            <property name="label" translatable="yes">About RebornOS Welcome</property>
             <attributes>
               <attribute name="font-desc" value="Cantarell 11"/>
               <attribute name="weight" value="bold"/>
@@ -2159,7 +2242,7 @@ Version 0.0.16
           </packing>
         </child>
         <style>
-          <class name="dark-background"/>
+          <class name="outer-background"/>
         </style>
       </object>
     </child>
@@ -2218,8 +2301,8 @@ Version 0.0.16
                               <object class="GtkBox">
                                 <property name="visible">True</property>
                                 <property name="can-focus">False</property>
-                                <property name="margin-start">42</property>
-                                <property name="margin-end">42</property>
+                                <property name="margin-start">43</property>
+                                <property name="margin-end">43</property>
                                 <property name="orientation">vertical</property>
                                 <child>
                                   <object class="GtkLabel">
@@ -2330,6 +2413,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">2</property>
@@ -2388,6 +2474,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">0</property>
@@ -2446,6 +2535,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
@@ -2504,6 +2596,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">0</property>
@@ -2562,6 +2657,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">2</property>
@@ -2620,6 +2718,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">0</property>
@@ -2678,6 +2779,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
@@ -2736,6 +2840,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">2</property>
@@ -2794,6 +2901,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
@@ -2852,6 +2962,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">0</property>
@@ -2910,6 +3023,9 @@ Version 0.0.16
                                     </child>
                                   </object>
                                 </child>
+                                <style>
+                                  <class name="button"/>
+                                </style>
                               </object>
                               <packing>
                                 <property name="left-attach">1</property>
@@ -2939,7 +3055,7 @@ Version 0.0.16
                           </packing>
                         </child>
                         <style>
-                          <class name="light-background"/>
+                          <class name="inner-background"/>
                         </style>
                       </object>
                     </child>
@@ -2970,30 +3086,36 @@ Version 0.0.16
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
                 <child>
-                  <object class="GtkScrolledWindow">
+                  <object class="GtkScrolledWindow" id="console_scrolled_window">
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="shadow-type">in</property>
                     <child>
-                      <object class="GtkTextView" id="console_text_view">
+                      <object class="GtkViewport">
                         <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="editable">False</property>
-                        <property name="accepts-tab">False</property>
-                        <property name="monospace">True</property>
+                        <property name="can-focus">False</property>
+                        <child>
+                          <object class="GtkTextView" id="console_text_view">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="editable">False</property>
+                            <property name="accepts-tab">False</property>
+                            <property name="monospace">True</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">1</property>
+                    <property name="position">0</property>
                   </packing>
                 </child>
                 <style>
-                  <class name="dark-background"/>
+                  <class name="outer-background"/>
                 </style>
               </object>
             </child>
@@ -3012,7 +3134,7 @@ Version 0.0.16
               </object>
             </child>
             <style>
-              <class name="dark-background"/>
+              <class name="outer-background"/>
             </style>
           </object>
           <packing>
@@ -3021,7 +3143,7 @@ Version 0.0.16
           </packing>
         </child>
         <style>
-          <class name="dark-background"/>
+          <class name="outer-background"/>
         </style>
       </object>
       <packing>
