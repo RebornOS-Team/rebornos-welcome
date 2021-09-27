@@ -164,7 +164,8 @@ class Main:
     def launch_third_party_utility(
         self,
         package_name: str,
-        executable_name: Union[str, List[str]]
+        executable_name: Union[str, List[str]],
+        detached: bool = False
     ):
         self.display_busy()
         package_lookup_command = Command(
@@ -201,15 +202,33 @@ class Main:
             batch_job += Command.Shell(
                 "pkexec bash -c \"pacman -S --needed --noconfirm " + package_name + "\""
             )
-            if type(executable_name) == str:    
-                batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
-                batch_job += Command(
-                    [
-                        executable_name
-                    ]
-                )
-            elif type(executable_name) == list:
-                batch_job += Command.Shell(' '.join(executable_name))
+            if not detached: 
+                if type(executable_name) == str:    
+                    batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
+                    batch_job += Command(
+                        [
+                            executable_name
+                        ]
+                    )
+                elif type(executable_name) == list:
+                    batch_job += Command.Shell(' '.join(executable_name))
+            else: 
+                import subprocess
+                import shlex
+                if type(executable_name) == str:    
+                    batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
+                    batch_job += Function(
+                        subprocess.Popen,
+                        shlex.split(executable_name),
+                        start_new_session=True
+                    )
+                elif type(executable_name) == list:
+                    batch_job += LogMessage.Info("Running `" + " ".join(executable_name) + "`...")
+                    batch_job += Function(
+                        subprocess.Popen,
+                        executable_name,
+                        start_new_session=True
+                    )
             batch_job.start()
         self.display_ready()
 
@@ -520,8 +539,9 @@ class Main:
     def on_installer1(self, _):
         self.launch_third_party_utility(
             package_name= "gtk3",
-            # executable_name = ["gtk-launch", "rebornos-install.desktop"]
-            executable_name = "/usr/bin/cnchi-start.sh"
+            # executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
+            executable_name = "/usr/bin/cnchi-start.sh",
+            detached= True
         ) 
         sys.exit(0)
 
@@ -529,7 +549,8 @@ class Main:
         self.launch_third_party_utility(
             package_name= "gtk3",
             # executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
-            executable_name = "/usr/bin/cnchi-start-2.sh"
+            executable_name = "/usr/bin/cnchi-start-2.sh",
+            detached= True
         ) 
         sys.exit(0)
 
