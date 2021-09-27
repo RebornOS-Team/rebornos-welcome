@@ -20,7 +20,7 @@ import sys
 
 # FENIX IMPORTS
 from fenix_library.configuration import JSONConfiguration
-from fenix_library.running import LoggingHandler, LogMessage, Command, LoggingLevel, BatchJob
+from fenix_library.running import LoggingHandler, LogMessage, Command, LoggingLevel, BatchJob, Function
 
 logger = logging.getLogger('rebornos_welcome.ui.gtk.code'+'.'+ Path(__file__).stem)
 
@@ -182,15 +182,37 @@ class Main:
         LogMessage.Debug("Package lookup command return code: " + str(package_lookup_return_code)).write(logging_handler=self.logging_handler)
 
         if package_lookup_return_code == 0:
-            if type(executable_name) == str:
-                LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
-                command = Command([executable_name])
-                command.start()
-            elif type(executable_name) == list:
-                LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
-                command = Command.Shell(' '.join(executable_name))
-                command.start()
-            # command.run_and_log(self.logging_handler)
+            if not detached: 
+                if type(executable_name) == str:
+                    LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
+                    command = Command([executable_name])
+                    command.start()
+                elif type(executable_name) == list:
+                    LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
+                    command = Command.Shell(' '.join(executable_name))
+                    command.start()
+                # command.run_and_log(self.logging_handler)
+            else: 
+                import subprocess
+                import shlex
+                if type(executable_name) == str:    
+                    LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
+                    function = Function(
+                        subprocess.Popen,
+                        shlex.split(executable_name),
+                        shell=True,
+                        start_new_session=True
+                    )
+                    function.run()
+                elif type(executable_name) == list:
+                    LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
+                    function = Function(
+                        subprocess.Popen,
+                        executable_name,
+                        shell=True,
+                        start_new_session=True
+                    )
+                    function.run()
         else:
             LogMessage.Warning("Could not find `" + package_name + "` on your system...").write(self.logging_handler)
             if not self.get_confirmation_from_dialog("`" + package_name + "` is not installed. Do you want to install it?"):
@@ -212,23 +234,24 @@ class Main:
                     )
                 elif type(executable_name) == list:
                     batch_job += Command.Shell(' '.join(executable_name))
-            else: 
+            else:
                 import subprocess
                 import shlex
                 if type(executable_name) == str:    
-                    batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
+                    batch_job += LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
                     batch_job += Function(
                         subprocess.Popen,
                         shlex.split(executable_name),
+                        shell=True,
                         start_new_session=True
                     )
                 elif type(executable_name) == list:
-                    batch_job += LogMessage.Info("Running `" + " ".join(executable_name) + "`...")
+                    batch_job += LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
                     batch_job += Function(
                         subprocess.Popen,
                         executable_name,
+                        shell=True,
                         start_new_session=True
-                    )
             batch_job.start()
         self.display_ready()
 
