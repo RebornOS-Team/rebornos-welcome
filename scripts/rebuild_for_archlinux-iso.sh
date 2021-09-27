@@ -2,7 +2,6 @@
 
 (# Go into a subshell to nullify directory changes
     cd packaging/archlinux-iso \
-    && makepkg -f --noextract \
-    && sudo pacman -U --noconfirm *.pkg.tar.zst \
-    && gpg --detach-sign --use-agent *.pkg.tar.zst
+    && makepkg --cleanbuild --noextract --clean --force --install --syncdeps #\
+    # && gpg --detach-sign --use-agent *.pkg.tar.zst
 )

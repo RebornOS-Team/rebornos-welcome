@@ -26,7 +26,7 @@ replaces=()
 backup=()
 options=()
 install=
-source=()
+source=('*')
 noextract=()
 md5sums=('SKIP')
 
@@ -39,10 +39,12 @@ check() {
 }
 
 package() {
-    cd ..
+    pwd; ls
 
-    install -D -m 755 rebornos-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
-    install -D -m 755 rebornos-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
+    cd ..
+  
+    install -D -m 644 rebornos-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
+    install -D -m 644 rebornos-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
 
     cd ../..
 
@@ -65,6 +67,8 @@ package() {
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/user_interface"
 
     install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-welcome"
+    install -d 755 "${pkgdir}/usr/share/licenses/rebornos-welcome"
+    install -m 644 LICENSE "${pkgdir}/usr/share/licenses/rebornos-welcome/LICENSE"
 
     install -m 755 main.py rebornos-welcome.sh "${pkgdir}/opt/rebornos-welcome"
     mkdir temp && ln -s "${pkgdir}/opt/rebornos-welcome/rebornos-welcome.sh" temp/rebornos-welcome.sh

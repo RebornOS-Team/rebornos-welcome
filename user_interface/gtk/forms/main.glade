@@ -152,6 +152,9 @@
         <property name="position">1</property>
       </packing>
     </child>
+    <style>
+      <class name="light-background"/>
+    </style>
   </object>
   <object class="GtkScrolledWindow" id="links_page">
     <property name="name">links</property>
@@ -1103,6 +1106,9 @@
         </child>
       </object>
     </child>
+    <style>
+      <class name="light-background"/>
+    </style>
   </object>
   <object class="GtkApplicationWindow" id="main">
     <property name="width-request">500</property>
@@ -1736,17 +1742,19 @@ Version 0.0.16
                             <property name="wrap">True</property>
                             <attributes>
                               <attribute name="font-desc" value="FreeMono 11"/>
+                              <attribute name="foreground" value="#000000000000"/>
+                              <attribute name="background" value="#ffffffffffff"/>
                             </attributes>
                             <style>
                               <class name="white-background"/>
                             </style>
                           </object>
                         </child>
+                        <style>
+                          <class name="white-background"/>
+                        </style>
                       </object>
                     </child>
-                    <style>
-                      <class name="light-background"/>
-                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -2192,6 +2200,71 @@ Version 0.0.16
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="orientation">vertical</property>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="margin-left">7</property>
+                            <property name="margin-right">7</property>
+                            <property name="margin-start">7</property>
+                            <property name="margin-end">7</property>
+                            <property name="margin-top">20</property>
+                            <property name="margin-bottom">7</property>
+                            <signal name="clicked" handler="on_rebornos_fire" swapped="no"/>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="margin-start">42</property>
+                                <property name="margin-end">42</property>
+                                <property name="orientation">vertical</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label" translatable="yes">RebornOS FIRE</property>
+                                    <attributes>
+                                      <attribute name="font-desc" value="Cantarell 11"/>
+                                      <attribute name="weight" value="bold"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">0</property>
+                                  </packing>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="visible">True</property>
+                                    <property name="can-focus">False</property>
+                                    <property name="label" translatable="yes">rebornos-fire</property>
+                                    <attributes>
+                                      <attribute name="font-desc" value="Cantarell 11"/>
+                                      <attribute name="style" value="italic"/>
+                                    </attributes>
+                                  </object>
+                                  <packing>
+                                    <property name="expand">False</property>
+                                    <property name="fill">True</property>
+                                    <property name="position">1</property>
+                                  </packing>
+                                </child>
+                              </object>
+                            </child>
+                            <style>
+                              <class name="special-button"/>
+                            </style>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
                         <child>
                           <!-- n-columns=3 n-rows=4 -->
                           <object class="GtkGrid">
@@ -2850,7 +2923,7 @@ Version 0.0.16
                           <packing>
                             <property name="expand">False</property>
                             <property name="fill">True</property>
-                            <property name="position">0</property>
+                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -2862,9 +2935,12 @@ Version 0.0.16
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="pack-type">end</property>
-                            <property name="position">1</property>
+                            <property name="position">2</property>
                           </packing>
                         </child>
+                        <style>
+                          <class name="light-background"/>
+                        </style>
                       </object>
                     </child>
                   </object>
@@ -2907,9 +2983,6 @@ Version 0.0.16
                         <property name="editable">False</property>
                         <property name="accepts-tab">False</property>
                         <property name="monospace">True</property>
-                        <style>
-                          <class name="dark-background-text"/>
-                        </style>
                       </object>
                     </child>
                   </object>
@@ -2947,6 +3020,9 @@ Version 0.0.16
             <property name="shrink">False</property>
           </packing>
         </child>
+        <style>
+          <class name="dark-background"/>
+        </style>
       </object>
       <packing>
         <property name="expand">True</property>

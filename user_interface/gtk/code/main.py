@@ -16,6 +16,7 @@ from typing import List, Union
 from pathlib import Path
 import logging
 import functools
+import sys
 
 # FENIX IMPORTS
 from fenix_library.configuration import JSONConfiguration
@@ -87,6 +88,7 @@ class Main:
         self.builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
 
         self.console_buffer = self.builder.get_object("console_text_view").get_buffer()
+        self.builder.get_object("console_text_view").modify_base(Gtk.StateFlags.NORMAL, Gdk.color_parse('black'))
 
         LogMessage.Info("Displaying the main window...").write(self.logging_handler)
         self.builder.get_object("main").set_title("Welcome to RebornOS!")
@@ -197,7 +199,7 @@ class Main:
             batch_job = BatchJob(logging_handler= self.logging_handler)
             batch_job += LogMessage.Info("Trying to install `" + package_name + "`...")
             batch_job += Command.Shell(
-                "pkexec bash -c \"yay -S --needed --noconfirm " + package_name + "\""
+                "pkexec bash -c \"pacman -S --needed --noconfirm " + package_name + "\""
             )
             if type(executable_name) == str:    
                 batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
@@ -518,11 +520,22 @@ class Main:
     def on_installer1(self, _):
         self.launch_third_party_utility(
             package_name= "gtk3",
-            executable_name = ["gtk-launch", "rebornos-install.desktop"]
+            # executable_name = ["gtk-launch", "rebornos-install.desktop"]
+            executable_name = "/usr/bin/cnchi-start.sh"
         ) 
+        sys.exit(0)
 
     def on_installer2(self, _):
         self.launch_third_party_utility(
             package_name= "gtk3",
-            executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
+            # executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
+            executable_name = "/usr/bin/cnchi-start-2.sh"
         ) 
+        sys.exit(0)
+
+    def on_rebornos_fire(self, _):
+        self.launch_third_party_utility(
+            package_name= "rebornos-fire",
+            executable_name = "rebornos-fire"
+        ) 
+        

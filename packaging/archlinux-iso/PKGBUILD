@@ -41,8 +41,8 @@ check() {
 package() {
     cd ..
 
-    install -D -m 755 rebornos-iso-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-iso-welcome.desktop"
-    install -D -m 755 rebornos-iso-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-iso-welcome.desktop"
+    install -D -m 644 rebornos-iso-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-iso-welcome.desktop"
+    install -D -m 644 rebornos-iso-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-iso-welcome.desktop"
 
     cd ../..
 
@@ -65,6 +65,8 @@ package() {
     chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/user_interface"
 
     install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-iso-welcome"
+    install -d 755 "${pkgdir}/usr/share/licenses/rebornos-iso-welcome"
+    install -m 644 LICENSE "${pkgdir}/usr/share/licenses/rebornos-iso-welcome/LICENSE"
 
     install -m 755 main.py "${pkgdir}/opt/rebornos-iso-welcome"
     install -D -m 755 rebornos-welcome.sh "${pkgdir}/opt/rebornos-iso-welcome/rebornos-iso-welcome.sh" # Note that the script's name is changed
