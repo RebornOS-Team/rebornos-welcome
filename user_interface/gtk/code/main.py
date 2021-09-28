@@ -121,6 +121,9 @@ class Main:
                 title = "Install"
             )
 
+            self.builder.get_object("startup_toggle").hide()
+            self.builder.get_object("startup_toggle_text").hide()
+
             rebornos_iso_welcome_icon_path = "media/icons/rebornos_iso_welcome_logo.svg"
             self.builder.get_object("main").set_icon_from_file(rebornos_iso_welcome_icon_path)
             about_dialog = self.builder.get_object("about")
