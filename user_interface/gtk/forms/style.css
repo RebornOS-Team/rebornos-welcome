@@ -3,6 +3,10 @@ textview text {
     background:rgb(50, 50, 50);
 }
 
+button.link {
+    color: rgb(0, 0, 255);
+}
+
 .outer-background {
     color:rgb(255, 255, 255);
     background-color: rgb(50, 50, 50);

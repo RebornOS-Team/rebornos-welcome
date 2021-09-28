@@ -102,6 +102,12 @@ class Main:
 
         self.builder.get_object("green_light").set_visible(False)
         self.builder.get_object("red_light").set_visible(False)
+        try:
+            self.builder.get_object("show_installinfo_again").set_active(self.application_settings["show_install_info"])
+        except KeyError as _:
+            self.application_settings["show_install_info"] = True
+            self.application_settings.write_data()
+            self.builder.get_object("show_installinfo_again").set_active(True)
 
         page_stack = self.builder.get_object("page_stack")
 
@@ -583,4 +589,20 @@ class Main:
             package_name= "rebornos-fire",
             executable_name = "rebornos-fire"
         ) 
+
+    def on_utilities_page_shown(self, _):
+        if self.application_settings["show_install_info"] is True:
+            LogMessage.Debug("Bringing up the installation info dialog...").write(self.logging_handler)
+            self.builder.get_object("show_installinfo_again").set_active(True)
+            self.builder.get_object("installinfo").show_all()
+        else: 
+            LogMessage.Debug("Not bringing up the installation info dialog because the user disabled it...").write(self.logging_handler)
+
+    def on_installinfo_close(self, _):
+        LogMessage.Debug("Hiding the installation info dialog...").write(self.logging_handler)
+        self.builder.get_object("installinfo").hide()
+
+    def on_show_installinfo_again_toggled(self, _):
+        self.application_settings["show_install_info"] = self.builder.get_object("show_installinfo_again").get_active()
+        self.application_settings.write_data()
         

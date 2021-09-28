@@ -8,4 +8,4 @@
 # 1. shivanandvp@rebornos.org
 # 2. 
 
-python3 main.py "$@"
+python3 main.py --iso "$@"
