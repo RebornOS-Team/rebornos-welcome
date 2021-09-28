@@ -15,7 +15,8 @@ depends=('python'
          'polkit'
          'cantarell-fonts'
          'gtk3'
-         'ttf-righteous-regular')
+         'ttf-righteous-regular'
+         'python-pyxdg') # `python-pyxdg` required for OpenBox autostart
 makedepends=('git'
              'python-setuptools'
              'python-pip'
