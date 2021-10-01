@@ -1323,7 +1323,7 @@
                     <property name="always-show-image">True</property>
                     <signal name="clicked" handler="on_about_clicked" swapped="no"/>
                     <style>
-                      <class name="white-background"/>
+                      <class name="button"/>
                     </style>
                   </object>
                   <packing>
@@ -1344,7 +1344,7 @@
                     <property name="always-show-image">True</property>
                     <signal name="clicked" handler="on_close" swapped="no"/>
                     <style>
-                      <class name="white-background"/>
+                      <class name="button"/>
                     </style>
                   </object>
                   <packing>
