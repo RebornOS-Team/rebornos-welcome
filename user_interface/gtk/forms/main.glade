@@ -1646,12 +1646,10 @@ Version 0.0.16
 5) The "About" Window has undergone an overhaul with margins, alignments, background color, and a changelog button!</property>
                             <property name="wrap">True</property>
                             <attributes>
-                              <attribute name="font-desc" value="FreeMono 11"/>
-                              <attribute name="foreground" value="#000000000000"/>
-                              <attribute name="background" value="#ffffffffffff"/>
+                              <attribute name="font-desc" value="Monospace 10"/>
                             </attributes>
                             <style>
-                              <class name="white-background"/>
+                              <class name="outer-background"/>
                             </style>
                           </object>
                         </child>
