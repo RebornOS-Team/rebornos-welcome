@@ -1572,7 +1572,18 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.25
+                            <property name="label" translatable="yes">Version 0.0.26
+==============
+
+1) The `About` and `Close` buttons now follow the same style as the other buttons, so background issues are reduced.
+
+2) Changelog background is made dark to be consistent. 
+
+3) Changelong font changed and removed custom color and highlighting
+   
+4) RebornOS FIRE launch button made lighter to prevent text from blending in some themes.
+
+Version 0.0.25
 ==============
 
 1) Added `rebornos-fire` launch button centered at the top, separate from the grid of applications. The button displays in RebornOS logo's dark blue color in most themes (an exception being Adwaita).
