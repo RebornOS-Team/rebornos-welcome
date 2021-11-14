@@ -114,40 +114,47 @@ class RebornOSWelcome():
             The logger which has been set up
         """
 
-        self.delete_old_log_files(no_of_files_to_keep =5) # delete old log files
-
         logger = logging.getLogger('rebornos_welcome') # create a new logger and name it
         logger.setLevel(logging.DEBUG) # set it to log anything of debugging and higher alert levels
         logger.propagate = False
         
-        # Set up file-based logging
-        log_directory_path = pathlib.Path(
-            os.path.expanduser(
-                self.application_settings["log_directory"]
-            )
-        )
+        log_directory_path = []
         try:
+            # Set up file-based logging
+            log_directory_path = pathlib.Path(
+                os.path.expanduser(
+                    self.application_settings["log_directory"]
+                )
+            )
             log_directory_path.mkdir( parents=True, exist_ok=True )
+            if not os.path.isdir(log_directory_path):
+                raise FileNotFoundError("The directory '" + str(log_directory_path) + "' could not be created.")
         except Exception as error:
             import traceback
             traceback.print_exception(type(error), error, error.__traceback__)
-            log_directory_path = pathlib.Path(
+            try:
+                log_directory_path = pathlib.Path(
                     os.path.expanduser(
                         "~/.rebornos-welcome/log/"
                     )
                 )
-            try:
                 log_directory_path.mkdir( parents=True, exist_ok=True )
+                if not os.path.isdir(log_directory_path):
+                    raise FileNotFoundError("The directory '" + str(log_directory_path) + "' could not be created.")
             except Exception as inner_error:
                 traceback.print_exception(type(inner_error), inner_error, inner_error.__traceback__)
-
-        self.application_settings["log_directory"] = str(log_directory_path)
-        self.application_settings.write_data()
+                exit(1)
 
         log_file_path = log_directory_path / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
-        print("Logging to " + str(log_file_path.resolve()) + "...\n")
+
+        self.application_settings["log_directory"] = str(log_directory_path)
         self.application_settings["current_log_file_path"] = str(log_file_path)
+        self.application_settings.write_data()        
+        print("Logging to " + str(log_file_path.resolve()) + "...\n")        
         self.application_settings.write_data()
+
+        self.delete_old_log_files(log_directory_path, no_of_files_to_keep =5) # delete old log files
+
         log_file_handler = logging.FileHandler(log_file_path) # for logging onto files
         log_file_handler.setLevel(logging.DEBUG) # log debug messages and higher
         # log_file_formatter = logging.Formatter('[%(asctime)s, %(levelname)-8s, %(name)s] %(message)s', '%Y-%m-%d, %H:%M:%S %Z') # old format of each log file entry
@@ -235,7 +242,7 @@ class RebornOSWelcome():
 
         return parsed_args
 
-    def delete_old_log_files(self, no_of_files_to_keep: int) -> None:
+    def delete_old_log_files(self, log_directory_path, no_of_files_to_keep: int) -> None:
         """
         Delete old log files while keeping the newest ones whose count is specified by "no_of_files_to_keep"
         
@@ -254,7 +261,7 @@ class RebornOSWelcome():
                 + str(no_of_files_to_keep + 1) 
                 + " | xargs -I {} rm -- {}",
             shell=True,
-            cwd=pathlib.Path("./log/")
+            cwd=log_directory_path
         )
     
     def load_UI(self, commandline_arguments: Namespace) -> None:
