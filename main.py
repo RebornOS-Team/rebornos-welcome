@@ -127,8 +127,11 @@ class RebornOSWelcome():
                 )
             )
             log_directory_path.mkdir( parents=True, exist_ok=True )
+            log_file_path = log_directory_path / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
             if not os.path.isdir(log_directory_path):
                 raise FileNotFoundError("The directory '" + str(log_directory_path) + "' could not be created.")
+            elif not os.access(log_directory_path, os.W_OK):
+                raise PermissionError("The directory '" + str(log_directory_path) + "' does not have write permissions.")
         except Exception as error:
             import traceback
             traceback.print_exception(type(error), error, error.__traceback__)
@@ -139,13 +142,14 @@ class RebornOSWelcome():
                     )
                 )
                 log_directory_path.mkdir( parents=True, exist_ok=True )
+                log_file_path = log_directory_path / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
                 if not os.path.isdir(log_directory_path):
                     raise FileNotFoundError("The directory '" + str(log_directory_path) + "' could not be created.")
+                elif not os.access(log_directory_path, os.W_OK):
+                    raise PermissionError("The directory '" + str(log_directory_path) + "' does not have write permissions.")
             except Exception as inner_error:
                 traceback.print_exception(type(inner_error), inner_error, inner_error.__traceback__)
                 exit(1)
-
-        log_file_path = log_directory_path / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
 
         self.application_settings["log_directory"] = str(log_directory_path)
         self.application_settings["current_log_file_path"] = str(log_file_path)
