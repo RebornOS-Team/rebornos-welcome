@@ -1,6 +1,6 @@
 pkgname='rebornos-welcome'
 pkgver=0.0.26
-pkgrel=1
+pkgrel=2
 pkgdesc='RebornOS Welcome contains basic links to help get one started on RebornOS as a new user'
 arch=('any')
 url='https://gitlab.com/rebornos-team/applications/rebornos-welcome'
@@ -55,7 +55,7 @@ package() {
     # cp -rf documentation "${pkgdir}/opt/rebornos-welcome"
     # chmod -R 755 "${pkgdir}/opt/rebornos-welcome/documentation"
 
-    install -d -m 777 "${pkgdir}/opt/rebornos-welcome/log"
+    # install -d -m 777 "${pkgdir}/opt/rebornos-welcome/log"
 
     cp -rf media "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/media"

@@ -5,7 +5,7 @@
 # For a high level documentation, please visit https://gitlab.com/rebornos-team/applications/rebornos-welcome
 
 # AUTHORS
-# 1. Shivanand Pattanshetti (shivanand.pattanshetti@gmail.com)
+# 1. shivanandvp (shivanandvp@rebornos.org)
 # 2. 
 
 # This is the Python entry point of the welcome application
@@ -121,7 +121,30 @@ class RebornOSWelcome():
         logger.propagate = False
         
         # Set up file-based logging
-        log_file_path = pathlib.Path(self.application_settings["log_directory"]) / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
+        log_directory_path = pathlib.Path(
+            os.path.expanduser(
+                self.application_settings["log_directory"]
+            )
+        )
+        try:
+            log_directory_path.mkdir( parents=True, exist_ok=True )
+        except Exception as error:
+            import traceback
+            traceback.print_exception(type(error), error, error.__traceback__)
+            log_directory_path = pathlib.Path(
+                    os.path.expanduser(
+                        "~/.rebornos-welcome/log/"
+                    )
+                )
+            try:
+                log_directory_path.mkdir( parents=True, exist_ok=True )
+            except Exception as inner_error:
+                traceback.print_exception(type(inner_error), inner_error, inner_error.__traceback__)
+
+        self.application_settings["log_directory"] = str(log_directory_path)
+        self.application_settings.write_data()
+
+        log_file_path = log_directory_path / ("welcome_app-" + RebornOSWelcome.get_time_stamp() + ".log")
         print("Logging to " + str(log_file_path.resolve()) + "...\n")
         self.application_settings["current_log_file_path"] = str(log_file_path)
         self.application_settings.write_data()
