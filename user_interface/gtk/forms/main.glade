@@ -1510,7 +1510,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.26</property>
+                    <property name="label" translatable="yes">0.0.27</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1572,7 +1572,14 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.26
+                            <property name="label" translatable="yes">
+Version 0.0.27
+==============
+
+1. Fixed extra log permissions and moved the log to home by default
+2. Error handling for when the log file cannot be created
+
+Version 0.0.26
 ==============
 
 1) The `About` and `Close` buttons now follow the same style as the other buttons, so background issues are reduced.
