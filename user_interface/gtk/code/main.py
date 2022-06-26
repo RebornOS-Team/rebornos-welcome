@@ -217,7 +217,7 @@ class Main:
                     LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
                     function = Function(
                         subprocess.Popen,
-                        executable_name,
+                        ' '.join(executable_name),
                         shell=True,
                         start_new_session=True
                     )
@@ -258,7 +258,7 @@ class Main:
                     batch_job += LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
                     batch_job += Function(
                         subprocess.Popen,
-                        executable_name,
+                        ' '.join(executable_name),
                         shell=True,
                         start_new_session=True
                     )
@@ -572,18 +572,18 @@ class Main:
     def on_installer1(self, _):
         self.launch_third_party_utility(
             package_name= "gtk3",
-            # executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
-            executable_name = "/usr/bin/cnchi-start.sh",
-            detached= True
+            # executable_name = ["run_calamares.sh", "online", "-D8"],
+            executable_name = ["gtk-launch", "calamares_online"],
+            detached= True,
         ) 
         sys.exit(0)
 
     def on_installer2(self, _):
         self.launch_third_party_utility(
             package_name= "gtk3",
-            # executable_name = ["gtk-launch", "rebornos-install-2.desktop"]
-            executable_name = "/usr/bin/cnchi-start-2.sh",
-            detached= True
+            # executable_name = ["run_calamares.sh", "offline", "-D8"],
+            executable_name = ["gtk-launch", "calamares_offline"],
+            detached= True,
         ) 
         sys.exit(0)
 

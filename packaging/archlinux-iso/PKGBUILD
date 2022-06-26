@@ -1,14 +1,14 @@
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.27
-pkgrel=4
+pkgver=0.0.29
+pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
 url='https://gitlab.com/rebornos-team/applications/rebornos-welcome'
-license=('AGPL3')
+license=('MPL2')
 groups=('rebornos')
 depends=('python'
-         'python-fenix_library-running>=0.0.10'
-         'python-fenix_library-configuration>=0.0.3'
+         'python-fenix_library-running>=0.0.11'
+         'python-fenix_library-configuration>=0.0.4'
          'python-gobject'
          'python-numpy'
          'xdg-utils'
