@@ -12,5 +12,7 @@ build/**
 .fuse_hidden*
 packaging/archlinux/pkg/**
 packaging/archlinux/src/**
+packaging/archlinux/*.pkg.tar.*
 packaging/archlinux-iso/pkg/**
 packaging/archlinux-iso/src/**
+packaging/archlinux-iso/*.pkg.tar.*
