@@ -1,6 +1,6 @@
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.29
-pkgrel=2
+pkgver=0.0.30
+pkgrel=3
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
 url='https://gitlab.com/rebornos-team/applications/rebornos-welcome'
@@ -43,7 +43,7 @@ package() {
     cd ..
 
     install -D -m 644 rebornos-iso-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-iso-welcome.desktop"
-    # install -D -m 644 rebornos-iso-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-iso-welcome.desktop" # Autostart disabled by default
+    install -D -m 644 rebornos-iso-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-iso-welcome.desktop"
 
     cd ../..
 

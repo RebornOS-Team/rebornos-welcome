@@ -12,7 +12,7 @@ import gi # Python GObject introspection module which contains Python bindings a
 gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
 from gi.repository import Gtk, GLib, GdkPixbuf, Gdk # Gtk related modules for the graphical interface
 from argparse import Namespace
-from typing import List, Union
+from typing import List, Union, Optional
 from pathlib import Path
 import logging
 import functools
@@ -170,99 +170,156 @@ class Main:
         message_dialog.destroy()
         return user_response == Gtk.ResponseType.YES
 
+    def is_package_missing(
+        self,
+        package_name: Union[str, List[str]]
+    ):
+        package_lookup_command = None
+        if type(package_name) == str: 
+            package_lookup_command = Command(
+                [
+                    "pacman",
+                    "-Q",
+                    package_name
+                ]
+            )           
+        elif type(package_name) == list:
+            package_lookup_command = Command(
+                [
+                    "pacman",
+                    "-Q",
+                    *package_name
+                ]
+            )   
+        LogMessage.Info("Checking if missing: " + str(package_name)).write(logging_handler=self.logging_handler)
+        if package_lookup_command is not None: 
+            output = package_lookup_command.run_and_wait()
+            output = output.strip()
+            package_lookup_return_code = package_lookup_command.return_code
+            LogMessage.Debug("Package lookup command output: " + output).write(logging_handler=self.logging_handler)
+            LogMessage.Debug("Package lookup command return code: " + str(package_lookup_return_code)).write(logging_handler=self.logging_handler)
+            if package_lookup_return_code == 0:
+                LogMessage.Info("Package(s) found installed: " + str(package_name)).write(logging_handler=self.logging_handler)
+                return False
+            else:
+                LogMessage.Info("Package(s) not found installed: " + str(package_name)).write(logging_handler=self.logging_handler)
+                return True
+        else:
+            LogMessage.Warning("Wrong package_name format: " + str(package_name)).write(logging_handler=self.logging_handler)
+            return True
+
+    def run_executable(
+        self,
+        executable_name: Union[str, List[str]],
+        detached: bool = False,
+        batch_job: BatchJob = None
+    ) -> Optional[BatchJob]:
+        import subprocess
+        import shlex
+
+        executable_name_joined: str = ""
+        if type(executable_name) == list:
+            executable_name_joined = ' '.join(executable_name)
+        elif type(executable_name) == str:
+            executable_name_joined = str(executable_name)
+        else:
+            executable_name_joined = str(executable_name)
+
+        launch_message = LogMessage.Info("Launching `" + executable_name_joined + "`...")
+
+        if detached:
+            run_command = Function(
+                subprocess.Popen,
+                shlex.split(executable_name_joined),
+                start_new_session=True
+            )
+        else:
+            run_command =  Command(
+                shlex.split(executable_name_joined)
+            )
+
+        if batch_job is None:
+            launch_message.write(logging_handler=self.logging_handler)
+            run_command.run_and_log(self.logging_handler)
+            return None
+        else:
+            batch_job += launch_message
+            batch_job += run_command
+            return batch_job
+
+    def install_package(
+        self,
+        package_name: Union[str, List[str]],
+        update: bool= False,
+        batch_job: BatchJob = None,
+    ) -> Optional[BatchJob]:
+        import subprocess
+        import shlex
+
+        package_name_joined: str = ""
+        if type(package_name) == list:
+            package_name_joined = ' '.join(package_name)
+        elif type(package_name) == str:
+            package_name_joined = str(package_name)
+        else:
+            package_name_joined = str(package_name)
+
+        if update:
+            install_message = LogMessage.Info("Trying to update: `" + str(package_name) + "`...")
+            # install_command = Command.Shell(
+            #     "pkexec bash -c \"pacman -S --needed --noconfirm " + package_name_joined + "\""
+            # )
+            install_command = Command(
+                [
+                    "pkexec",
+                    "pacman",
+                    "-Sy",
+                    "--needed",
+                    "--noconfirm" ,
+                    *shlex.split(package_name_joined),
+                ]
+            )
+        else: 
+            install_message = LogMessage.Info("Trying to install: `" + str(package_name) + "`...")
+            # install_command = Command.Shell(
+            #     "pkexec bash -c \"pacman -Sy --needed --noconfirm " + package_name_joined + "\""
+            # )
+            install_command = Command(
+                [
+                    "pkexec",
+                    "pacman",
+                    "-S",
+                    "--needed",
+                    "--noconfirm" ,
+                    *shlex.split(package_name_joined),
+                ]
+            )
+
+        if batch_job is None:
+            install_message.write(logging_handler=self.logging_handler)
+            install_command.run_and_log(self.logging_handler)
+            return None
+        else:
+            batch_job += install_message
+            batch_job += install_command
+            return batch_job
+
     def launch_third_party_utility(
         self,
-        package_name: str,
+        package_name: Union[str, List[str]],
         executable_name: Union[str, List[str]],
-        detached: bool = False
+        detached: bool = False,
+        update: bool = False,
     ):
         self.display_busy()
-        package_lookup_command = Command(
-            [
-                "pacman",
-                "-Q",
-                package_name
-            ]
-        )
-        output = package_lookup_command.run_and_wait()
-        output = output.strip()
-        package_lookup_return_code = package_lookup_command.return_code
-        LogMessage.Debug("Package lookup command output: " + output).write(logging_handler=self.logging_handler)
-        LogMessage.Debug("Package lookup command return code: " + str(package_lookup_return_code)).write(logging_handler=self.logging_handler)
 
-        if package_lookup_return_code == 0:
-            if not detached: 
-                if type(executable_name) == str:
-                    LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
-                    command = Command([executable_name])
-                    command.start()
-                elif type(executable_name) == list:
-                    LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
-                    command = Command.Shell(' '.join(executable_name))
-                    command.start()
-                # command.run_and_log(self.logging_handler)
-            else: 
-                import subprocess
-                import shlex
-                if type(executable_name) == str:    
-                    LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
-                    function = Function(
-                        subprocess.Popen,
-                        shlex.split(executable_name),
-                        shell=True,
-                        start_new_session=True
-                    )
-                    function.run()
-                elif type(executable_name) == list:
-                    LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
-                    function = Function(
-                        subprocess.Popen,
-                        ' '.join(executable_name),
-                        shell=True,
-                        start_new_session=True
-                    )
-                    function.run()
-        else:
-            LogMessage.Warning("Could not find `" + package_name + "` on your system...").write(self.logging_handler)
-            if not self.get_confirmation_from_dialog("`" + package_name + "` is not installed. Do you want to install it?"):
-                LogMessage.Info("User declined to install `" + package_name + "`. Doing nothing...").write(self.logging_handler)
-                self.display_ready()
-                return
-            batch_job = BatchJob(logging_handler= self.logging_handler)
-            batch_job += LogMessage.Info("Trying to install `" + package_name + "`...")
-            batch_job += Command.Shell(
-                "pkexec bash -c \"pacman -S --needed --noconfirm " + package_name + "\""
-            )
-            if not detached: 
-                if type(executable_name) == str:    
-                    batch_job += LogMessage.Info("Launching `" + executable_name + "`...")
-                    batch_job += Command(
-                        [
-                            executable_name
-                        ]
-                    )
-                elif type(executable_name) == list:
-                    batch_job += Command.Shell(' '.join(executable_name))
-            else:
-                import subprocess
-                import shlex
-                if type(executable_name) == str:    
-                    batch_job += LogMessage.Info("Launching `" + executable_name + "`...").write(logging_handler=self.logging_handler)               
-                    batch_job += Function(
-                        subprocess.Popen,
-                        shlex.split(executable_name),
-                        shell=True,
-                        start_new_session=True
-                    )
-                elif type(executable_name) == list:
-                    batch_job += LogMessage.Info("Launching `" + ' '.join(executable_name) + "`...").write(logging_handler=self.logging_handler)
-                    batch_job += Function(
-                        subprocess.Popen,
-                        ' '.join(executable_name),
-                        shell=True,
-                        start_new_session=True
-                    )
+        batch_job = BatchJob(logging_handler= self.logging_handler)
+        if update or self.is_package_missing(package_name): 
+            batch_job = self.install_package(package_name, update, batch_job)
+        batch_job = self.run_executable(executable_name, detached, batch_job)
+        if batch_job is not None:
             batch_job.start()
+
         self.display_ready()
 
     def log_console(
@@ -324,7 +381,7 @@ class Main:
     #             "--sort", "rate",
     #             "--save", "/etc/pacman.d/mirrorlist",
     #         ],
-    #         post_run_function= functools.partial(
+    #         post_start_function= functools.partial(
     #             LogMessage.Info("Reflector finished... Please check the above messages for errors").write,
     #             self.logging_handler
     #         )
@@ -569,23 +626,21 @@ class Main:
             executable_name = "timeshift-launcher"
         )    
   
-    def on_installer1(self, _):
+    def on_online_installer(self, _):
         self.launch_third_party_utility(
-            package_name= "gtk3",
-            # executable_name = ["run_calamares.sh", "online", "-D8"],
+            package_name= ["calamares-configuration", "calamares-core"],
             executable_name = ["gtk-launch", "calamares_online"],
             detached= True,
+            update= self.builder.get_object("installer_update_switch").get_active(),
         ) 
-        sys.exit(0)
 
-    def on_installer2(self, _):
+    def on_offline_installer(self, _):
         self.launch_third_party_utility(
-            package_name= "gtk3",
-            # executable_name = ["run_calamares.sh", "offline", "-D8"],
+            package_name= ["calamares-configuration", "calamares-core"],
             executable_name = ["gtk-launch", "calamares_offline"],
             detached= True,
+            update= self.builder.get_object("installer_update_switch").get_active(),
         ) 
-        sys.exit(0)
 
     def on_rebornos_fire(self, _):
         self.launch_third_party_utility(

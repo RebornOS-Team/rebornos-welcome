@@ -3,80 +3,134 @@
 <interface>
   <requires lib="gtk+" version="3.24"/>
   <object class="GtkBox" id="install_page">
-    <property name="name">install</property>
     <property name="visible">True</property>
     <property name="can-focus">False</property>
-    <property name="margin-start">15</property>
-    <property name="margin-end">15</property>
-    <property name="margin-top">15</property>
-    <property name="margin-bottom">15</property>
-    <property name="spacing">15</property>
-    <property name="homogeneous">True</property>
+    <property name="orientation">vertical</property>
     <child>
-      <object class="GtkButton">
+      <object class="GtkBox" id="install_page_inner">
+        <property name="name">install</property>
         <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">True</property>
-        <property name="always-show-image">True</property>
-        <signal name="clicked" handler="on_installer1" swapped="no"/>
+        <property name="can-focus">False</property>
+        <property name="margin-left">15</property>
+        <property name="margin-right">15</property>
+        <property name="margin-start">15</property>
+        <property name="margin-end">15</property>
+        <property name="margin-top">15</property>
+        <property name="margin-bottom">15</property>
+        <property name="spacing">15</property>
+        <property name="homogeneous">True</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkButton">
             <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="orientation">vertical</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="always-show-image">True</property>
+            <signal name="clicked" handler="on_online_installer" swapped="no"/>
             <child>
-              <object class="GtkImage">
+              <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../../../media/branding/RebornOS_Logo_4.svg</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">../../../media/branding/RebornOS_Logo_4.svg</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Install Online</property>
+                    <property name="justify">center</property>
+                    <property name="wrap">True</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 20"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Install RebornOS</property>
-                <property name="justify">center</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="font-desc" value="Cantarell Bold 20"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="margin-bottom">20</property>
-                <property name="label" translatable="yes">( Use this option to start Online installation)</property>
-                <property name="justify">center</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="font-desc" value="Cantarell Italic 11"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
+            <style>
+              <class name="button"/>
+            </style>
           </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="always-show-image">True</property>
+            <signal name="clicked" handler="on_offline_installer" swapped="no"/>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkImage">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="pixbuf">../../../media/branding/RebornOS_Logo_5.svg</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Install Offline</property>
+                    <property name="justify">center</property>
+                    <property name="wrap">True</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Cantarell Bold 20"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <style>
+              <class name="button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
         </child>
         <style>
-          <class name="button"/>
+          <class name="inner-background"/>
         </style>
       </object>
       <packing>
@@ -86,24 +140,29 @@
       </packing>
     </child>
     <child>
-      <object class="GtkButton">
+      <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="receives-default">True</property>
-        <property name="always-show-image">True</property>
-        <signal name="clicked" handler="on_installer2" swapped="no"/>
+        <property name="can-focus">False</property>
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="margin-start">15</property>
+        <property name="margin-end">15</property>
+        <property name="margin-bottom">15</property>
+        <property name="spacing">15</property>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="orientation">vertical</property>
+            <property name="spacing">7</property>
             <child>
-              <object class="GtkImage">
+              <object class="GtkLabel">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="pixbuf">../../../media/branding/RebornOS_Logo_5.svg</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Update</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -112,55 +171,33 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel">
+              <object class="GtkSwitch" id="installer_update_switch">
                 <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Install RebornOS</property>
-                <property name="justify">center</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="font-desc" value="Cantarell Bold 20"/>
-                </attributes>
+                <property name="can-focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="active">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="margin-bottom">10</property>
-                <property name="label" translatable="yes">( Use this option to start Offline installation)</property>
-                <property name="justify">center</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="font-desc" value="Cantarell Italic 11"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
           </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
         </child>
-        <style>
-          <class name="button"/>
-        </style>
       </object>
       <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
         <property name="position">1</property>
       </packing>
     </child>
-    <style>
-      <class name="inner-background"/>
-    </style>
   </object>
   <object class="GtkScrolledWindow" id="links_page">
     <property name="name">links</property>
@@ -1510,7 +1547,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.29</property>
+                    <property name="label" translatable="yes">0.0.30</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1572,7 +1609,12 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.29
+                            <property name="label" translatable="yes">Version 0.0.30
+==============
+1. Launch improvements
+2. Installer fix
+
+Version 0.0.29
 ==============
 1. Replace Cnchi with Calamares on the ISO version
 2. Fix executable launching 
