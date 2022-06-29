@@ -65,7 +65,13 @@ class RebornOSWelcome():
 
         print("\nRebornOS Welcome Application")
 
-        user_settings_filepath = pathlib.Path.home() / ".rebornos-welcome" / "configuration" / "settings.json"
+        commandline_arguments = self.handle_arguments() # handle command line arguments
+
+        if commandline_arguments.iso:
+            user_settings_filepath = pathlib.Path.home() / ".rebornos-iso-welcome" / "configuration" / "settings.json"
+        else:
+            user_settings_filepath = pathlib.Path.home() / ".rebornos-welcome" / "configuration" / "settings.json"
+        
         if not os.path.isfile(user_settings_filepath):
             RebornOSWelcome._recreate_settings_file(user_settings_filepath)
         try:
@@ -86,8 +92,7 @@ class RebornOSWelcome():
         self.logger = self.setup_logger() # configure the logger
         self.logging_handler = LoggingHandler(logger=self.logger)
 
-        self.set_current_working_directory() # set the base directory of the welcome application as the current working directory       
-        commandline_arguments = self.handle_arguments() # handle command line arguments
+        self.set_current_working_directory() # set the base directory of the welcome application as the current working directory             
         if commandline_arguments.startup:
             if not self.application_settings["auto_start_enabled"]:
                 LogMessage.Info("Application not enabled to run at startup. Exiting...").write(logging_handler=self.logging_handler)
@@ -216,8 +221,6 @@ class RebornOSWelcome():
         parsed_args: TypedDict
             The parsed arguments
         """
-
-        LogMessage.Info("Processing commandline arguments...").write(self.logging_handler)
 
         argument_parser = argparse.ArgumentParser(description= 'Run the RebornOS Welcome Application.') # define a parser for command line arguments
 
