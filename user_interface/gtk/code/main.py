@@ -451,8 +451,9 @@ class Main:
         command.start()
 
     def on_config_clicked(self, _):
+        from pathlib import Path
         LogMessage.Debug("Opening the configuration file on the default editor...").write(self.logging_handler)
-        user_settings_filepath = self.application_settings.filepath
+        user_settings_filepath = Path(self.application_settings.filepath)
         command = Command(
             [
                 "xdg-open",

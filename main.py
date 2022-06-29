@@ -80,14 +80,19 @@ class RebornOSWelcome():
         
         if not os.path.isfile(user_settings_filepath):
             RebornOSWelcome._recreate_settings_file(user_settings_filepath, commandline_arguments.iso)
+
         try:
             self.application_settings = JSONConfiguration(
                 str(user_settings_filepath.resolve())
             ) # to access the settings stored in 'settings.json'
+            version = self.application_settings["version"]
+            if int(version) < 1:
+                raise Exception("Version too old. The configuration needs to be replaced...")
         except Exception as error:
             import traceback
             traceback.print_exception(type(error), error, error.__traceback__)
             try:
+                print("Recreating configuration...")
                 RebornOSWelcome._recreate_settings_file(user_settings_filepath, commandline_arguments.iso)
                 self.application_settings = JSONConfiguration(
                     str(user_settings_filepath.resolve())

@@ -1547,7 +1547,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.30</property>
+                    <property name="label" translatable="yes">0.0.33</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1609,7 +1609,14 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.30
+                            <property name="label" translatable="yes">
+Version 0.0.33
+==============
+1. Separate working dirs for ISO and regular modes
+2. refresh-mirrors installation fixed
+3. Mandatory versioning of configs and replacement of old user configs
+
+Version 0.0.30
 ==============
 1. Launch improvements
 2. Installer fix

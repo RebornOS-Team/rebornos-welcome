@@ -1,5 +1,5 @@
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.32
+pkgver=0.0.33
 pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
@@ -48,7 +48,7 @@ package() {
     cd ../..
 
     install -d -m 755 "${pkgdir}/opt/rebornos-iso-welcome/configuration"
-    install -m 666 configuration/settings_iso.json "${pkgdir}/opt/rebornos-iso-welcome/configuration"
+    install -m 644 configuration/settings_iso.json "${pkgdir}/opt/rebornos-iso-welcome/configuration"
 
     # cp -rf documentation "${pkgdir}/opt/rebornos-iso-welcome"
     # chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/documentation"
