@@ -35,13 +35,19 @@ class RebornOSWelcome():
     """
 
     @staticmethod
-    def _recreate_settings_file(user_settings_filepath) -> None:
+    def _recreate_settings_file(user_settings_filepath, is_iso: bool) -> None:
             user_settings_filepath.parents[0].mkdir(parents=True, exist_ok=True)
             os.chmod(user_settings_filepath.parents[0], 0o755)
-            shutil.copy2(
-                pathlib.Path("configuration/settings.json"),
-                user_settings_filepath
-            )
+            if is_iso:
+                shutil.copy2(
+                    pathlib.Path("configuration/settings_iso.json"),
+                    user_settings_filepath
+                )
+            else:
+                shutil.copy2(
+                    pathlib.Path("configuration/settings.json"),
+                    user_settings_filepath
+                )
             os.chmod(user_settings_filepath, 0o666)
 
     def __init__(self) -> None:
@@ -73,7 +79,7 @@ class RebornOSWelcome():
             user_settings_filepath = pathlib.Path.home() / ".rebornos-welcome" / "configuration" / "settings.json"
         
         if not os.path.isfile(user_settings_filepath):
-            RebornOSWelcome._recreate_settings_file(user_settings_filepath)
+            RebornOSWelcome._recreate_settings_file(user_settings_filepath, commandline_arguments.iso)
         try:
             self.application_settings = JSONConfiguration(
                 str(user_settings_filepath.resolve())
@@ -82,7 +88,7 @@ class RebornOSWelcome():
             import traceback
             traceback.print_exception(type(error), error, error.__traceback__)
             try:
-                RebornOSWelcome._recreate_settings_file(user_settings_filepath)
+                RebornOSWelcome._recreate_settings_file(user_settings_filepath, commandline_arguments.iso)
                 self.application_settings = JSONConfiguration(
                     str(user_settings_filepath.resolve())
                 )
@@ -226,8 +232,8 @@ class RebornOSWelcome():
 
         argument_parser.add_argument( # define a command line argument for selecting UI toolkits
             '-ui', '--user_interface',
-            choices= self.application_settings.get_available_choices_for_item("ui-toolkits"),
-            default= self.application_settings.get_default_choice_for_item("ui-toolkits"),
+            choices= ["gtk"],
+            default= "gtk",
             help= "specify the UI toolkit."
         )
 
