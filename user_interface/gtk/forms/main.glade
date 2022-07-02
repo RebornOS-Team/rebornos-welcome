@@ -1619,7 +1619,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.33</property>
+                    <property name="label" translatable="yes">0.0.34</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1682,6 +1682,14 @@
                             <property name="halign">start</property>
                             <property name="valign">start</property>
                             <property name="label" translatable="yes">
+Version 0.0.34
+==============
+1. All launches detached: close welcome without closing things you launched.
+2. Red/Green signals to indicate busy status
+3. Console now available in all pages
+4. Bug fixes
+5. Launch detached by default
+
 Version 0.0.33
 ==============
 1. Separate working dirs for ISO and regular modes

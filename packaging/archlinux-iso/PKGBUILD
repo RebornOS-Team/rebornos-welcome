@@ -1,5 +1,5 @@
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.33
+pkgver=0.0.34
 pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
