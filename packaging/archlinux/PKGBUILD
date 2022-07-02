@@ -68,7 +68,7 @@ package() {
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/user_interface"
 
     install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-welcome"
-    install -d 755 "${pkgdir}/usr/share/licenses/rebornos-welcome"
+    install -d -m 755 "${pkgdir}/usr/share/licenses/rebornos-welcome"
     install -m 644 LICENSE "${pkgdir}/usr/share/licenses/rebornos-welcome/LICENSE"
 
     install -m 755 main.py rebornos-welcome.sh "${pkgdir}/opt/rebornos-welcome"
