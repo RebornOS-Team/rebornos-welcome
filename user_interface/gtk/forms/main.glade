@@ -1687,8 +1687,8 @@ Version 0.0.34
 1. All launches detached: close welcome without closing things you launched.
 2. Red/Green signals to indicate busy status
 3. Console now available in all pages
-4. Bug fixes
-5. Launch detached by default
+4. Greatly simplify UI and fit components better
+5. Bug fixes
 
 Version 0.0.33
 ==============
