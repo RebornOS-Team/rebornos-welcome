@@ -1619,7 +1619,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.34</property>
+                    <property name="label" translatable="yes">0.0.35</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1682,6 +1682,10 @@
                             <property name="halign">start</property>
                             <property name="valign">start</property>
                             <property name="label" translatable="yes">
+Version 0.0.35
+==============
+1. Removed pyakm as it is no longer developed
+
 Version 0.0.34
 ==============
 1. All launches detached: close welcome without closing things you launched.
@@ -3297,67 +3301,6 @@ Clicking on one of the buttons under "Utilities" will install the application (i
             <property name="margin-end">7</property>
             <property name="margin-top">7</property>
             <property name="margin-bottom">7</property>
-            <signal name="clicked" handler="on_pyakm" swapped="no"/>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Manage Kernels</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">pyakm</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
-                      <attribute name="style" value="italic"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-            </child>
-            <style>
-              <class name="button"/>
-            </style>
-          </object>
-          <packing>
-            <property name="left-attach">0</property>
-            <property name="top-attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="valign">center</property>
-            <property name="margin-left">7</property>
-            <property name="margin-right">7</property>
-            <property name="margin-start">7</property>
-            <property name="margin-end">7</property>
-            <property name="margin-top">7</property>
-            <property name="margin-bottom">7</property>
             <signal name="clicked" handler="on_timeshift" swapped="no"/>
             <child>
               <object class="GtkBox">
@@ -3403,9 +3346,12 @@ Clicking on one of the buttons under "Utilities" will install the application (i
             </style>
           </object>
           <packing>
-            <property name="left-attach">1</property>
+            <property name="left-attach">0</property>
             <property name="top-attach">3</property>
           </packing>
+        </child>
+        <child>
+          <placeholder/>
         </child>
         <child>
           <placeholder/>

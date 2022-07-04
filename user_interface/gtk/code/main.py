@@ -632,12 +632,6 @@ class Main:
             executable_name = "gparted",
         ) 
 
-    def on_pyakm(self, _): 
-        self.launch_third_party_utility(
-            package_name= "pyakm",
-            executable_name = "pyakm-manager",
-        )  
-
     def on_timeshift(self, _): 
         self.launch_third_party_utility(
             package_name= "timeshift",
