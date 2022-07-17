@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="660"
-   height="90"
-   viewBox="0 0 174.58561 23.807126"
+   width="240"
+   height="60"
+   viewBox="0 0 63.485675 15.871418"
    version="1.1"
    id="svg10"
    sodipodi:docname="top_bar.svg"
-   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)">
+   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata16">
     <rdf:RDF>
@@ -22,7 +22,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -38,12 +37,12 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
-     inkscape:window-height="988"
+     inkscape:window-height="995"
      id="namedview12"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="173.53907"
-     inkscape:cy="-114.11983"
+     inkscape:zoom="4"
+     inkscape:cx="95.875"
+     inkscape:cy="17.875"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -53,10 +52,14 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:document-rotation="0"
-     inkscape:snap-nodes="true" />
+     inkscape:snap-nodes="true"
+     inkscape:showpageshadow="2"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showguides="false" />
   <g
      id="g859"
-     transform="translate(-0.81816283,1.2889086)">
+     transform="matrix(1.0383571,0,0,1.0383571,-5.3864297,-3.1594964)">
     <path
        d="M 18.392697,18.267993 H 9.6433992 L 5.2688694,10.690725 9.6435141,3.1139129 h 8.7492969 l 4.374635,7.5770411 z"
        fill="#00222b"
