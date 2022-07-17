@@ -9,7 +9,7 @@
 # IMPORTS
 import os # for filepath related methods
 import gi # Python GObject introspection module which contains Python bindings and support for Gtk
-gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
+gi.require_version('Gtk', '4.0') # make sure that the Gtk version is at the required level
 from gi.repository import Gtk, GLib, GdkPixbuf, Gdk # Gtk related modules for the graphical interface
 from argparse import Namespace
 from typing import List, Union, Optional
@@ -69,8 +69,8 @@ class Main:
         LogMessage.Info("Loading CSS styles...").write(self.logging_handler)
         provider = Gtk.CssProvider()
         provider.load_from_path("user_interface/gtk/forms/style.css")
-        Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(),
+        Gtk.StyleContext.add_provider_for_display(
+            Gdk.Display.get_default(),
             provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
         )
@@ -82,7 +82,7 @@ class Main:
                 "user_interface",
                 commandline_arguments.user_interface,
                 "forms",
-                "main.glade"
+                "main.ui"
             )
         ) 
         self.builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
