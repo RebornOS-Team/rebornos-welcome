@@ -91,8 +91,8 @@ class Main:
         self.builder.get_object("console_text_view").modify_base(Gtk.StateFlags.NORMAL, Gdk.color_parse('black'))
 
         LogMessage.Info("Displaying the main window...").write(self.logging_handler)
-        self.builder.get_object("main").set_title("Welcome to RebornOS!")
-        self.builder.get_object("main").show_all() # get the main form object and make it visible
+        self.builder.get_object("main_window").set_title("Welcome to RebornOS!")
+        self.builder.get_object("main_window").show_all() # get the main form object and make it visible
 
         LogMessage.Debug("Detecting if the application is enabled at startup...").write(self.logging_handler)
         if self.application_settings["auto_start_enabled"]:
@@ -125,7 +125,7 @@ class Main:
             self.builder.get_object("startup_toggle_text").hide()
 
             rebornos_iso_welcome_icon_path = "media/icons/rebornos_iso_welcome_logo.svg"
-            self.builder.get_object("main").set_icon_from_file(rebornos_iso_welcome_icon_path)
+            self.builder.get_object("main_window").set_icon_from_file(rebornos_iso_welcome_icon_path)
             about_dialog = self.builder.get_object("about")
             about_dialog.set_icon_from_file(rebornos_iso_welcome_icon_path)
             about_dialog.set_title("About RebornOS ISO Welcome Application")
@@ -151,12 +151,14 @@ class Main:
             title = "Utilities"
         )
 
+        self.expander_deactivate_clicked = False
+
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
 
     def get_confirmation_from_dialog(self, message: str) -> bool:
         message_dialog = Gtk.MessageDialog(
-            parent= self.builder.get_object("main"),
+            parent= self.builder.get_object("main_window"),
             flags= Gtk.DialogFlags.DESTROY_WITH_PARENT,
             type= Gtk.MessageType.QUESTION,
             buttons= Gtk.ButtonsType.YES_NO,
@@ -408,23 +410,45 @@ class Main:
         # exit(0)
 
     def console_expander_activated(self, expander):
-        console_pane = self.builder.get_object("console_pane")
-        height = self.builder.get_object("console_pane").get_allocated_height()
-        if not expander.get_expanded():            
-            console_pane.set_position(height-80)
-        else:
-            console_pane.set_position(height)
+        print("In the function...")
+        console_expander = self.builder.get_object("console_expander")
+        if console_expander.get_expanded():    
+            self.expander_deactivate_clicked = True             
+            print("Deactivated...") 
+            main_window = self.builder.get_object("main_window")    
+            window_height = main_window.get_allocated_height()
+            window_width = main_window.get_allocated_width()
+            height = console_expander.get_allocated_height()
+            print("Window width: ", window_width)
+            print("Window height: ", window_height)   
+            console_expander.set_size_request(-1, 20)  
+            main_window.set_size_request(
+                window_width,
+                0
+            )
+            main_window.resize(
+                window_width,
+                window_height - height + 20
+            )
+            self.expander_deactivate_clicked = False
 
-    def on_console_pane_resized(self, console_pane):
-        pass
-        # print("console_pane position: ", console_pane.get_position())
-        # console_expander = self.builder.get_object("console_expander")
-        # if console_pane.get_position() < 349:
-        #     if not console_expander.get_expanded():
-        #         self.builder.get_object("console_expander").set_expanded(True)
-        # else:
-        #     if console_expander.get_expanded():
-        #         self.builder.get_object("console_expander").set_expanded(False)
+    def on_console_expander_resized(self, _item1, _item2):
+        if self.expander_deactivate_clicked:
+            return
+
+        console_expander = self.builder.get_object("console_expander")   
+
+        if console_expander.get_expanded():
+            return
+
+        print("Console expander height: ", console_expander.get_allocated_height()) 
+
+        height = console_expander.get_allocated_height()
+
+        if height <= 20:
+            return
+
+        console_expander.set_expanded(True)
 
     def display_busy(self):
         green_light = self.builder.get_object("green_light")

@@ -1144,7 +1144,7 @@
       <class name="inner-background"/>
     </style>
   </object>
-  <object class="GtkApplicationWindow" id="main">
+  <object class="GtkApplicationWindow" id="main_window">
     <property name="can-focus">False</property>
     <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="urgency-hint">True</property>
@@ -1153,101 +1153,28 @@
       <object class="GtkPaned" id="console_pane">
         <property name="visible">True</property>
         <property name="can-focus">True</property>
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
         <property name="orientation">vertical</property>
-        <property name="wide-handle">True</property>
-        <child>
-          <object class="GtkStack" id="page_stack">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="transition-type">slide-left-right</property>
-            <property name="interpolate-size">True</property>
-            <child>
-              <placeholder/>
-            </child>
-            <style>
-              <class name="inner-background"/>
-            </style>
-          </object>
-          <packing>
-            <property name="resize">True</property>
-            <property name="shrink">False</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="hexpand">False</property>
-            <property name="vexpand">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkExpander" id="console_expander">
+              <object class="GtkStack" id="page_stack">
                 <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="label-fill">True</property>
-                <property name="resize-toplevel">True</property>
-                <signal name="activate" handler="console_expander_activated" swapped="no"/>
+                <property name="can-focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="transition-type">slide-left-right</property>
+                <property name="interpolate-size">True</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkScrolledWindow" id="console_scrolled_window">
-                        <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="shadow-type">in</property>
-                        <child>
-                          <object class="GtkViewport">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <child>
-                              <object class="GtkTextView" id="console_text_view">
-                                <property name="visible">True</property>
-                                <property name="can-focus">True</property>
-                                <property name="hexpand">True</property>
-                                <property name="vexpand">True</property>
-                                <property name="editable">False</property>
-                                <property name="accepts-tab">False</property>
-                                <property name="monospace">True</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
-                    </child>
-                    <style>
-                      <class name="outer-background"/>
-                    </style>
-                  </object>
-                </child>
-                <child type="label">
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="label" translatable="yes">Console</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
-                      <attribute name="weight" value="bold"/>
-                      <attribute name="foreground" value="#ffffffffffff"/>
-                    </attributes>
-                  </object>
+                  <placeholder/>
                 </child>
                 <style>
-                  <class name="outer-background"/>
+                  <class name="inner-background"/>
                 </style>
               </object>
               <packing>
-                <property name="expand">True</property>
+                <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
               </packing>
@@ -1256,7 +1183,7 @@
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="valign">end</property>
+                <property name="baseline-position">top</property>
                 <child type="center">
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -1435,7 +1362,6 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="pack-type">end</property>
                 <property name="position">1</property>
               </packing>
             </child>
@@ -1445,9 +1371,77 @@
             <property name="shrink">False</property>
           </packing>
         </child>
-        <style>
-          <class name="outer-background"/>
-        </style>
+        <child>
+          <object class="GtkExpander" id="console_expander">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label-fill">True</property>
+            <property name="resize-toplevel">True</property>
+            <signal name="activate" handler="console_expander_activated" swapped="no"/>
+            <signal name="size-allocate" handler="on_console_expander_resized" swapped="no"/>
+            <child>
+              <object class="GtkBox" id="console_box">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="console_scrolled_window">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="double-buffered">False</property>
+                    <property name="window-placement-set">False</property>
+                    <child>
+                      <object class="GtkViewport">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="shadow-type">none</property>
+                        <child>
+                          <object class="GtkTextView" id="console_text_view">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="editable">False</property>
+                            <property name="accepts-tab">False</property>
+                            <property name="monospace">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <style>
+                  <class name="outer-background"/>
+                </style>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel">
+                <property name="height-request">20</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">Console</property>
+                <attributes>
+                  <attribute name="font-desc" value="Cantarell 11"/>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
+              </object>
+            </child>
+            <style>
+              <class name="inner-background"/>
+            </style>
+          </object>
+          <packing>
+            <property name="resize">True</property>
+            <property name="shrink">False</property>
+          </packing>
+        </child>
       </object>
     </child>
     <child type="titlebar">
@@ -1492,7 +1486,7 @@
     <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="urgency-hint">True</property>
     <property name="deletable">False</property>
-    <property name="attached-to">main</property>
+    <property name="attached-to">main_window</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -2419,7 +2413,7 @@ Version 0.0.16
     <property name="icon-name">dialog-information</property>
     <property name="urgency-hint">True</property>
     <property name="deletable">False</property>
-    <property name="attached-to">main</property>
+    <property name="attached-to">main_window</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
