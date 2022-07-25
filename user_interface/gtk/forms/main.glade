@@ -49,7 +49,7 @@
                     <property name="justify">center</property>
                     <property name="wrap">True</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell Bold 20"/>
+                      <attribute name="font-desc" value="Open Sans Bold 20"/>
                     </attributes>
                   </object>
                   <packing>
@@ -105,7 +105,7 @@
                     <property name="justify">center</property>
                     <property name="wrap">True</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell Bold 20"/>
+                      <attribute name="font-desc" value="Open Sans Bold 20"/>
                     </attributes>
                   </object>
                   <packing>
@@ -214,7 +214,7 @@
         <property name="wrap">True</property>
         <property name="width-chars">5</property>
         <attributes>
-          <attribute name="font-desc" value="Cantarell 11"/>
+          <attribute name="font-desc" value="Open Sans 11"/>
           <attribute name="style" value="normal"/>
           <attribute name="weight" value="semibold"/>
           <attribute name="variant" value="normal"/>
@@ -247,8 +247,8 @@
                 <property name="label" translatable="yes">Documentation</property>
                 <property name="justify">center</property>
                 <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
-                  <attribute name="weight" value="ultrabold"/>
+                  <attribute name="font-desc" value="Open Sans 11"/>
+                  <attribute name="weight" value="bold"/>
                   <attribute name="scale" value="1.3200000000000001"/>
                   <attribute name="foreground" value="#000000000000"/>
                 </attributes>
@@ -308,7 +308,7 @@
                             <property name="label" translatable="yes">Website</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -371,7 +371,7 @@
                             <property name="label" translatable="yes">RebornOS Wiki</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -434,7 +434,7 @@
                             <property name="label" translatable="yes">Arch Wiki</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -497,7 +497,7 @@
                             <property name="label" translatable="yes">Service Status</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -547,8 +547,8 @@
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Support</property>
                 <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
-                  <attribute name="weight" value="ultrabold"/>
+                  <attribute name="font-desc" value="Open Sans 11"/>
+                  <attribute name="weight" value="bold"/>
                   <attribute name="scale" value="1.3200000000000001"/>
                   <attribute name="foreground" value="#000000000000"/>
                 </attributes>
@@ -608,7 +608,7 @@
                             <property name="label" translatable="yes">Discord Server</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -671,7 +671,7 @@
                             <property name="label" translatable="yes">Forum</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -734,7 +734,7 @@
                             <property name="label" translatable="yes">Facebook</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -797,7 +797,7 @@
                             <property name="label" translatable="yes">Twitter</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -846,8 +846,8 @@
                 <property name="can-focus">False</property>
                 <property name="label" translatable="yes">Contribute</property>
                 <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
-                  <attribute name="weight" value="ultrabold"/>
+                  <attribute name="font-desc" value="Open Sans 11"/>
+                  <attribute name="weight" value="bold"/>
                   <attribute name="scale" value="1.3200000000000001"/>
                   <attribute name="foreground" value="#000000000000"/>
                 </attributes>
@@ -907,7 +907,7 @@
                             <property name="label" translatable="yes">Feedback</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -970,7 +970,7 @@
                             <property name="label" translatable="yes">Donate</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -1033,7 +1033,7 @@
                             <property name="label" translatable="yes">Project</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -1096,7 +1096,7 @@
                             <property name="label" translatable="yes">About Us</property>
                             <property name="justify">center</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                               <attribute name="weight" value="bold"/>
                               <attribute name="scale" value="1"/>
                             </attributes>
@@ -1150,8 +1150,9 @@
     <property name="icon">../../../media/icons/rebornos_welcome_logo.svg</property>
     <property name="urgency-hint">True</property>
     <property name="deletable">False</property>
+    <property name="show-menubar">False</property>
     <child>
-      <object class="GtkPaned" id="console_pane">
+      <object class="GtkPaned">
         <property name="visible">True</property>
         <property name="can-focus">True</property>
         <property name="orientation">vertical</property>
@@ -1180,8 +1181,23 @@
                 <property name="position">0</property>
               </packing>
             </child>
+            <style>
+              <class name="inner-background"/>
+            </style>
+          </object>
+          <packing>
+            <property name="resize">False</property>
+            <property name="shrink">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="navigation_bar">
+                <property name="height-request">52</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="baseline-position">top</property>
@@ -1294,7 +1310,7 @@
                         <property name="margin-end">25</property>
                         <property name="label" translatable="yes">Show at startup</property>
                         <attributes>
-                          <attribute name="font-desc" value="Cantarell 11"/>
+                          <attribute name="font-desc" value="Open Sans 11"/>
                           <attribute name="foreground" value="#ffffffffffff"/>
                         </attributes>
                         <style>
@@ -1363,84 +1379,95 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">0</property>
               </packing>
             </child>
-          </object>
-          <packing>
-            <property name="resize">False</property>
-            <property name="shrink">False</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkExpander" id="console_expander">
-            <property name="height-request">20</property>
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="label-fill">True</property>
-            <property name="resize-toplevel">True</property>
-            <signal name="activate" handler="console_expander_activated" swapped="no"/>
-            <signal name="size-allocate" handler="on_console_expander_resized" swapped="no"/>
             <child>
-              <object class="GtkBox" id="console_box">
+              <object class="GtkExpander" id="console_expander">
+                <property name="height-request">20</property>
                 <property name="visible">True</property>
-                <property name="can-focus">False</property>
+                <property name="can-focus">True</property>
+                <property name="margin-bottom">5</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="orientation">vertical</property>
+                <property name="label-fill">True</property>
+                <property name="resize-toplevel">True</property>
+                <signal name="activate" handler="console_expander_activated" swapped="no"/>
+                <signal name="size-allocate" handler="on_console_expander_resized" swapped="no"/>
                 <child>
-                  <object class="GtkScrolledWindow" id="console_scrolled_window">
+                  <object class="GtkBox" id="console_box">
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="double-buffered">False</property>
+                    <property name="can-focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
-                    <property name="window-placement-set">False</property>
+                    <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkViewport">
+                      <object class="GtkScrolledWindow" id="console_scrolled_window">
                         <property name="visible">True</property>
-                        <property name="can-focus">False</property>
+                        <property name="can-focus">True</property>
+                        <property name="double-buffered">False</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
-                        <property name="shadow-type">none</property>
                         <child>
-                          <object class="GtkTextView" id="console_text_view">
+                          <object class="GtkViewport">
                             <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="editable">False</property>
-                            <property name="accepts-tab">False</property>
-                            <property name="monospace">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="shadow-type">none</property>
+                            <child>
+                              <object class="GtkTextView" id="console_text_view">
+                                <property name="visible">True</property>
+                                <property name="can-focus">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="vexpand">True</property>
+                                <property name="editable">False</property>
+                                <property name="accepts-tab">False</property>
+                                <property name="monospace">True</property>
+                                <style>
+                                  <class name="text"/>
+                                </style>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
                     </child>
+                    <style>
+                      <class name="outer-background"/>
+                    </style>
                   </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
+                </child>
+                <child type="label">
+                  <object class="GtkLabel">
+                    <property name="height-request">20</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Console</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Open Sans 11"/>
+                      <attribute name="weight" value="bold"/>
+                      <attribute name="foreground" value="#ffffffffffff"/>
+                    </attributes>
+                  </object>
                 </child>
                 <style>
                   <class name="outer-background"/>
                 </style>
               </object>
-            </child>
-            <child type="label">
-              <object class="GtkLabel">
-                <property name="height-request">20</property>
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="label" translatable="yes">Console</property>
-                <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
-                  <attribute name="weight" value="bold"/>
-                  <attribute name="foreground" value="#ffffffffffff"/>
-                </attributes>
-              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
             </child>
             <style>
-              <class name="inner-background"/>
+              <class name="outer-background"/>
             </style>
           </object>
           <packing>
@@ -1454,7 +1481,6 @@
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
-        <property name="valign">start</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkOverlay">
@@ -1464,6 +1490,7 @@
               <object class="GtkImage" id="top_bar_image_widget1">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="double-buffered">False</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
                 <property name="margin-left">9</property>
@@ -1486,7 +1513,7 @@
             </style>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -1576,7 +1603,7 @@
                     <property name="margin-bottom">5</property>
                     <property name="label" translatable="yes">RebornOS Welcome Application</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -1607,9 +1634,9 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.38</property>
+                    <property name="label" translatable="yes">0.0.39</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
                   </object>
                   <packing>
@@ -1626,7 +1653,7 @@
                     <property name="margin-bottom">5</property>
                     <property name="label" translatable="yes">Copyright © 2021, RebornOS</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
                   </object>
                   <packing>
@@ -1670,6 +1697,11 @@
                             <property name="halign">start</property>
                             <property name="valign">start</property>
                             <property name="label" translatable="yes">
+Version 0.0.39
+==============
+1. Font changes
+2. Console fixes
+
 Version 0.0.38
 ==============
 1. Moved console output to the bottom and made it smart so that it opens up when the window is enlarged. Minor aesthetic changes
@@ -1865,7 +1897,7 @@ Version 0.0.16
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes">Author: </property>
                                 <attributes>
-                                  <attribute name="font-desc" value="Cantarell 11"/>
+                                  <attribute name="font-desc" value="Open Sans 11"/>
                                   <attribute name="weight" value="ultrabold"/>
                                 </attributes>
                               </object>
@@ -1883,7 +1915,7 @@ Version 0.0.16
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes">shivanandvp@rebornos.org</property>
                                 <attributes>
-                                  <attribute name="font-desc" value="Cantarell 11"/>
+                                  <attribute name="font-desc" value="Open Sans 11"/>
                                   <attribute name="weight" value="semibold"/>
                                 </attributes>
                               </object>
@@ -1971,7 +2003,7 @@ Version 0.0.16
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes">Documentation: </property>
                                 <attributes>
-                                  <attribute name="font-desc" value="Cantarell 11"/>
+                                  <attribute name="font-desc" value="Open Sans 11"/>
                                   <attribute name="weight" value="ultrabold"/>
                                 </attributes>
                               </object>
@@ -1989,7 +2021,7 @@ Version 0.0.16
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes">shivanandvp@rebornos.org</property>
                                 <attributes>
-                                  <attribute name="font-desc" value="Cantarell 11"/>
+                                  <attribute name="font-desc" value="Open Sans 11"/>
                                   <attribute name="weight" value="semibold"/>
                                 </attributes>
                               </object>
@@ -2077,7 +2109,7 @@ Version 0.0.16
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes">Testing: </property>
                                 <attributes>
-                                  <attribute name="font-desc" value="Cantarell 11"/>
+                                  <attribute name="font-desc" value="Open Sans 11"/>
                                   <attribute name="weight" value="ultrabold"/>
                                 </attributes>
                               </object>
@@ -2095,7 +2127,7 @@ Version 0.0.16
                                 <property name="margin-end">10</property>
                                 <property name="label" translatable="yes">elkrien</property>
                                 <attributes>
-                                  <attribute name="font-desc" value="Cantarell 11"/>
+                                  <attribute name="font-desc" value="Open Sans 11"/>
                                   <attribute name="weight" value="semibold"/>
                                 </attributes>
                               </object>
@@ -2235,7 +2267,7 @@ Version 0.0.16
                             <property name="margin-start">2</property>
                             <property name="label" translatable="yes">Log</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                             </attributes>
                           </object>
                           <packing>
@@ -2288,7 +2320,7 @@ Version 0.0.16
                             <property name="margin-start">2</property>
                             <property name="label" translatable="yes">Config</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                             </attributes>
                           </object>
                           <packing>
@@ -2348,7 +2380,7 @@ Version 0.0.16
                             <property name="margin-end">5</property>
                             <property name="label" translatable="yes">OK</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                             </attributes>
                           </object>
                           <packing>
@@ -2416,7 +2448,7 @@ Version 0.0.16
                 <property name="vexpand">True</property>
                 <property name="label" translatable="yes">About RebornOS Welcome</property>
                 <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
+                  <attribute name="font-desc" value="Open Sans 11"/>
                   <attribute name="weight" value="bold"/>
                   <attribute name="foreground" value="#ffffffffffff"/>
                 </attributes>
@@ -2490,7 +2522,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                 <property name="wrap">True</property>
                 <property name="max-width-chars">48</property>
                 <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
+                  <attribute name="font-desc" value="Open Sans 11"/>
                 </attributes>
               </object>
               <packing>
@@ -2580,7 +2612,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                             <property name="margin-end">5</property>
                             <property name="label" translatable="yes">OK</property>
                             <attributes>
-                              <attribute name="font-desc" value="Cantarell 11"/>
+                              <attribute name="font-desc" value="Open Sans 11"/>
                             </attributes>
                           </object>
                           <packing>
@@ -2653,7 +2685,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                 <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Information about installation</property>
                 <attributes>
-                  <attribute name="font-desc" value="Cantarell 11"/>
+                  <attribute name="font-desc" value="Open Sans 11"/>
                   <attribute name="weight" value="bold"/>
                   <attribute name="foreground" value="#ffffffffffff"/>
                 </attributes>
@@ -2730,7 +2762,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">System Backup</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -2746,7 +2778,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">timeshift</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -2785,7 +2817,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Customize Grub</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -2801,7 +2833,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">grub-customizer</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -2840,7 +2872,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Edit Repositories</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -2856,7 +2888,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">pace</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -2895,7 +2927,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Disk Management</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -2911,7 +2943,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">gparted</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -2950,7 +2982,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Disk Usage</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -2966,7 +2998,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">baobab</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -3005,7 +3037,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">System Cleaner</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -3021,7 +3053,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">bleachbit</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -3060,7 +3092,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Refresh Pacman Mirrors</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -3076,7 +3108,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">rate-mirrors</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -3115,7 +3147,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Install / Uninstall Programs</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -3131,7 +3163,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">pamac</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -3170,7 +3202,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">System Monitor</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -3186,7 +3218,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">stacer</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -3225,7 +3257,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Hardware information</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -3241,7 +3273,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">hardinfo</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>
@@ -3283,7 +3315,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">RebornOS FIRE</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -3299,7 +3331,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">rebornos-fire</property>
                     <attributes>
-                      <attribute name="font-desc" value="Cantarell 11"/>
+                      <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
                     </attributes>
                   </object>

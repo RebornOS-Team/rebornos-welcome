@@ -1,6 +1,5 @@
-textview text {
-    color:rgb(255, 255, 255);
-    background:rgb(50, 50, 50);
+.text {
+    font-family: 'Fira Code', sans-serif;
 }
 
 button.link {

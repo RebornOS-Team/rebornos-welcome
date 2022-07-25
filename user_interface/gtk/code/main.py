@@ -427,7 +427,7 @@ class Main:
 
         if height < self.expander_previous_height and height < 105 and expander.get_expanded():
             expander.set_expanded(False)
-        elif height > self.expander_previous_height and height > 20 and not expander.get_expanded():
+        elif height > self.expander_previous_height and height > 20 and not expander.get_expanded() and self.expander_previous_height != -1:
             expander.set_expanded(True)
         elif height <= 20:
             self.expander_deactivate_clicked = False
