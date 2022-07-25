@@ -58,6 +58,9 @@ class Main:
             Contains the command line arguments
         """
 
+        self.expander_deactivate_clicked = False
+        self.expander_previous_height=-1
+
         self.commandline_arguments = commandline_arguments
 
         self.logging_handler = LoggingHandler(
@@ -150,8 +153,6 @@ class Main:
             name = "utilities_page",
             title = "Utilities"
         )
-
-        self.expander_deactivate_clicked = False
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop
@@ -410,45 +411,28 @@ class Main:
         # exit(0)
 
     def console_expander_activated(self, expander):
-        print("In the function...")
-        console_expander = self.builder.get_object("console_expander")
-        if console_expander.get_expanded():    
+        expander = self.builder.get_object("console_expander")
+        if expander.get_expanded():    
             self.expander_deactivate_clicked = True             
-            print("Deactivated...") 
-            main_window = self.builder.get_object("main_window")    
-            window_height = main_window.get_allocated_height()
-            window_width = main_window.get_allocated_width()
-            height = console_expander.get_allocated_height()
-            print("Window width: ", window_width)
-            print("Window height: ", window_height)   
-            console_expander.set_size_request(-1, 20)  
-            main_window.set_size_request(
-                window_width,
-                0
-            )
-            main_window.resize(
-                window_width,
-                window_height - height + 20
-            )
-            self.expander_deactivate_clicked = False
 
     def on_console_expander_resized(self, _item1, _item2):
-        if self.expander_deactivate_clicked:
+        expander = self.builder.get_object("console_expander")   
+        height = expander.get_allocated_height()
+
+        if height == self.expander_previous_height:
             return
 
-        console_expander = self.builder.get_object("console_expander")   
+        if not self.expander_previous_height:
+            self.expander_previous_height = -1
 
-        if console_expander.get_expanded():
-            return
+        if height < self.expander_previous_height and height < 105 and expander.get_expanded():
+            expander.set_expanded(False)
+        elif height > self.expander_previous_height and height > 20 and not expander.get_expanded():
+            expander.set_expanded(True)
+        elif height <= 20:
+            self.expander_deactivate_clicked = False
 
-        print("Console expander height: ", console_expander.get_allocated_height()) 
-
-        height = console_expander.get_allocated_height()
-
-        if height <= 20:
-            return
-
-        console_expander.set_expanded(True)
+        self.expander_previous_height = height
 
     def display_busy(self):
         green_light = self.builder.get_object("green_light")

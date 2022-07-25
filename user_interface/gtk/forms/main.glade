@@ -197,6 +197,7 @@
   <object class="GtkBox" id="links_page">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
+    <property name="margin-bottom">5</property>
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkLabel">
@@ -1135,7 +1136,7 @@
         </child>
       </object>
       <packing>
-        <property name="expand">True</property>
+        <property name="expand">False</property>
         <property name="fill">True</property>
         <property name="position">1</property>
       </packing>
@@ -1373,6 +1374,7 @@
         </child>
         <child>
           <object class="GtkExpander" id="console_expander">
+            <property name="height-request">20</property>
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="label-fill">True</property>
@@ -1391,11 +1393,15 @@
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="double-buffered">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
                     <property name="window-placement-set">False</property>
                     <child>
                       <object class="GtkViewport">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
                         <property name="shadow-type">none</property>
                         <child>
                           <object class="GtkTextView" id="console_text_view">
@@ -1451,24 +1457,36 @@
         <property name="valign">start</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkImage" id="top_bar_image_widget1">
+          <object class="GtkOverlay">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="margin-left">9</property>
-            <property name="margin-right">9</property>
-            <property name="margin-start">9</property>
-            <property name="margin-end">9</property>
-            <property name="margin-top">9</property>
-            <property name="margin-bottom">9</property>
-            <property name="pixbuf">../../../media/pictures/top_bar.svg</property>
+            <child>
+              <object class="GtkImage" id="top_bar_image_widget1">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="margin-left">9</property>
+                <property name="margin-right">9</property>
+                <property name="margin-start">9</property>
+                <property name="margin-end">9</property>
+                <property name="margin-top">9</property>
+                <property name="margin-bottom">9</property>
+                <property name="pixbuf">../../../media/pictures/top_bar.svg</property>
+                <style>
+                  <class name="outer-background"/>
+                </style>
+              </object>
+              <packing>
+                <property name="index">-1</property>
+              </packing>
+            </child>
             <style>
               <class name="outer-background"/>
             </style>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -1589,7 +1607,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.37</property>
+                    <property name="label" translatable="yes">0.0.38</property>
                     <attributes>
                       <attribute name="font-desc" value="Cantarell 11"/>
                     </attributes>
@@ -1652,6 +1670,11 @@
                             <property name="halign">start</property>
                             <property name="valign">start</property>
                             <property name="label" translatable="yes">
+Version 0.0.38
+==============
+1. Moved console output to the bottom and made it smart so that it opens up when the window is enlarged. Minor aesthetic changes
+2. Added overlays on titlebars with CSS theming
+
 Version 0.0.37
 ==============
 1. Fixes in UI sizing
@@ -2378,23 +2401,36 @@ Version 0.0.16
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkOverlay">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="valign">center</property>
-            <property name="margin-start">15</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="label" translatable="yes">About RebornOS Welcome</property>
-            <attributes>
-              <attribute name="font-desc" value="Cantarell 11"/>
-              <attribute name="weight" value="bold"/>
-              <attribute name="foreground" value="#ffffffffffff"/>
-            </attributes>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="margin-left">15</property>
+                <property name="margin-start">15</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">About RebornOS Welcome</property>
+                <attributes>
+                  <attribute name="font-desc" value="Cantarell 11"/>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="index">-1</property>
+              </packing>
+            </child>
+            <style>
+              <class name="outer-background"/>
+            </style>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
@@ -2600,26 +2636,38 @@ Clicking on one of the buttons under "Utilities" will install the application (i
         <property name="can-focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel">
-            <property name="width-request">-1</property>
-            <property name="height-request">-1</property>
+          <object class="GtkOverlay">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
-            <property name="halign">start</property>
-            <property name="valign">center</property>
-            <property name="margin-left">15</property>
-            <property name="margin-start">15</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="label" translatable="yes">Information about installation</property>
-            <attributes>
-              <attribute name="font-desc" value="Cantarell 11"/>
-              <attribute name="weight" value="bold"/>
-              <attribute name="foreground" value="#ffffffffffff"/>
-            </attributes>
+            <child>
+              <object class="GtkLabel">
+                <property name="width-request">-1</property>
+                <property name="height-request">-1</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">center</property>
+                <property name="margin-left">15</property>
+                <property name="margin-start">15</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Information about installation</property>
+                <attributes>
+                  <attribute name="font-desc" value="Cantarell 11"/>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="foreground" value="#ffffffffffff"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="index">-1</property>
+              </packing>
+            </child>
+            <style>
+              <class name="outer-background"/>
+            </style>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
