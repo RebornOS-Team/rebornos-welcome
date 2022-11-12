@@ -612,7 +612,7 @@ class Main:
         LogMessage.Debug("Opening the Feedback page on the default browser...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://rebornos.org/pixpopup-item/feedback/"],
+            executable_name = ["xdg-open", "https://www.rebornos.org/contact"],
         )
 
     def on_donate_clicked(self, _):
