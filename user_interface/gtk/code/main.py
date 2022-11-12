@@ -633,7 +633,7 @@ class Main:
         LogMessage.Debug("Opening the \"About us\" page on the default browser...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://rebornos.org/about-us/"],
+            executable_name = ["xdg-open", "https://rebornos.org/about/"],
         )
 
     def on_pamac(self, _):
