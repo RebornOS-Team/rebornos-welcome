@@ -563,7 +563,7 @@ class Main:
         LogMessage.Debug("Opening RebornOS Wiki on the default browser...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://osdn.net/projects/rebornos/wiki/TitleIndex"],
+            executable_name = ["xdg-open", "https://wiki.rebornos.org"],
         )
     
     def on_arch_wiki_clicked(self, _):
