@@ -173,7 +173,7 @@ class Main:
         message_dialog.destroy()
         return user_response == Gtk.ResponseType.YES
 
-    def is_package_missing(
+    def is_any_package_missing(
         self,
         package_name: Union[str, List[str]]
     ):
@@ -307,6 +307,56 @@ class Main:
             batch_job += install_command
             return batch_job
 
+    def uninstall_package(
+        self,
+        package_name: Union[str, List[str]],
+        batch_job: BatchJob = None,
+    ) -> Optional[BatchJob]:
+        import subprocess
+        import shlex
+
+        package_name_joined: str = ""
+        if type(package_name) == list:
+            filtered_package_list = list(
+                filter(
+                    lambda p: not self.is_any_package_missing(p),
+                    package_name
+                )
+            )
+            if not filtered_package_list:
+                return
+            package_name_joined = ' '.join(filtered_package_list)
+        elif type(package_name) == str:
+            if self.is_any_package_missing(package_name):
+                return None
+            package_name_joined = str(package_name)
+        else:
+            package_name_joined = str(package_name)
+
+        uninstall_message = LogMessage.Info("Trying to uninstall: `" + str(package_name) + "`...")
+
+        # uninstall_command = Command.Shell(
+        #     "pkexec bash -c \"pacman -Rdd --noconfirm " + package_name_joined + "\""
+        # )
+        uninstall_command = Command(
+            [
+                "pkexec",
+                "pacman",
+                "-Rdd",
+                "--noconfirm" ,
+                *shlex.split(package_name_joined),
+            ]
+        )
+
+        if batch_job is None:
+            uninstall_message.write(logging_handler=self.logging_handler)
+            uninstall_command.run_log_and_wait(self.logging_handler)
+            return None
+        else:
+            batch_job += uninstall_message
+            batch_job += uninstall_command
+            return batch_job            
+
     def launch_third_party_utility(
         self,
         package_name: Union[str, List[str]],
@@ -321,7 +371,7 @@ class Main:
                 self.display_ready
             ),
         )
-        if update or self.is_package_missing(package_name): 
+        if update or self.is_any_package_missing(package_name): 
             batch_job = self.install_package(package_name, update, batch_job)
         batch_job = self.run_executable(executable_name, detached, batch_job)
         if batch_job is not None:
@@ -489,7 +539,7 @@ class Main:
         LogMessage.Debug("Opening the git page for shivanandvp...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://gitlab.com/shivanandvp"],
+            executable_name = ["xdg-open", "https://github.com/shivanandvp"],
         )
 
     def on_startup_toggle(self, button):
@@ -576,7 +626,7 @@ class Main:
         LogMessage.Debug("Opening the Gitlab page on the default browser...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://gitlab.com/rebornos-team"],
+            executable_name = ["xdg-open", "https://github.com/rebornos-developers"],
         )
 
     def on_about_us_clicked(self, _):
@@ -647,20 +697,60 @@ class Main:
         )    
   
     def on_online_installer(self, _):
-        self.launch_third_party_utility(
-            package_name= ["calamares-configuration", "calamares-core"],
-            executable_name = ["gtk-launch", "calamares_online"],
-            detached= True,
-            update= self.builder.get_object("installer_update_switch").get_active(),
-        ) 
+        if not self.builder.get_object("git_toggle").get_active():    
+            self.uninstall_package(
+                [
+                    "calamares-core-git",
+                    "calamares-configuration-git",  
+                ],
+            )    
+            self.launch_third_party_utility(
+                package_name= ["calamares-configuration", "calamares-core"],
+                executable_name = ["gtk-launch", "calamares_online"],
+                detached= True,
+                update= self.builder.get_object("installer_update_switch").get_active(),
+            ) 
+        else:
+            self.uninstall_package(
+                [
+                    "calamares-core",
+                    "calamares-configuration",                
+                ],
+            )
+            self.launch_third_party_utility(
+                package_name= ["calamares-configuration-git", "calamares-core-git"],
+                executable_name = ["gtk-launch", "calamares_online"],
+                detached= True,
+                update= self.builder.get_object("installer_update_switch").get_active(),
+            )
 
     def on_offline_installer(self, _):
-        self.launch_third_party_utility(
-            package_name= ["calamares-configuration", "calamares-core"],
-            executable_name = ["gtk-launch", "calamares_offline"],
-            detached= True,
-            update= self.builder.get_object("installer_update_switch").get_active(),
-        ) 
+        if not self.builder.get_object("git_toggle").get_active(): 
+            self.uninstall_package(
+                [
+                    "calamares-core-git",
+                    "calamares-configuration-git",  
+                ],
+            ) 
+            self.launch_third_party_utility(
+                package_name= ["calamares-configuration", "calamares-core"],
+                executable_name = ["gtk-launch", "calamares_offline"],
+                detached= True,
+                update= self.builder.get_object("installer_update_switch").get_active(),
+            ) 
+        else:
+            self.uninstall_package(
+                [
+                    "calamares-core",
+                    "calamares-configuration",                
+                ],
+            )
+            self.launch_third_party_utility(
+                package_name= ["calamares-configuration-git", "calamares-core-git"],
+                executable_name = ["gtk-launch", "calamares_offline"],
+                detached= True,
+                update= self.builder.get_object("installer_update_switch").get_active(),
+            ) 
 
     def on_rebornos_fire(self, _):
         self.launch_third_party_utility(

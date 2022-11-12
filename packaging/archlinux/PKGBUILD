@@ -1,6 +1,6 @@
 pkgname='rebornos-welcome'
-pkgver=0.0.39
-pkgrel=2
+pkgver=0.0.40
+pkgrel=1
 pkgdesc='RebornOS Welcome contains basic links to help get one started on RebornOS as a new user'
 arch=('any')
 url='https://github.com/RebornOS-Developers/rebornos-welcome'
