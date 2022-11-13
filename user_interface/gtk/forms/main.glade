@@ -175,7 +175,7 @@
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label">Git</property>
+                    <property name="label">Git Version (Advanced)</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1683,7 +1683,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.40</property>
+                    <property name="label" translatable="yes">0.0.41</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
