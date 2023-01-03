@@ -1,3 +1,42 @@
+Version 0.0.43
+==============
+1. ISO Welcome configuration can now hide "Update" and "Git" switches
+2. ISO Welcome configuration now allows custom installer and installer config package names
+3. Newer settings are safely accessed to account for older config files
+4. Installer packages no longer downgrade if the repository version is older
+5. Bug that caused window to resize late fixed
+6. Provision to run post-install commands for launching utilities
+7. Firewall added to utilities
+8. Reclassify log levels and dull debug messages for visibility of other logs
+
+Version 0.0.42
+==============
+Change the git toggle button into a switch
+
+Version 0.0.40
+==============
+1) Git toggle for installer in the ISO mode
+2) Launch git or release versions. Automatically install/uninstall required packages in the process
+
+Version 0.0.39
+==============
+1. Font changes
+2. Console fixes
+
+Version 0.0.38
+==============
+1. Moved console output to the bottom and made it smart so that it opens up when the window is enlarged. Minor aesthetic changes
+2. Added overlays on titlebars with CSS theming
+
+Version 0.0.37
+==============
+1. Fixes in UI sizing
+
+Version 0.0.36
+==============
+1. More compact UI
+2. Installation button style in ISO mode
+
 Version 0.0.35
 ==============
 1. Removed pyakm as it is no longer developed

@@ -144,7 +144,7 @@
         <property name="valign">center</property>
         <property name="spacing">15</property>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="installer_update_switch_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
@@ -186,7 +186,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkBox">
+          <object class="GtkBox" id="git_switch_box">
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="halign">center</property>
@@ -205,20 +205,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkImage">
-                <property name="can-focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="pixbuf">../../../media/icons/git.svg</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="git_toggle">
+              <object class="GtkSwitch" id="git_switch">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
               </object>
@@ -1308,6 +1295,8 @@
                       <object class="GtkStackSwitcher">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="valign">center</property>
                         <property name="stack">page_stack</property>
                       </object>
                       <packing>
@@ -1681,7 +1670,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.42</property>
+                    <property name="label" translatable="yes">0.0.43</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
@@ -1743,7 +1732,18 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.42
+                            <property name="label" translatable="yes">Version 0.0.43
+==============
+1. ISO Welcome configuration can now hide "Update" and "Git" switches
+2. ISO Welcome configuration now allows custom installer and installer config package names
+3. Newer settings are safely accessed to account for older config files
+4. Installer packages no longer downgrade if the repository version is older
+5. Bug that caused window to resize late fixed
+6. Provision to run post-install commands for launching utilities
+7. Firewall added to utilities
+8. Reclassify log levels and dull debug messages for visibility of other logs
+
+Version 0.0.42
 ==============
 Change the git toggle button into a switch
 
@@ -3408,7 +3408,59 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="on_firewall" swapped="no"/>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Firewall</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Open Sans 11"/>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">firewalld</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Open Sans 11"/>
+                      <attribute name="style" value="italic"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <style>
+              <class name="button"/>
+            </style>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">4</property>
+          </packing>
         </child>
         <child>
           <placeholder/>

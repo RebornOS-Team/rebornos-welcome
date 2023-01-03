@@ -12,7 +12,7 @@ import gi # Python GObject introspection module which contains Python bindings a
 gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
 from gi.repository import Gtk, GLib, GdkPixbuf, Gdk # Gtk related modules for the graphical interface
 from argparse import Namespace
-from typing import List, Union, Optional
+from typing import List, Union, Optional, Any
 from pathlib import Path
 import logging
 import functools
@@ -67,7 +67,7 @@ class Main:
             logger=logger,
             logging_functions=[self.log_console]
         )
-        self.application_settings = application_settings
+        self.application_settings: JSONConfiguration = application_settings
 
         LogMessage.Info("Loading CSS styles...").write(self.logging_handler)
         provider = Gtk.CssProvider()
@@ -89,13 +89,11 @@ class Main:
             )
         ) 
         self.builder.connect_signals(self) # connect the signals from the Gtk forms to our event handlers (which are all defined in a class)
+        
+        self.builder.get_object("main_window").set_title("Welcome to RebornOS!") 
 
         self.console_buffer = self.builder.get_object("console_text_view").get_buffer()
-        self.builder.get_object("console_text_view").modify_base(Gtk.StateFlags.NORMAL, Gdk.color_parse('black'))
-
-        LogMessage.Info("Displaying the main window...").write(self.logging_handler)
-        self.builder.get_object("main_window").set_title("Welcome to RebornOS!")
-        self.builder.get_object("main_window").show_all() # get the main form object and make it visible
+        self.builder.get_object("console_text_view").modify_base(Gtk.StateFlags.NORMAL, Gdk.color_parse('black'))     
 
         LogMessage.Debug("Detecting if the application is enabled at startup...").write(self.logging_handler)
         if self.application_settings["auto_start_enabled"]:
@@ -105,17 +103,31 @@ class Main:
 
         self.builder.get_object("green_light").set_visible(True)
         self.builder.get_object("red_light").set_visible(True)
-        try:
-            self.builder.get_object("show_installinfo_again").set_active(self.application_settings["show_install_info"])
-        except KeyError as _:
-            self.application_settings["show_install_info"] = True
-            self.application_settings.write_data()
-            self.builder.get_object("show_installinfo_again").set_active(True)
+        
+        self.builder.get_object("show_installinfo_again").set_active(self.settings_safe_get("show_install_info", True))
 
         page_stack = self.builder.get_object("page_stack")
 
         if commandline_arguments.iso:
             LogMessage.Info("Running in the 'ISO' mode...").write(self.logging_handler)
+
+            self.builder.get_object("main_window").resize(1,1) # resize the window to fit contents
+
+            self.show_update_toggle = self.settings_safe_get("show_update_toggle", True)            
+            if not self.show_update_toggle:
+                self.builder.get_object("installer_update_switch_box").hide()
+                LogMessage.Info("Update toggle is hidden...").write(self.logging_handler)
+
+            self.show_git_toggle = self.settings_safe_get("show_git_toggle", True)            
+            if not self.show_git_toggle:
+                self.builder.get_object("git_switch_box").hide()
+                LogMessage.Info("Git toggle is hidden...").write(self.logging_handler)      
+
+            self.installer_package_name_stub = self.settings_safe_get("installer_package_name_stub", "calamares-core")
+            LogMessage.Info(f"Set to detect installer package name {self.installer_package_name_stub}...").write(self.logging_handler)
+            self.installer_config_package_name_stub = self.settings_safe_get("installer_config_package_name_stub", "calamares-configuration")
+            LogMessage.Info(f"Set to detect installer config package name {self.installer_config_package_name_stub}...").write(self.logging_handler)
+
             LogMessage.Info("Loading the 'Install' tab...").write(self.logging_handler)
             install_page = self.builder.get_object("install_page")
             page_stack.add_titled(
@@ -154,8 +166,20 @@ class Main:
             title = "Utilities"
         )
 
+        LogMessage.Info("Displaying the main window...").write(self.logging_handler)
+        self.builder.get_object("main_window").resize(1,1) # resize the window to fit contents
+        self.builder.get_object("main_window").show() # get the main form object and make it visible  
+
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
-        Gtk.main() # start the GUI event loop
+        Gtk.main() # start the GUI event loop   
+
+    def settings_safe_get(self, key: str, default_value: Any) -> Any :
+        try:
+            return self.application_settings[key]
+        except KeyError as _:
+            self.application_settings[key] = default_value
+            self.application_settings.write_data()
+            return default_value
 
     def get_confirmation_from_dialog(self, message: str) -> bool:
         message_dialog = Gtk.MessageDialog(
@@ -194,7 +218,7 @@ class Main:
                     *package_name
                 ]
             )   
-        LogMessage.Info("Checking if missing: " + str(package_name)).write(logging_handler=self.logging_handler)
+        LogMessage.Debug("Checking if missing: " + str(package_name)).write(logging_handler=self.logging_handler)
         if package_lookup_command is not None: 
             output = package_lookup_command.run_and_wait()
             output = output.strip()
@@ -205,7 +229,7 @@ class Main:
                 LogMessage.Info("Package(s) found installed: " + str(package_name)).write(logging_handler=self.logging_handler)
                 return False
             else:
-                LogMessage.Info("Package(s) not found installed: " + str(package_name)).write(logging_handler=self.logging_handler)
+                LogMessage.Debug("Package(s) not found installed: " + str(package_name)).write(logging_handler=self.logging_handler)
                 return True
         else:
             LogMessage.Warning("Wrong package_name format: " + str(package_name)).write(logging_handler=self.logging_handler)
@@ -250,25 +274,63 @@ class Main:
             batch_job += run_command
             return batch_job
 
+    def is_package_old(self, single_package_name: str) -> bool:
+        version_check_command = Command.Shell(
+            f"vercmp \"$(pacman -Q {single_package_name} | cut -d \' \'  -f 2)\" \"$(pacman -Ss {single_package_name} | head -n 1 | cut -d \' \'  -f 2)\""
+        )
+        try:            
+            version_check_command_output = version_check_command.run_and_wait().strip()
+            if int(version_check_command_output) < 0:
+                return True
+            else:
+                return False
+        except:
+            return True # For when the package is not found
+
+    def filter_old_packages(
+        self,
+        package_names: Union[str, List[str]]
+    ) -> Union[str, List[str]]:
+        if type(package_names) == list:
+            old_package_names = list(
+                filter(self.is_package_old, package_names)
+            )
+            return old_package_names
+        elif type(package_names) == str:
+            if self.is_package_old(str(package_names)):
+                return str(package_names)
+            else:
+                return "" 
+        return []       
+
+
     def install_package(
         self,
         package_name: Union[str, List[str]],
+        post_install_command: Optional[Union[str, List[str]]] = None,
         update: bool= False,
         batch_job: BatchJob = None,
     ) -> Optional[BatchJob]:
         import subprocess
         import shlex
 
-        package_name_joined: str = ""
-        if type(package_name) == list:
-            package_name_joined = ' '.join(package_name)
-        elif type(package_name) == str:
-            package_name_joined = str(package_name)
-        else:
-            package_name_joined = str(package_name)
+        if update:          
+            LogMessage.Debug("Checking if newer versions exist for: " + str(package_name)).write(logging_handler=self.logging_handler)            
+            package_name = self.filter_old_packages(package_name)
+            LogMessage.Debug("Package(s) which need updates: " + str(package_name)).write(logging_handler=self.logging_handler)
 
-        if update:
-            # Check something like vercmp "$(pacman -Q calamares-core | cut -d ' '  -f 2)" "$(pacman -Ss calamares-core | head -n 1 | cut -d ' '  -f 2)"
+            package_name_joined: str = ""
+            if type(package_name) == list:
+                package_name_joined = ' '.join(package_name)
+            elif type(package_name) == str:
+                package_name_joined = str(package_name)
+            else:
+                package_name_joined = str(package_name)
+                          
+            package_name_joined = package_name_joined.strip()
+            if package_name_joined == "":
+                return                        
+
             install_message = LogMessage.Info("Trying to update: `" + str(package_name) + "`...")
             # install_command = Command.Shell(
             #     "pkexec bash -c \"pacman -S --needed --noconfirm " + package_name_joined + "\""
@@ -284,6 +346,14 @@ class Main:
                 ]
             )
         else: 
+            package_name_joined: str = ""
+            if type(package_name) == list:
+                package_name_joined = ' '.join(package_name)
+            elif type(package_name) == str:
+                package_name_joined = str(package_name)
+            else:
+                package_name_joined = str(package_name)
+
             install_message = LogMessage.Info("Trying to install: `" + str(package_name) + "`...")
             # install_command = Command.Shell(
             #     "pkexec bash -c \"pacman -Sy --needed --noconfirm " + package_name_joined + "\""
@@ -302,10 +372,14 @@ class Main:
         if batch_job is None:
             install_message.write(logging_handler=self.logging_handler)
             install_command.run_and_log(self.logging_handler)
+            if post_install_command is not None:
+                Command(post_install_command).run_and_log(self.logging_handler)
             return None
         else:
             batch_job += install_message
             batch_job += install_command
+            if post_install_command is not None:
+                batch_job += Command(post_install_command)
             return batch_job
 
     def uninstall_package(
@@ -362,6 +436,7 @@ class Main:
         self,
         package_name: Union[str, List[str]],
         executable_name: Union[str, List[str]],
+        post_install_command: Optional[Union[str, List[str]]] = None,
         detached: bool = True,
         update: bool = False,
     ):
@@ -373,8 +448,17 @@ class Main:
             ),
         )
         if update or self.is_any_package_missing(package_name): 
-            batch_job = self.install_package(package_name, update, batch_job)
-        batch_job = self.run_executable(executable_name, detached, batch_job)
+            batch_job = self.install_package(
+                package_name= package_name,
+                post_install_command= post_install_command,
+                update= update,
+                batch_job= batch_job
+            )
+        batch_job = self.run_executable(
+            executable_name= executable_name,
+            detached= detached,
+            batch_job= batch_job
+        )
         if batch_job is not None:
             batch_job.start()
 
@@ -409,21 +493,41 @@ class Main:
                 )
             )
         ) 
-        # Needed because Gtk doesn't prefer adding stuff on a different thread
-        GLib.idle_add(
-            lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
-                self.console_buffer.insert(
-                    self.console_buffer.get_end_iter(),
-                    "".join(
-                        (
-                            message,
-                            # "(", loginfo_filename, " > ", loginfo_function_name, "; ", "Line ", str(loginfo_line_number), ")"
-                            "\n"
+
+        if LoggingLevel(logging_level) != LoggingLevel.DEBUG:
+            # Needed because Gtk doesn't prefer adding stuff on a different thread
+            GLib.idle_add(
+                lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
+                    self.console_buffer.insert(
+                        self.console_buffer.get_end_iter(),
+                        "".join(
+                            (
+                                message,
+                                # "(", loginfo_filename, " > ", loginfo_function_name, "; ", "Line ", str(loginfo_line_number), ")"
+                                "\n"
+                            )
                         )
                     )
                 )
             )
-        )    
+        else:
+            GLib.idle_add(
+                lambda: ( # A temporary nameless function handle to make sure that console_buffer.get_end_iter() is valid by calling it right when the insert() method is called. They are both grouped together. Using GLib.idle_add directly was somehow invalidating get_end_iter(), resulting in runtime errors, which are now fixed
+                    self.console_buffer.insert_markup(
+                        self.console_buffer.get_end_iter(),
+                        "".join(
+                            (
+                                "<span color=\"{:s}\">",
+                                GLib.markup_escape_text(message),                                
+                                # "(", loginfo_filename, " > ", loginfo_function_name, "; ", "Line ", str(loginfo_line_number), ")"
+                                "</span>"
+                                "\n",                                
+                            )
+                        ).format(self.log_color[logging_level_name]),
+                        -1,
+                    )
+                )
+            )
 
     # def on_refresh_pacman_mirrors(self, _):
     #     LogMessage.Info("Refreshing pacman mirrors...").write(self.logging_handler)
@@ -695,18 +799,36 @@ class Main:
         self.launch_third_party_utility(
             package_name= "timeshift",
             executable_name = "timeshift-launcher",
-        )    
+        )  
+
+    def on_firewall(self, _): 
+        self.launch_third_party_utility(
+            package_name= "firewalld",
+            executable_name = [
+                "gtk-launch",
+                "firewall-config"
+            ],
+            post_install_command= [
+                "pkexec",
+                "systemctl",
+                "enable",
+                "--now",
+                "firewalld"
+            ]
+        )             
   
     def on_online_installer(self, _):
-        if not self.builder.get_object("git_toggle").get_active():    
+        if not self.builder.get_object("git_switch").get_active():    
             self.uninstall_package(
                 [
-                    "calamares-core-git",
-                    "calamares-configuration-git",  
+                    f"{self.installer_package_name_stub}-git",
+                    f"{self.installer_config_package_name_stub}-git", 
+                    f"{self.installer_package_name_stub}-local", 
+                    f"{self.installer_config_package_name_stub}-local",
                 ],
             )    
             self.launch_third_party_utility(
-                package_name= ["calamares-configuration", "calamares-core"],
+                package_name= [f"{self.installer_config_package_name_stub}", f"{self.installer_package_name_stub}"],
                 executable_name = ["gtk-launch", "calamares_online"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
@@ -714,27 +836,31 @@ class Main:
         else:
             self.uninstall_package(
                 [
-                    "calamares-core",
-                    "calamares-configuration",                
+                    f"{self.installer_package_name_stub}",
+                    f"{self.installer_config_package_name_stub}",
+                    f"{self.installer_package_name_stub}-local", 
+                    f"{self.installer_config_package_name_stub}-local",                                    
                 ],
             )
             self.launch_third_party_utility(
-                package_name= ["calamares-configuration-git", "calamares-core-git"],
+                package_name= [f"{self.installer_config_package_name_stub}-git", f"{self.installer_package_name_stub}-git"],
                 executable_name = ["gtk-launch", "calamares_online"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
             )
 
     def on_offline_installer(self, _):
-        if not self.builder.get_object("git_toggle").get_active(): 
+        if not self.builder.get_object("git_switch").get_active(): 
             self.uninstall_package(
                 [
-                    "calamares-core-git",
-                    "calamares-configuration-git",  
+                    f"{self.installer_package_name_stub}-git",
+                    f"{self.installer_config_package_name_stub}-git", 
+                    f"{self.installer_package_name_stub}-local", 
+                    f"{self.installer_config_package_name_stub}-local", 
                 ],
             ) 
             self.launch_third_party_utility(
-                package_name= ["calamares-configuration", "calamares-core"],
+                package_name= [f"{self.installer_config_package_name_stub}", f"{self.installer_package_name_stub}"],
                 executable_name = ["gtk-launch", "calamares_offline"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
@@ -742,12 +868,14 @@ class Main:
         else:
             self.uninstall_package(
                 [
-                    "calamares-core",
-                    "calamares-configuration",                
+                    f"{self.installer_package_name_stub}",
+                    f"{self.installer_config_package_name_stub}",
+                    f"{self.installer_package_name_stub}-local", 
+                    f"{self.installer_config_package_name_stub}-local",               
                 ],
             )
             self.launch_third_party_utility(
-                package_name= ["calamares-configuration-git", "calamares-core-git"],
+                package_name= [f"{self.installer_config_package_name_stub}-git", f"{self.installer_package_name_stub}-git"],
                 executable_name = ["gtk-launch", "calamares_offline"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
