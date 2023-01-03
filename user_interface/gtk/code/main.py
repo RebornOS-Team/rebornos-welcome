@@ -268,6 +268,7 @@ class Main:
             package_name_joined = str(package_name)
 
         if update:
+            # Check something like vercmp "$(pacman -Q calamares-core | cut -d ' '  -f 2)" "$(pacman -Ss calamares-core | head -n 1 | cut -d ' '  -f 2)"
             install_message = LogMessage.Info("Trying to update: `" + str(package_name) + "`...")
             # install_command = Command.Shell(
             #     "pkexec bash -c \"pacman -S --needed --noconfirm " + package_name_joined + "\""
