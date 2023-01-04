@@ -329,7 +329,7 @@ class Main:
                           
             package_name_joined = package_name_joined.strip()
             if package_name_joined == "":
-                return                        
+                return batch_job                       
 
             install_message = LogMessage.Info("Trying to update: `" + str(package_name) + "`...")
             # install_command = Command.Shell(
