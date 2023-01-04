@@ -267,7 +267,7 @@ class Main:
 
         if batch_job is None:
             launch_message.write(logging_handler=self.logging_handler)
-            run_command.run_and_log(self.logging_handler)
+            run_command.run_log_and_wait(self.logging_handler)
             return None
         else:
             batch_job += launch_message
@@ -278,7 +278,7 @@ class Main:
         version_check_command = Command.Shell(
             f"vercmp \"$(pacman -Q {single_package_name} | cut -d \' \'  -f 2)\" \"$(pacman -Ss {single_package_name} | head -n 1 | cut -d \' \'  -f 2)\""
         )
-        try:            
+        try:
             version_check_command_output = version_check_command.run_and_wait().strip()
             if int(version_check_command_output) < 0:
                 return True
@@ -315,7 +315,8 @@ class Main:
         import shlex
 
         if update:          
-            LogMessage.Debug("Checking if newer versions exist for: " + str(package_name)).write(logging_handler=self.logging_handler)            
+            LogMessage.Debug("Checking if newer versions exist for: " + str(package_name)).write(logging_handler=self.logging_handler) 
+            Command(["pkexec", "pacman", "-Sy"]).run_log_and_wait(self.logging_handler)
             package_name = self.filter_old_packages(package_name)
             LogMessage.Debug("Package(s) which need updates: " + str(package_name)).write(logging_handler=self.logging_handler)
 
@@ -371,9 +372,9 @@ class Main:
 
         if batch_job is None:
             install_message.write(logging_handler=self.logging_handler)
-            install_command.run_and_log(self.logging_handler)
+            install_command.run_log_and_wait(self.logging_handler)
             if post_install_command is not None:
-                Command(post_install_command).run_and_log(self.logging_handler)
+                Command(post_install_command).run_log_and_wait(self.logging_handler)
             return None
         else:
             batch_job += install_message
@@ -546,7 +547,7 @@ class Main:
     #             self.logging_handler
     #         )
     #     )
-    #     command.run_and_log(self.logging_handler)
+    #     command.run_log_and_wait(self.logging_handler)
 
     def on_main_message_resized(self, label, size):
         # A hack needed to wrap text dynamically, instead of Gtk making the window wide to accomodate it
