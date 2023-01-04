@@ -1,4 +1,4 @@
-Version 0.0.43
+Version 0.0.44
 ==============
 1. ISO Welcome configuration can now hide "Update" and "Git" switches
 2. ISO Welcome configuration now allows custom installer and installer config package names
@@ -8,6 +8,7 @@ Version 0.0.43
 6. Provision to run post-install commands for launching utilities
 7. Firewall added to utilities
 8. Reclassify log levels and dull debug messages for visibility of other logs
+9. Fix status not turning back to ready after installer launch
 
 Version 0.0.42
 ==============
