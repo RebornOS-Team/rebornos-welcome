@@ -2,25 +2,6 @@
 <!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
-  <object class="GtkExpander">
-    <property name="visible">True</property>
-    <property name="can-focus">True</property>
-    <property name="valign">end</property>
-    <child>
-      <placeholder/>
-    </child>
-    <child type="label">
-      <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="label" translatable="yes">Advanced Options</property>
-        <attributes>
-          <attribute name="font-desc" value="Open Sans 11"/>
-          <attribute name="weight" value="bold"/>
-        </attributes>
-      </object>
-    </child>
-  </object>
   <object class="GtkBox" id="install_page">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
@@ -492,13 +473,14 @@
                             <property name="halign">center</property>
                             <property name="valign">center</property>
                             <child>
-                              <object class="GtkRadioButton" id="radiobutton1">
+                              <object class="GtkRadioButton" id="isp_dns_radio_button">
                                 <property name="label" translatable="yes">Your ISP</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">False</property>
                                 <property name="active">True</property>
                                 <property name="draw-indicator">True</property>
+                                <signal name="toggled" handler="on_isp_dns_toggled" swapped="no"/>
                               </object>
                             </child>
                           </object>
@@ -508,13 +490,14 @@
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <child>
-                              <object class="GtkRadioButton">
+                              <object class="GtkRadioButton" id="cloudflare_dns_radio_button">
                                 <property name="label" translatable="yes">Cloudflare</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">False</property>
                                 <property name="draw-indicator">True</property>
-                                <property name="group">radiobutton1</property>
+                                <property name="group">isp_dns_radio_button</property>
+                                <signal name="toggled" handler="on_cloudflare_dns_toggled" swapped="no"/>
                               </object>
                             </child>
                           </object>
@@ -524,13 +507,14 @@
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <child>
-                              <object class="GtkRadioButton">
+                              <object class="GtkRadioButton" id="google_dns_radio_button">
                                 <property name="label" translatable="yes">Google</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">False</property>
                                 <property name="draw-indicator">True</property>
-                                <property name="group">radiobutton1</property>
+                                <property name="group">isp_dns_radio_button</property>
+                                <signal name="toggled" handler="on_google_dns_toggled" swapped="no"/>
                               </object>
                             </child>
                           </object>
@@ -3799,7 +3783,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">firewalld</property>
+                    <property name="label" translatable="yes">gufw</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>

@@ -58,6 +58,7 @@ class Main:
             Contains the command line arguments
         """
         self.is_iso = False
+        self.initialized = False
         self.expander_deactivate_clicked = False
         self.expander_previous_height=-1
 
@@ -151,6 +152,13 @@ class Main:
             about_dialog.set_icon_from_file(rebornos_iso_welcome_icon_path)
             about_dialog.set_title("About RebornOS ISO Welcome Application")
 
+            self.builder.get_object("internet_check").set_active(self.application_settings["internet_check_toggled"])
+            self.builder.get_object("memory_check").set_active(self.application_settings["memory_check_toggled"])
+            self.builder.get_object("storage_check").set_active(self.application_settings["storage_check_toggled"])
+            self.builder.get_object("isp_dns_radio_button").set_active(self.application_settings["isp_dns_toggled"])
+            self.builder.get_object("cloudflare_dns_radio_button").set_active(self.application_settings["cloudflare_dns_toggled"])
+            self.builder.get_object("google_dns_radio_button").set_active(self.application_settings["google_dns_toggled"])
+
             self.builder.get_object("about_application_name").set_label("RebornOS ISO Welcome Application")
             self.builder.get_object("about_logo").set_from_file(rebornos_iso_welcome_icon_path)
         else:            
@@ -174,7 +182,9 @@ class Main:
 
         LogMessage.Info("Displaying the main window...").write(self.logging_handler)
         self.builder.get_object("main_window").resize(1,1) # resize the window to fit contents
-        self.builder.get_object("main_window").show() # get the main form object and make it visible  
+        self.builder.get_object("main_window").show() # get the main form object and make it visible 
+
+        self.initialized = True 
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
         Gtk.main() # start the GUI event loop   
@@ -812,17 +822,17 @@ class Main:
 
     def on_firewall(self, _): 
         self.launch_third_party_utility(
-            package_name= "firewalld",
+            package_name= "gufw",
             executable_name = [
                 "gtk-launch",
-                "firewall-config"
+                "gufw"
             ],
             post_install_command= [
                 "pkexec",
                 "systemctl",
                 "enable",
                 "--now",
-                "firewalld"
+                "ufw"
             ]
         )   
 
@@ -1002,6 +1012,8 @@ class Main:
             self.builder.get_object("installer_page_stack").set_visible_child_name("install_page") 
 
     def on_internet_check_toggled(self, _):
+        if not self.initialized:
+            return # Do nothing when initial values are being set based on current status
         self.display_busy()
         if self.builder.get_object("internet_check").get_active():
             Command([
@@ -1017,9 +1029,13 @@ class Main:
                 "sed -i 's/- internet/# - internet/g' /etc/calamares/modules/welcomeq_online.conf"
                 + " && " + "sed -i 's/- internet/# - internet/g' /etc/calamares/modules/welcomeq_offline.conf" 
             ]).run_log_and_wait(self.logging_handler)
+        self.application_settings["internet_check_toggled"] = self.builder.get_object("internet_check").get_active()
+        self.application_settings.write_data()
         self.display_ready()
 
     def on_memory_check_toggled(self, _):
+        if not self.initialized:
+            return # Do nothing when initial values are being set based on current status        
         self.display_busy()
         if self.builder.get_object("memory_check").get_active():
             Command([
@@ -1035,9 +1051,13 @@ class Main:
                 "sed -i 's/- ram/# - ram/g' /etc/calamares/modules/welcomeq_online.conf"
                 + " && " + "sed -i 's/- ram/# - ram/g' /etc/calamares/modules/welcomeq_offline.conf" 
             ]).run_log_and_wait(self.logging_handler)
+        self.application_settings["memory_check_toggled"] = self.builder.get_object("memory_check").get_active()
+        self.application_settings.write_data()
         self.display_ready()
 
     def on_storage_check_toggled(self, _):
+        if not self.initialized:
+            return # Do nothing when initial values are being set based on current status        
         self.display_busy()
         if self.builder.get_object("storage_check").get_active():
             Command([
@@ -1053,4 +1073,57 @@ class Main:
                 "sed -i 's/- storage/# - storage/g' /etc/calamares/modules/welcomeq_online.conf"
                 + " && " + "sed -i 's/- storage/# - storage/g' /etc/calamares/modules/welcomeq_offline.conf" 
             ]).run_log_and_wait(self.logging_handler)
-        self.display_ready()            
+        self.application_settings["storage_check_toggled"] = self.builder.get_object("storage_check").get_active()            
+        self.application_settings.write_data()
+        self.display_ready()  
+
+    def on_isp_dns_toggled(self, _):  
+        if not self.initialized:
+            return # Do nothing when initial values are being set based on current status              
+        if self.builder.get_object("isp_dns_radio_button").get_active():
+            self.display_busy()
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "rm -f /etc/NetworkManager/conf.d/dns-servers.conf"
+                + " && " + "systemctl restart NetworkManager"
+            ]).run_log_and_wait(self.logging_handler)    
+            self.application_settings["isp_dns_toggled"] = True
+            self.application_settings["cloudflare_dns_toggled"] = False
+            self.application_settings["google_dns_toggled"] = False
+            self.application_settings.write_data()                    
+            self.display_ready()
+    
+    def on_cloudflare_dns_toggled(self, _):   
+        if not self.initialized:
+            return # Do nothing when initial values are being set based on current status             
+        if self.builder.get_object("cloudflare_dns_radio_button").get_active():
+            self.display_busy()
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_cloudflare /etc/NetworkManager/conf.d/dns-servers.conf  && systemctl restart NetworkManager"
+                + " && " + "systemctl restart NetworkManager"
+            ]).run_log_and_wait(self.logging_handler)  
+            self.application_settings["isp_dns_toggled"] = False
+            self.application_settings["cloudflare_dns_toggled"] = True
+            self.application_settings["google_dns_toggled"] = False
+            self.application_settings.write_data()                        
+            self.display_ready() 
+
+    def on_google_dns_toggled(self, _):  
+        if not self.initialized:
+            return # Do nothing when initial values are being set based on current status              
+        if self.builder.get_object("google_dns_radio_button").get_active():
+            self.display_busy()
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_google /etc/NetworkManager/conf.d/dns-servers.conf"
+                + " && " + "systemctl restart NetworkManager"
+            ]).run_log_and_wait(self.logging_handler)    
+            self.application_settings["isp_dns_toggled"] = False
+            self.application_settings["cloudflare_dns_toggled"] = False
+            self.application_settings["google_dns_toggled"] = True
+            self.application_settings.write_data()                      
+            self.display_ready()             
