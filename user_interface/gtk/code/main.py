@@ -121,7 +121,12 @@ class Main:
             self.show_git_toggle = self.settings_safe_get("show_git_toggle", True)            
             if not self.show_git_toggle:
                 self.builder.get_object("git_switch_box").hide()
-                LogMessage.Info("Git toggle is hidden...").write(self.logging_handler)      
+                LogMessage.Info("Git toggle is hidden...").write(self.logging_handler)  
+
+            self.use_github_toggle = self.settings_safe_get("show_use_github_toggle", True)            
+            if not self.use_github_toggle:
+                self.builder.get_object("use_github_switch_box").hide()
+                LogMessage.Info("\"from GitHub\" toggle is hidden...").write(self.logging_handler)                     
 
             self.installer_package_name_stub = self.settings_safe_get("installer_package_name_stub", "calamares-core")
             LogMessage.Info(f"Set to detect installer package name {self.installer_package_name_stub}...").write(self.logging_handler)
@@ -440,14 +445,16 @@ class Main:
         post_install_command: Optional[Union[str, List[str]]] = None,
         detached: bool = True,
         update: bool = False,
-    ):
-        self.display_busy()
-        batch_job = BatchJob(
-            logging_handler= self.logging_handler,
-            post_run_function=functools.partial(
-                self.display_ready
-            ),
-        )
+        batch_job: BatchJob = None,
+    ) -> BatchJob:        
+        if batch_job is None:            
+            self.display_busy()
+            batch_job = BatchJob(
+                logging_handler= self.logging_handler,
+                post_run_function=functools.partial(
+                    self.display_ready
+                ),
+            )
         if update or self.is_any_package_missing(package_name): 
             batch_job = self.install_package(
                 package_name= package_name,
@@ -816,71 +823,145 @@ class Main:
                 "--now",
                 "firewalld"
             ]
-        )             
-  
+        )   
+
+    def install_latest_github_release(
+        self,
+        batch_job: BatchJob = None, 
+    ) -> BatchJob:
+        LogMessage.Info("Will download and install from GitHub...").write(self.logging_handler)
+        download_path = "/tmp/downloaded_from_github"
+        if batch_job is None:
+            self.display_busy()
+            batch_job = BatchJob(
+                logging_handler= self.logging_handler,
+                post_run_function=functools.partial(
+                    self.display_ready
+                ),
+            )
+        batch_job += LogMessage.Debug("Removing temporary download directory: " + download_path)
+        batch_job += Command.Shell(
+            "rm -rf" + " " + download_path
+        )
+        batch_job += LogMessage.Debug("(Re)creating temporary download directory: " + download_path)
+        batch_job += Command.Shell(
+            "mkdir -p" + " " + download_path
+        )
+        batch_job += LogMessage.Debug("Downloading `calamares-configuration` from GitHub...")
+        batch_job += Command([
+            "gh",
+            "--repo", "rebornos-developers/calamares-configuration",
+            "release", "download", "--clobber",
+            "--pattern", "*.pkg.tar*", 
+            "--dir", download_path               
+        ])
+        batch_job += LogMessage.Debug("Downloading `calamares-core` from GitHub...")
+        batch_job += Command([
+            "gh",
+            "--repo", "rebornos-developers/calamares-core",
+            "release", "download", "--clobber",
+            "--pattern", "*.pkg.tar*",
+            "--dir", download_path               
+        ])
+        batch_job += Command.Shell(
+            "rm -rf" + " " + download_path + "/" + "*.md5sum"
+        )
+        batch_job += LogMessage.Debug("Installing downloaded files...")
+        batch_job += Command.Shell(
+            "pkexec pacman -U --noconfirm" + " " + download_path + "/" + "*.pkg.tar.*",
+        )
+        batch_job += LogMessage.Debug("GitHub download and install task finished...")
+        return batch_job
+
     def on_online_installer(self, _):
+        self.display_busy()
+        batch_job = BatchJob(
+            logging_handler= self.logging_handler,
+            post_run_function=functools.partial(
+                self.display_ready
+            ),
+        )
         if not self.builder.get_object("git_switch").get_active():    
-            self.uninstall_package(
+            batch_job = self.uninstall_package(
                 [
                     f"{self.installer_package_name_stub}-git",
                     f"{self.installer_config_package_name_stub}-git", 
                     f"{self.installer_package_name_stub}-local", 
                     f"{self.installer_config_package_name_stub}-local",
                 ],
-            )    
+                batch_job= batch_job,
+            )
+            if self.builder.get_object("use_github_switch").get_active():
+                batch_job = self.install_latest_github_release(batch_job= batch_job)
             self.launch_third_party_utility(
                 package_name= [f"{self.installer_config_package_name_stub}", f"{self.installer_package_name_stub}"],
                 executable_name = ["gtk-launch", "calamares_online"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
+                batch_job= batch_job,
             ) 
         else:
-            self.uninstall_package(
+            batch_job = self.uninstall_package(
                 [
                     f"{self.installer_package_name_stub}",
                     f"{self.installer_config_package_name_stub}",
                     f"{self.installer_package_name_stub}-local", 
                     f"{self.installer_config_package_name_stub}-local",                                    
                 ],
+                batch_job= batch_job
             )
             self.launch_third_party_utility(
                 package_name= [f"{self.installer_config_package_name_stub}-git", f"{self.installer_package_name_stub}-git"],
                 executable_name = ["gtk-launch", "calamares_online"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
+                batch_job= batch_job,
             )
 
-    def on_offline_installer(self, _):
+    def on_offline_installer(self, _):    
+        self.display_busy()    
+        batch_job = BatchJob(
+            logging_handler= self.logging_handler,
+            post_run_function=functools.partial(
+                self.display_ready
+            ),
+        )        
         if not self.builder.get_object("git_switch").get_active(): 
-            self.uninstall_package(
+            batch_job = self.uninstall_package(
                 [
                     f"{self.installer_package_name_stub}-git",
                     f"{self.installer_config_package_name_stub}-git", 
                     f"{self.installer_package_name_stub}-local", 
                     f"{self.installer_config_package_name_stub}-local", 
                 ],
+                batch_job= batch_job
             ) 
+            if self.builder.get_object("use_github_switch").get_active():
+                batch_job = self.install_latest_github_release(batch_job= batch_job)            
             self.launch_third_party_utility(
                 package_name= [f"{self.installer_config_package_name_stub}", f"{self.installer_package_name_stub}"],
                 executable_name = ["gtk-launch", "calamares_offline"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
+                batch_job= batch_job
             ) 
         else:
-            self.uninstall_package(
+            batch_job = self.uninstall_package(
                 [
                     f"{self.installer_package_name_stub}",
                     f"{self.installer_config_package_name_stub}",
                     f"{self.installer_package_name_stub}-local", 
-                    f"{self.installer_config_package_name_stub}-local",               
+                    f"{self.installer_config_package_name_stub}-local",                                  
                 ],
+                batch_job= batch_job
             )
             self.launch_third_party_utility(
                 package_name= [f"{self.installer_config_package_name_stub}-git", f"{self.installer_package_name_stub}-git"],
                 executable_name = ["gtk-launch", "calamares_offline"],
                 detached= True,
                 update= self.builder.get_object("installer_update_switch").get_active(),
-            ) 
+                batch_job= batch_job
+            )          
 
     def on_rebornos_fire(self, _):
         self.launch_third_party_utility(
@@ -904,3 +985,10 @@ class Main:
         self.application_settings["show_install_info"] = self.builder.get_object("show_installinfo_again").get_active()
         self.application_settings.write_data()
         
+    def on_use_github_switch_state_set(self, state: bool, _):
+        if state:
+            self.builder.get_object("git_switch").set_active(False)
+
+    def on_git_switch_state_set(self, state: bool, _):
+        if state:
+            self.builder.get_object("use_github_switch").set_active(False)            

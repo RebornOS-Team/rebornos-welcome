@@ -14,6 +14,7 @@
     "show_install_info": true,
     "show_update_toggle": true,
     "show_git_toggle": true,
+    "show_use_github_toggle": true,
     "installer_package_name_stub": "calamares-core",
     "installer_config_package_name_stub": "calamares-configuration"
 }
