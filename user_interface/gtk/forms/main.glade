@@ -369,13 +369,14 @@
                                         <property name="halign">center</property>
                                         <property name="valign">center</property>
                                         <child>
-                                          <object class="GtkCheckButton">
+                                          <object class="GtkCheckButton" id="internet_check">
                                             <property name="label" translatable="yes">Internet</property>
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">False</property>
                                             <property name="active">True</property>
                                             <property name="draw-indicator">True</property>
+                                            <signal name="toggled" handler="on_internet_check_toggled" swapped="no"/>
                                           </object>
                                         </child>
                                       </object>
@@ -385,13 +386,14 @@
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <child>
-                                          <object class="GtkCheckButton">
+                                          <object class="GtkCheckButton" id="memory_check">
                                             <property name="label" translatable="yes">Memory</property>
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">False</property>
                                             <property name="active">True</property>
                                             <property name="draw-indicator">True</property>
+                                            <signal name="toggled" handler="on_memory_check_toggled" swapped="no"/>
                                           </object>
                                         </child>
                                       </object>
@@ -401,13 +403,14 @@
                                         <property name="visible">True</property>
                                         <property name="can-focus">True</property>
                                         <child>
-                                          <object class="GtkCheckButton">
+                                          <object class="GtkCheckButton" id="storage_check">
                                             <property name="label" translatable="yes">Storage</property>
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
                                             <property name="receives-default">False</property>
                                             <property name="active">True</property>
                                             <property name="draw-indicator">True</property>
+                                            <signal name="toggled" handler="on_storage_check_toggled" swapped="no"/>
                                           </object>
                                         </child>
                                       </object>

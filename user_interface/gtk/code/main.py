@@ -1000,3 +1000,57 @@ class Main:
             # original state in case the advanced options tab was clicked on the
             # ISO Welcome         
             self.builder.get_object("installer_page_stack").set_visible_child_name("install_page") 
+
+    def on_internet_check_toggled(self, _):
+        self.display_busy()
+        if self.builder.get_object("internet_check").get_active():
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "sed -i 's/# - internet/- internet/g' /etc/calamares/modules/welcomeq_online.conf" 
+                + " && " + "sed -i 's/# - internet/- internet/g' /etc/calamares/modules/welcomeq_offline.conf"
+            ]).run_log_and_wait(self.logging_handler)
+        else:
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "sed -i 's/- internet/# - internet/g' /etc/calamares/modules/welcomeq_online.conf"
+                + " && " + "sed -i 's/- internet/# - internet/g' /etc/calamares/modules/welcomeq_offline.conf" 
+            ]).run_log_and_wait(self.logging_handler)
+        self.display_ready()
+
+    def on_memory_check_toggled(self, _):
+        self.display_busy()
+        if self.builder.get_object("memory_check").get_active():
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "sed -i 's/# - ram/- ram/g' /etc/calamares/modules/welcomeq_online.conf" 
+                + " && " + "sed -i 's/# - ram/- ram/g' /etc/calamares/modules/welcomeq_offline.conf"
+            ]).run_log_and_wait(self.logging_handler)
+        else:
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "sed -i 's/- ram/# - ram/g' /etc/calamares/modules/welcomeq_online.conf"
+                + " && " + "sed -i 's/- ram/# - ram/g' /etc/calamares/modules/welcomeq_offline.conf" 
+            ]).run_log_and_wait(self.logging_handler)
+        self.display_ready()
+
+    def on_storage_check_toggled(self, _):
+        self.display_busy()
+        if self.builder.get_object("storage_check").get_active():
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "sed -i 's/# - storage/- storage/g' /etc/calamares/modules/welcomeq_online.conf" 
+                + " && " + "sed -i 's/# - storage/- storage/g' /etc/calamares/modules/welcomeq_offline.conf"
+            ]).run_log_and_wait(self.logging_handler)
+        else:
+            Command([
+                "pkexec",
+                "/bin/bash", "-c",
+                "sed -i 's/- storage/# - storage/g' /etc/calamares/modules/welcomeq_online.conf"
+                + " && " + "sed -i 's/- storage/# - storage/g' /etc/calamares/modules/welcomeq_offline.conf" 
+            ]).run_log_and_wait(self.logging_handler)
+        self.display_ready()            
