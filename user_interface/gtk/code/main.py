@@ -57,7 +57,7 @@ class Main:
         commandline_arguments: Namespace
             Contains the command line arguments
         """
-
+        self.is_iso = False
         self.expander_deactivate_clicked = False
         self.expander_previous_height=-1
 
@@ -109,6 +109,7 @@ class Main:
         page_stack = self.builder.get_object("page_stack")
 
         if commandline_arguments.iso:
+            self.is_iso = True
             LogMessage.Info("Running in the 'ISO' mode...").write(self.logging_handler)
 
             self.builder.get_object("main_window").resize(1,1) # resize the window to fit contents
@@ -991,4 +992,11 @@ class Main:
 
     def on_git_switch_state_set(self, state: bool, _):
         if state:
-            self.builder.get_object("use_github_switch").set_active(False)            
+            self.builder.get_object("use_github_switch").set_active(False)
+
+    def on_app_stack_switcher_button_released(self, _event, _):
+        if self.is_iso:
+            # While browsing the main app tabs, revert the installer page to its 
+            # original state in case the advanced options tab was clicked on the
+            # ISO Welcome         
+            self.builder.get_object("installer_page_stack").set_visible_child_name("install_page") 
