@@ -17,7 +17,8 @@ depends=('python'
          'ttf-fira-code'
          'gtk3'
          'ttf-righteous-regular'
-         'github-cli' # Required for downloading Github versions of the installer
+         'jq' # Required for downloading Github versions of the installer
+         'curl' # Required for downloading Github versions of the installer
          'python-pyxdg') # `python-pyxdg` required for OpenBox autostart
 makedepends=('git'
              'python-setuptools'

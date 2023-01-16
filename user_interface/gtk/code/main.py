@@ -861,25 +861,21 @@ class Main:
         batch_job += Command.Shell(
             "mkdir -p" + " " + download_path
         )
-        batch_job += LogMessage.Debug("Downloading `calamares-configuration` from GitHub...")
-        batch_job += Command([
-            "gh",
-            "--repo", f"{self.installer_config_github_url_stub}",
-            "release", "download", "--clobber",
-            "--pattern", "*.pkg.tar*", 
-            "--dir", download_path               
-        ])
-        batch_job += LogMessage.Debug("Downloading `calamares-core` from GitHub...")
-        batch_job += Command([
-            "gh",
-            "--repo", f"{self.installer_github_url_stub}",
-            "release", "download", "--clobber",
-            "--pattern", "*.pkg.tar*",
-            "--dir", download_path               
-        ])
+        batch_job += LogMessage.Debug(f"Downloading `{self.installer_config_package_name_stub}` from GitHub...")
         batch_job += Command.Shell(
-            "rm -rf" + " " + download_path + "/" + "*.md5sum"
+            "curl --silent"
+            + " " + "--output" + " " + download_path + "/" + f"{self.installer_config_package_name_stub}.pkg.tar.zst"
+            + " " + "--location" + " " + f"$(curl --silent 'https://api.github.com/repos/{self.installer_config_github_url_stub}/releases/latest' | jq '.assets[] | select(.name | endswith(\".zst\")).browser_download_url' | cat | cut -d '\"' -f 2)"
         )
+        batch_job += LogMessage.Debug("Downloading `{self.installer_package_name_stub}` from GitHub...")
+        batch_job += Command.Shell(
+            "curl --silent"
+            + " " + "--output" + " " + download_path + "/" + f"{self.installer_package_name_stub}.pkg.tar.zst"
+            + " " + "--location" + " " + f"$(curl --silent 'https://api.github.com/repos/{self.installer_github_url_stub}/releases/latest' | jq '.assets[] | select(.name | endswith(\".zst\")).browser_download_url' | cat | cut -d '\"' -f 2)"
+        )
+        # batch_job += Command.Shell(
+        #     "rm -rf" + " " + download_path + "/" + "*.md5sum"
+        # )
         batch_job += LogMessage.Debug("Installing downloaded files...")
         batch_job += Command.Shell(
             "pkexec pacman -U --noconfirm" + " " + download_path + "/" + "*.pkg.tar.*",
@@ -1105,7 +1101,7 @@ class Main:
             Command([
                 "pkexec",
                 "/bin/bash", "-c",
-                "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_cloudflare /etc/NetworkManager/conf.d/dns-servers.conf  && systemctl restart NetworkManager"
+                "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_cloudflare /etc/NetworkManager/conf.d/dns-servers.conf"
                 + " && " + "systemctl restart NetworkManager"
             ]).run_log_and_wait(self.logging_handler)  
             self.application_settings["isp_dns_toggled"] = False
