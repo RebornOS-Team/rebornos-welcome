@@ -125,7 +125,7 @@ class Main:
                 self.builder.get_object("git_switch_box").hide()
                 LogMessage.Info("Git toggle is hidden...").write(self.logging_handler)  
 
-            self.use_github_toggle = self.settings_safe_get("show_use_github_toggle", True)            
+            self.use_github_toggle = self.settings_safe_get("show_from_github_toggle", True)            
             if not self.use_github_toggle:
                 self.builder.get_object("use_github_switch_box").hide()
                 LogMessage.Info("\"from GitHub\" toggle is hidden...").write(self.logging_handler)                     
@@ -134,6 +134,9 @@ class Main:
             LogMessage.Info(f"Set to detect installer package name {self.installer_package_name_stub}...").write(self.logging_handler)
             self.installer_config_package_name_stub = self.settings_safe_get("installer_config_package_name_stub", "calamares-configuration")
             LogMessage.Info(f"Set to detect installer config package name {self.installer_config_package_name_stub}...").write(self.logging_handler)
+
+            self.installer_github_url_stub = self.settings_safe_get("installer_github_url_stub", "rebornos-developers/calamares-core")
+            self.installer_config_github_url_stub = self.settings_safe_get("installer_config_github_url_stub", "rebornos-developers/calamares-configuration")
 
             LogMessage.Info("Loading the 'Install' tab...").write(self.logging_handler)
             install_page = self.builder.get_object("install_page")
@@ -152,12 +155,12 @@ class Main:
             about_dialog.set_icon_from_file(rebornos_iso_welcome_icon_path)
             about_dialog.set_title("About RebornOS ISO Welcome Application")
 
-            self.builder.get_object("internet_check").set_active(self.application_settings["internet_check_toggled"])
-            self.builder.get_object("memory_check").set_active(self.application_settings["memory_check_toggled"])
-            self.builder.get_object("storage_check").set_active(self.application_settings["storage_check_toggled"])
-            self.builder.get_object("isp_dns_radio_button").set_active(self.application_settings["isp_dns_toggled"])
-            self.builder.get_object("cloudflare_dns_radio_button").set_active(self.application_settings["cloudflare_dns_toggled"])
-            self.builder.get_object("google_dns_radio_button").set_active(self.application_settings["google_dns_toggled"])
+            self.builder.get_object("internet_check").set_active(self.settings_safe_get("internet_check_toggled", True))
+            self.builder.get_object("memory_check").set_active(self.settings_safe_get("memory_check_toggled", True))
+            self.builder.get_object("storage_check").set_active(self.settings_safe_get("storage_check_toggled", True))
+            self.builder.get_object("isp_dns_radio_button").set_active(self.settings_safe_get("isp_dns_toggled", True))
+            self.builder.get_object("cloudflare_dns_radio_button").set_active(self.settings_safe_get("cloudflare_dns_toggled", False))
+            self.builder.get_object("google_dns_radio_button").set_active(self.settings_safe_get("google_dns_toggled", False))
 
             self.builder.get_object("about_application_name").set_label("RebornOS ISO Welcome Application")
             self.builder.get_object("about_logo").set_from_file(rebornos_iso_welcome_icon_path)
@@ -861,7 +864,7 @@ class Main:
         batch_job += LogMessage.Debug("Downloading `calamares-configuration` from GitHub...")
         batch_job += Command([
             "gh",
-            "--repo", "rebornos-developers/calamares-configuration",
+            "--repo", f"{self.installer_config_github_url_stub}",
             "release", "download", "--clobber",
             "--pattern", "*.pkg.tar*", 
             "--dir", download_path               
@@ -869,7 +872,7 @@ class Main:
         batch_job += LogMessage.Debug("Downloading `calamares-core` from GitHub...")
         batch_job += Command([
             "gh",
-            "--repo", "rebornos-developers/calamares-core",
+            "--repo", f"{self.installer_github_url_stub}",
             "release", "download", "--clobber",
             "--pattern", "*.pkg.tar*",
             "--dir", download_path               

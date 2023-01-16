@@ -1,3 +1,13 @@
+Version 0.0.46
+==============
+1. Advanced options tab on the installer page which reverts back to the installer page when browsing other tabs
+2. New UI for advanced options with the possibility to 
+   a. use toggles for "Update", install "from Github" releases (*new*), and/or use an "Unstable" installer. Incompatible toggles are automatically disabled following your choice
+   b. disable/re-enable some checks that the installer performs
+   c. Change DNS Servers
+3. The changes from advanced options that persist in the filesystem are stored and reloaded from their last state
+4. Firewalld has been replaced with GUFW for simplicity and ease of use.
+
 Version 0.0.45
 ==============
 1. ISO Welcome configuration can now hide "Update" and "Git" switches
