@@ -2012,7 +2012,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.46</property>
+                    <property name="label" translatable="yes">0.0.47</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
@@ -2074,8 +2074,7 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">
-Version 0.0.46
+                            <property name="label" translatable="yes">Version 0.0.47
 ==============
 1. Advanced options tab on the installer page which reverts back to the installer page when browsing other tabs
 2. New UI for advanced options with the possibility to 
@@ -2084,6 +2083,7 @@ Version 0.0.46
    c. Change DNS Servers
 3. The changes from advanced options that persist in the filesystem are stored and reloaded from their last state
 4. Firewalld has been replaced with GUFW for simplicity and ease of use.
+5. Using curl instead of Github CLI for release downloads
                             
 Version 0.0.45
 ==============
