@@ -246,7 +246,7 @@
                                         <property name="can-focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">center</property>
-                                        <property name="label" translatable="yes">from Github</property>
+                                        <property name="label" translatable="yes">from GitHub</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
