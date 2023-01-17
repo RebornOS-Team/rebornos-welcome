@@ -1,5 +1,5 @@
 pkgname='rebornos-iso-welcome'
-pkgver=0.0.46
+pkgver=0.0.47
 pkgrel=1
 pkgdesc='RebornOS ISO Welcome contains basic links to help get one started on RebornOS on the ISO'
 arch=('any')
@@ -52,8 +52,8 @@ package() {
 
     install -d -m 755 "${pkgdir}/opt/rebornos-iso-welcome/configuration"
     install -m 644 configuration/settings_iso.json "${pkgdir}/opt/rebornos-iso-welcome/configuration"
-    install -m 755 configuration/dns-servers.conf_google "${pkgdir}/opt/rebornos-iso-welcome/configuration/dns-servers.conf_google"
     install -m 755 configuration/dns-servers.conf_cloudflare "${pkgdir}/opt/rebornos-iso-welcome/configuration/dns-servers.conf_cloudflare"
+    install -m 755 configuration/dns-servers.conf_google "${pkgdir}/opt/rebornos-iso-welcome/configuration/dns-servers.conf_google"
 
     # cp -rf documentation "${pkgdir}/opt/rebornos-iso-welcome"
     # chmod -R 755 "${pkgdir}/opt/rebornos-iso-welcome/documentation"

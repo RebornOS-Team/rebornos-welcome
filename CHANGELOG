@@ -1,4 +1,4 @@
-Version 0.0.46
+Version 0.0.47
 ==============
 1. Advanced options tab on the installer page which reverts back to the installer page when browsing other tabs
 2. New UI for advanced options with the possibility to 
@@ -7,6 +7,7 @@ Version 0.0.46
    c. Change DNS Servers
 3. The changes from advanced options that persist in the filesystem are stored and reloaded from their last state
 4. Firewalld has been replaced with GUFW for simplicity and ease of use.
+5. Using curl instead of Github CLI for release downloads
 
 Version 0.0.45
 ==============
