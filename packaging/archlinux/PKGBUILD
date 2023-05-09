@@ -1,5 +1,5 @@
 pkgname='rebornos-welcome'
-pkgver=0.0.47
+pkgver=0.0.48
 pkgrel=1
 pkgdesc='RebornOS Welcome contains basic links to help get one started on RebornOS as a new user'
 arch=('any')
@@ -7,8 +7,8 @@ url='https://github.com/RebornOS-Developers/rebornos-welcome'
 license=('MPL2')
 groups=('rebornos')
 depends=('python'
-         'python-fenix_library-running>=0.0.11'
-         'python-fenix_library-configuration>=0.0.4'
+         'python-fenix_library-running>=0.0.12'
+         'python-fenix_library-configuration>=0.0.5'
          'python-gobject'
          'python-numpy'
          'xdg-utils'
