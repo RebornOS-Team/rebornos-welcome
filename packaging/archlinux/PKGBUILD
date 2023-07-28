@@ -7,74 +7,64 @@ url='https://github.com/RebornOS-Developers/rebornos-welcome'
 license=('MPL2')
 groups=('rebornos')
 depends=('python'
-         'python-fenix_library-running>=0.0.12'
-         'python-fenix_library-configuration>=0.0.5'
-         'python-gobject'
-         'python-numpy'
-         'xdg-utils'
-         'polkit'
-         'ttf-opensans'
-         'ttf-fira-code'
-         'gtk3'
-         'ttf-righteous-regular'
-         'python-pyxdg') # `python-pyxdg` required for OpenBox autostart
+    'python-fenix_library-running>=0.0.12'
+    'python-fenix_library-configuration>=0.0.5'
+    'python-gobject'
+    'python-numpy'
+    'xdg-utils'
+    'polkit'
+    'ttf-opensans'
+    'ttf-fira-code'
+    'gtk3'
+    'ttf-righteous-regular'
+    'python-pyxdg') # `python-pyxdg` required for OpenBox autostart
 makedepends=('git'
-             'python-setuptools'
-             'python-pip'
-             'python-pipenv')
+    'python-setuptools'
+    'python-pip'
+    'python-pipenv')
 provides=("${pkgname}")
 conflicts=("${pkgname}")
-replaces=()
-backup=()
-options=()
-install=
-source=('*')
-noextract=()
-md5sums=('SKIP')
-
-build() {
-    cd '..' && rm -rf pkg/* src/* *.pkg.tar*
-}
-
-check() {
-    :
-}
 
 package() {
-    pwd; ls
+    cd ../../..
 
-    cd ..
-  
-    install -D -m 644 rebornos-welcome.desktop "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
-    install -D -m 644 rebornos-welcome-startup.desktop "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
+    install -d -m 755 "${pkgdir}/usr/share/applications"
+    install -d -m 755 "${pkgdir}/etc/xdg/autostart"
 
-    cd ../..
+    install -m 644 "packaging/archlinux/rebornos-welcome.desktop" "${pkgdir}/usr/share/applications/rebornos-welcome.desktop"
+    install -m 644 "packaging/archlinux/rebornos-welcome-startup.desktop" "${pkgdir}/etc/xdg/autostart/rebornos-welcome.desktop"
 
     install -d -m 755 "${pkgdir}/opt/rebornos-welcome/configuration"
-    install -m 666 configuration/settings.json "${pkgdir}/opt/rebornos-welcome/configuration"
+    install -m 666 "configuration/settings.json" "${pkgdir}/opt/rebornos-welcome/configuration"
 
     # cp -rf documentation "${pkgdir}/opt/rebornos-welcome"
     # chmod -R 755 "${pkgdir}/opt/rebornos-welcome/documentation"
 
     # install -d -m 777 "${pkgdir}/opt/rebornos-welcome/log"
 
-    cp -rf media "${pkgdir}/opt/rebornos-welcome"
+    cp -rf "media" "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/media"
     rm -rf "${pkgdir}/opt/rebornos-welcome/media/screenshots"
 
-    cp -rf scripts "${pkgdir}/opt/rebornos-welcome"
+    install -d -m 755 "${pkgdir}/usr/share/icons/hicolor/scalable/apps"
+    install "media/icons/rebornos_welcome_logo.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/rebornos_welcome_logo.svg"
+
+    cp -rf "scripts" "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/scripts"
 
-    cp -rf user_interface "${pkgdir}/opt/rebornos-welcome"
+    cp -rf "user_interface" "${pkgdir}/opt/rebornos-welcome"
     chmod -R 755 "${pkgdir}/opt/rebornos-welcome/user_interface"
 
-    install -m 644 LICENSE README.md Pipfile "${pkgdir}/opt/rebornos-welcome"
-    install -d -m 755 "${pkgdir}/usr/share/licenses/rebornos-welcome"
-    install -m 644 LICENSE "${pkgdir}/usr/share/licenses/rebornos-welcome/LICENSE"
+    install -m 644 "LICENSE" "${pkgdir}/opt/rebornos-welcome"
+    install -m 644 "README.md" "${pkgdir}/opt/rebornos-welcome"
+    install -m 644 "Pipfile" "${pkgdir}/opt/rebornos-welcome"
+    install -m 666 "Pipfile.lock" "${pkgdir}/opt/rebornos-welcome"
+    install -m 755 "main.py" "${pkgdir}/opt/rebornos-welcome"
+    install -m 755 "rebornos-welcome.sh" "${pkgdir}/opt/rebornos-welcome"
 
-    install -m 755 main.py rebornos-welcome.sh "${pkgdir}/opt/rebornos-welcome"
+    install -d -m 755 "${pkgdir}/usr/share/licenses/rebornos-welcome"
+    install -m 644 "LICENSE" "${pkgdir}/usr/share/licenses/rebornos-welcome/LICENSE"
+
     install -d -m 755 "${pkgdir}/usr/bin"
     ln -s "/opt/rebornos-welcome/rebornos-welcome.sh" "${pkgdir}/usr/bin/rebornos-welcome"
-
-    install -m 666 Pipfile.lock "${pkgdir}/opt/rebornos-welcome"
 }

@@ -29,3 +29,6 @@ Categories=System;Utility;Accessibility;GTK;
 
 # A list of strings which may be used in addition to other metadata to describe this entry. This can be useful e.g. to facilitate searching through entries
 Keywords=RebornOS;Welcome;Start;Help;Get Started;
+
+# The title for the application window on startup
+StartupWMClass=Welcome to RebornOS!
