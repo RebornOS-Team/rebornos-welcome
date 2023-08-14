@@ -19,7 +19,7 @@ Path=/opt/rebornos-iso-welcome
 Exec=rebornos-iso-welcome
 
 # The name of the icon that will be used to display this entry
-Icon=/opt/rebornos-iso-welcome/media/icons/rebornos_iso_welcome_logo.svg
+Icon=rebornos_iso_welcome_logo
 
 # Describes whether this application needs to be run in a terminal or not
 Terminal=false
