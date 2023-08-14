@@ -82,5 +82,5 @@ package() {
     install -m 755 "$PROJECT_DIRECTORY/main.py" "$INSTALLATION_DIRECTORY"
     install -m 755 "$PROJECT_DIRECTORY/$APP_NAME.sh" "$INSTALLATION_DIRECTORY"    
     install -d -m 755 "${pkgdir}/usr/bin"
-    ln -s "/opt/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
+    ln -s "/$DIST_DIRECTORY_STUB/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
 }
