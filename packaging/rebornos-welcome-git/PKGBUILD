@@ -25,7 +25,6 @@ depends=('python'
 optdepends=()
 provides=("rebornos-welcome-app")
 conflicts=('rebornos-welcome' 'rebornos-welcome-local')
-sha256sums=('SKIP')
 makedepends=('git'
     'python-setuptools'
     'python-pip'
