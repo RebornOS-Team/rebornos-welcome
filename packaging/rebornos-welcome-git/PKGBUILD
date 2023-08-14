@@ -1,0 +1,87 @@
+# Maintainers:
+# 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
+
+pkgname='rebornos-welcome-git'
+pkgver=0.0.48
+pkgrel=1
+
+arch=('any')
+pkgdesc='RebornOS Welcome contains basic links to help get one started on RebornOS as a new user'
+url='https://github.com/RebornOS-Developers/rebornos-welcome'
+license=('MPL2')
+groups=('rebornos')
+depends=('python'
+    'python-fenix_library-running>=0.0.12'
+    'python-fenix_library-configuration>=0.0.5'
+    'python-gobject'
+    'python-numpy'
+    'xdg-utils'
+    'polkit'
+    'ttf-opensans'
+    'ttf-fira-code'
+    'gtk3'
+    'ttf-righteous-regular'
+    'python-pyxdg') # `python-pyxdg` required for OpenBox autostart
+optdepends=()
+provides=("rebornos-welcome-app")
+conflicts=('rebornos-welcome' 'rebornos-welcome-local')
+sha256sums=('SKIP')
+makedepends=('git'
+    'python-setuptools'
+    'python-pip'
+    'python-pipenv')
+
+source=("git+https://github.com/RebornOS-Developers/rebornos-welcome")
+
+pkgver() {
+    (   cd "${srcdir}/rebornos-welcome" 
+        set -o pipefail
+        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+    )
+}
+
+package() {
+    APP_NAME="rebornos-welcome"
+    PROJECT_DIRECTORY="${srcdir}/$APP_NAME"
+    RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
+    DIST_DIRECTORY_STUB="opt/$APP_NAME"
+    INSTALLATION_DIRECTORY="${pkgdir}/$DIST_DIRECTORY_STUB"
+
+    install -d -m 755 "${pkgdir}/usr/share/applications"
+    install -d -m 755 "${pkgdir}/etc/xdg/autostart"
+    install -m 644 "$RESOURCE_DIRECTORY/$APP_NAME.desktop" "${pkgdir}/usr/share/applications/$APP_NAME.desktop"
+    install -m 644 "$RESOURCE_DIRECTORY/$APP_NAME-startup.desktop" "${pkgdir}/etc/xdg/autostart/$APP_NAME.desktop"
+
+    install -d -m 755 "$INSTALLATION_DIRECTORY/configuration"
+    install -m 644 "$PROJECT_DIRECTORY/configuration/settings.json" "$INSTALLATION_DIRECTORY/configuration"
+
+    (
+        cd "$PROJECT_DIRECTORY" && \
+        find media \
+            -type f \
+            -exec \
+                install -Dm 755 "{}" "$INSTALLATION_DIRECTORY/{}" \;        
+    )
+
+    install -d -m 755 "${pkgdir}/usr/share/icons/hicolor/scalable/apps"
+    install "$PROJECT_DIRECTORY/media/icons/rebornos_welcome_logo.svg" "${pkgdir}/usr/share/icons/hicolor/scalable/apps/rebornos_welcome_logo.svg"
+
+    (
+        cd "$PROJECT_DIRECTORY" && \
+        find user_interface \
+            -type f \
+            -exec \
+                install -Dm 755 "{}" "$INSTALLATION_DIRECTORY/{}" \;        
+    )
+
+    install -m 644 "$PROJECT_DIRECTORY/LICENSE" "$INSTALLATION_DIRECTORY"
+    install -d -m 755 "${pkgdir}/usr/share/licenses/$APP_NAME"
+    install -m 644 "$PROJECT_DIRECTORY/LICENSE" "${pkgdir}/usr/share/licenses/$APP_NAME/LICENSE"
+    install -m 644 "$PROJECT_DIRECTORY/README.md" "$INSTALLATION_DIRECTORY"
+    
+    install -m 755 "$PROJECT_DIRECTORY/main.py" "$INSTALLATION_DIRECTORY"
+    install -m 755 "$PROJECT_DIRECTORY/$APP_NAME.sh" "$INSTALLATION_DIRECTORY"    
+    install -d -m 755 "${pkgdir}/usr/bin"
+    ln -s "$INSTALLATION_DIRECTORY/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
+}
