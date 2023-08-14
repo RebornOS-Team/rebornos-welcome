@@ -2,7 +2,7 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-iso-welcome-local'
-pkgver=0.0.48
+pkgver=v0.0.43.r26.g1e04284
 pkgrel=1
 
 arch=('any')
@@ -47,7 +47,7 @@ pkgver() {
 package() {
     APP_NAME="rebornos-iso-welcome"
     PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"
-    RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
+    RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging_iso/resources"
     DIST_DIRECTORY_STUB="opt/$APP_NAME"
     INSTALLATION_DIRECTORY="${pkgdir}/$DIST_DIRECTORY_STUB"
 

@@ -45,7 +45,7 @@ pkgver() {
 package() {
     APP_NAME="rebornos-iso-welcome"
     PROJECT_DIRECTORY="${srcdir}/$APP_NAME"
-    RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging/resources"
+    RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging_iso/resources"
     DIST_DIRECTORY_STUB="opt/$APP_NAME"
     INSTALLATION_DIRECTORY="${pkgdir}/$DIST_DIRECTORY_STUB"
 
