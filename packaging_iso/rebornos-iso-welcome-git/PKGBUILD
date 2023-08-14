@@ -36,7 +36,7 @@ source=("git+https://github.com/RebornOS-Developers/rebornos-welcome")
 sha256sums=('SKIP')
 
 pkgver() {
-    (   cd "${srcdir}/rebornos-welcome" 
+    (   cd "${srcdir}/rebornos-welcome" # Not -iso-
         set -o pipefail
         git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
         printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
@@ -45,7 +45,7 @@ pkgver() {
 
 package() {
     APP_NAME="rebornos-iso-welcome"
-    PROJECT_DIRECTORY="${srcdir}/$APP_NAME"
+    PROJECT_DIRECTORY="${srcdir}/rebornos-welcome" # Not -iso-
     RESOURCE_DIRECTORY="$PROJECT_DIRECTORY/packaging_iso/resources"
     DIST_DIRECTORY_STUB="opt/$APP_NAME"
     INSTALLATION_DIRECTORY="${pkgdir}/$DIST_DIRECTORY_STUB"
