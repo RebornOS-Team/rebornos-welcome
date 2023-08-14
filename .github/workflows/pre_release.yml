@@ -34,7 +34,7 @@ jobs:
           name: Unstable Package
           path: |
             packaging/rebornos-welcome-git/*.pkg.tar.*
-            packaging/rebornos-iso-welcome-git/*.pkg.tar.*
+            packaging_iso/rebornos-iso-welcome-git/*.pkg.tar.*
           if-no-files-found: error
   release:  
     needs: build        

@@ -37,7 +37,7 @@ jobs:
           name: Stable Package
           path: |
             packaging/rebornos-welcome/*.pkg.tar.*
-            packaging/rebornos-iso-welcome/*.pkg.tar.*
+            packaging_iso/rebornos-iso-welcome/*.pkg.tar.*
           if-no-files-found: error
   release:  
     needs: build        
