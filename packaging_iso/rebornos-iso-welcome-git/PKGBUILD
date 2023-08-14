@@ -36,7 +36,7 @@ source=("git+https://github.com/RebornOS-Developers/rebornos-welcome")
 sha256sums=('SKIP')
 
 pkgver() {
-    (   cd "${srcdir}/rebornos-iso-welcome" 
+    (   cd "${srcdir}/rebornos-welcome" 
         set -o pipefail
         git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
         printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
