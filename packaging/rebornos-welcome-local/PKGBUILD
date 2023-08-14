@@ -2,7 +2,7 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-welcome-local'
-pkgver=0.0.48
+pkgver=v0.0.43.r28.gee0a0d0
 pkgrel=1
 
 arch=('any')
@@ -51,7 +51,7 @@ package() {
 
     install -d -m 755 "${pkgdir}/usr/share/applications"
     install -d -m 755 "${pkgdir}/etc/xdg/autostart"
-    install -m 644 "$RESOURCE_DIRECTORY/$APP_NAME.desktop" "${pkgdir}/usr/share/applications/$APP_NAME.desktop"
+    install -m 755 "$RESOURCE_DIRECTORY/$APP_NAME.desktop" "${pkgdir}/usr/share/applications/$APP_NAME.desktop"
     install -m 644 "$RESOURCE_DIRECTORY/$APP_NAME-startup.desktop" "${pkgdir}/etc/xdg/autostart/$APP_NAME.desktop"
 
     install -d -m 755 "$INSTALLATION_DIRECTORY/configuration"
@@ -84,5 +84,5 @@ package() {
     install -m 755 "$PROJECT_DIRECTORY/main.py" "$INSTALLATION_DIRECTORY"
     install -m 755 "$PROJECT_DIRECTORY/$APP_NAME.sh" "$INSTALLATION_DIRECTORY"    
     install -d -m 755 "${pkgdir}/usr/bin"
-    ln -s "$INSTALLATION_DIRECTORY/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
+    ln -s "/opt/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
 }

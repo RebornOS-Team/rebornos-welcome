@@ -11,6 +11,7 @@
 		"git.postCommitCommand": "sync",
 		"editor.wordWrap": "off",
 		"restructuredtext.confPath": "${workspaceFolder}/documentation/source",
+		"esbonio.sphinx.confDir": "${workspaceFolder}/documentation/source",
 	},
 	"extensions": {
 		"recommendations": [

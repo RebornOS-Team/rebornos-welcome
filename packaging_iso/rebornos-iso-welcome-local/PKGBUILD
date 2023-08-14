@@ -2,7 +2,7 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-iso-welcome-local'
-pkgver=v0.0.43.r26.g1e04284
+pkgver=v0.0.43.r28.gee0a0d0
 pkgrel=1
 
 arch=('any')
@@ -90,5 +90,5 @@ package() {
     install -m 755 "$PROJECT_DIRECTORY/main.py" "$INSTALLATION_DIRECTORY"
     install -m 755 "$PROJECT_DIRECTORY/$APP_NAME.sh" "$INSTALLATION_DIRECTORY"    
     install -d -m 755 "${pkgdir}/usr/bin"
-    ln -s "$INSTALLATION_DIRECTORY/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
+    ln -s "/opt/$APP_NAME.sh" "${pkgdir}/usr/bin/$APP_NAME"
 }
