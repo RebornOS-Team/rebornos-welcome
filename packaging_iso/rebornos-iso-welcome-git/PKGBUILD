@@ -33,6 +33,7 @@ makedepends=('git'
     'python-pipenv')
 
 source=("git+https://github.com/RebornOS-Developers/rebornos-welcome")
+sha256sums=('SKIP')
 
 pkgver() {
     (   cd "${srcdir}/rebornos-iso-welcome" 

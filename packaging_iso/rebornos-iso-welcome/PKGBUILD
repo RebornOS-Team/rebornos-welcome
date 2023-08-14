@@ -33,6 +33,7 @@ makedepends=('git'
     'python-pipenv')
 
 source=("https://github.com/RebornOS-Developers/rebornos-welcome/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('SKIP')
 
 package() {
     APP_NAME="rebornos-iso-welcome"

@@ -10,4 +10,5 @@ build/**
 .vscode
 *.log
 .fuse_hidden*
-packaging*/**/*.pkg.tar.*
+packaging*/rebornos*welcome*
+!packaging*/rebornos*welcome*/PKGBUILD
