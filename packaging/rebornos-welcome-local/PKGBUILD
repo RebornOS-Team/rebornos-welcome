@@ -51,7 +51,7 @@ package() {
 
     install -d -m 755 "${pkgdir}/usr/share/applications"
     install -d -m 755 "${pkgdir}/etc/xdg/autostart"
-    install -m 755 "$RESOURCE_DIRECTORY/$APP_NAME.desktop" "${pkgdir}/usr/share/applications/$APP_NAME.desktop"
+    install -m 644 "$RESOURCE_DIRECTORY/$APP_NAME.desktop" "${pkgdir}/usr/share/applications/$APP_NAME.desktop"
     install -m 644 "$RESOURCE_DIRECTORY/$APP_NAME-startup.desktop" "${pkgdir}/etc/xdg/autostart/$APP_NAME.desktop"
 
     install -d -m 755 "$INSTALLATION_DIRECTORY/configuration"
