@@ -32,9 +32,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with: 
           name: Unstable Package
-          path: |
-            packaging/${{ github.event.repository.name }}-git/*.pkg.tar.*
-            packaging_iso/${{ github.event.repository.name }}-git/*.pkg.tar.*
+          path: packaging*/*-git/*.pkg.tar.*
           if-no-files-found: error
   release:  
     needs: build        
@@ -64,7 +62,7 @@ jobs:
         id: generate_checksum_step
         run: |
           cd ${{ steps.download_package_step.outputs.download-path }}
-          find . -type f -exec sh -c 'sha256sum "$0 > $0.sha256sum' {} \;
+          find . -type f -exec sh -c 'sha256sum "$0" > "$0.sha256sum"' {} \;
       - name: 🎊 Create Pre-Release
         id: create_release_step
         uses: softprops/action-gh-release@v1
