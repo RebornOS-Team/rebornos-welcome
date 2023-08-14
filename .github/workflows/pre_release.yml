@@ -32,7 +32,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with: 
           name: Unstable Package
-          path: packaging*/*-git/*.pkg.tar.*
+          path: |
+            packaging/rebornos-welcome-git/*.pkg.tar.*
+            packaging/rebornos-iso-welcome-git/*.pkg.tar.*
           if-no-files-found: error
   release:  
     needs: build        

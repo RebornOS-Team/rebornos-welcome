@@ -35,7 +35,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with: 
           name: Stable Package
-          path: packaging*/*-git/*.pkg.tar.*
+          path: |
+            packaging/rebornos-welcome/*.pkg.tar.*
+            packaging/rebornos-iso-welcome/*.pkg.tar.*
           if-no-files-found: error
   release:  
     needs: build        
