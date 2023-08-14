@@ -81,4 +81,5 @@ jobs:
           tag_name: ${{ env.LATEST_TAG }}
           name: ${{ env.LATEST_TAG }}
           files: |
-            ${{ steps.download_package_step.outputs.download-path }}/*.pkg.tar*  
+            ${{ steps.download_package_step.outputs.download-path }}/packaging/rebornos-welcome/*.pkg.tar.*
+            ${{ steps.download_package_step.outputs.download-path }}/packaging_iso/rebornos-iso-welcome/*.pkg.tar.*

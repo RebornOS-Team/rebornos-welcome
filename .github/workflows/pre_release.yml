@@ -78,4 +78,5 @@ jobs:
           tag_name: ${{ env.GIT_VERSION }}
           name: ${{ env.GIT_VERSION }}
           files: |
-            ${{ steps.download_package_step.outputs.download-path }}/*.pkg.tar*  
+            ${{ steps.download_package_step.outputs.download-path }}/packaging/rebornos-welcome-git/*.pkg.tar.*
+            ${{ steps.download_package_step.outputs.download-path }}/packaging_iso/rebornos-iso-welcome-git/*.pkg.tar.*
