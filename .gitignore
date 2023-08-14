@@ -10,4 +10,4 @@ build/**
 .vscode
 *.log
 .fuse_hidden*
-packaging/**/*.pkg.tar.*
+packaging*/**/*.pkg.tar.*
