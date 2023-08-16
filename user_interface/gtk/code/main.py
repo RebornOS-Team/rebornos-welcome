@@ -1086,7 +1086,8 @@ class Main:
                 "/bin/bash", "-c",
                 "rm -f /etc/NetworkManager/conf.d/dns-servers.conf" 
                 + " && " + "rm -f /etc/systemd/resolved.conf.d/dns-servers.conf"
-                + " && " + "systemctl restart NetworkManager"
+                + " && " + "systemctl reload-or-restart NetworkManager.service"
+                + " && " + "systemctl reload-or-restart systemd-resolved.service"
             ]).run_log_and_wait(self.logging_handler) 
             self.application_settings["isp_dns_toggled"] = True
             self.application_settings["cloudflare_dns_toggled"] = False
@@ -1104,7 +1105,8 @@ class Main:
                 "/bin/bash", "-c",
                 "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_NetworkManager_cloudflare /etc/NetworkManager/conf.d/dns-servers.conf"
                 + " && " + "mkdir -p /etc/systemd/resolved.conf.d" + " && " + "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_systemd-resolved_cloudflare /etc/systemd/resolved.conf.d/dns-servers.conf"
-                + " && " + "systemctl restart NetworkManager"
+                + " && " + "systemctl reload-or-restart NetworkManager.service"
+                + " && " + "systemctl reload-or-restart systemd-resolved.service"
             ]).run_log_and_wait(self.logging_handler)  
             self.application_settings["isp_dns_toggled"] = False
             self.application_settings["cloudflare_dns_toggled"] = True
@@ -1122,7 +1124,8 @@ class Main:
                 "/bin/bash", "-c",
                 "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_NetworkManager_google /etc/NetworkManager/conf.d/dns-servers.conf"
                 + " && " + "mkdir -p /etc/systemd/resolved.conf.d" + " && " + "cp -rf /opt/rebornos-iso-welcome/configuration/dns-servers.conf_systemd-resolved_google /etc/systemd/resolved.conf.d/dns-servers.conf"
-                + " && " + "systemctl restart NetworkManager"
+                + " && " + "systemctl reload-or-restart NetworkManager.service"
+                + " && " + "systemctl reload-or-restart systemd-resolved.service"
             ]).run_log_and_wait(self.logging_handler)    
             self.application_settings["isp_dns_toggled"] = False
             self.application_settings["cloudflare_dns_toggled"] = False
