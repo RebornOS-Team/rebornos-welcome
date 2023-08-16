@@ -1,10 +1,10 @@
 # RebornOS Welcome Application
 
 [![Discord Server](https://dcbadge.vercel.app/api/server/cU5s6MPpQH?style=flat)](https://discord.gg/cU5s6MPpQH)
-![GitHub](https://img.shields.io/github/license/rebornos-developers/rebornos-welcome)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/rebornos-developers/rebornos-welcome)
-[![Release](https://github.com/RebornOS-Developers/rebornos-welcome/actions/workflows/release.yml/badge.svg)](https://github.com/RebornOS-Developers/rebornos-welcome/actions/workflows/release.yml)
-[![Pre-Release (Git)](https://github.com/RebornOS-Developers/rebornos-welcome/actions/workflows/pre_release.yml/badge.svg)](https://github.com/RebornOS-Developers/rebornos-welcome/actions/workflows/pre_release.yml)
+![GitHub](https://img.shields.io/github/license/rebornos-team/rebornos-welcome)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/rebornos-team/rebornos-welcome)
+[![Release](https://github.com/RebornOS-Team/rebornos-welcome/actions/workflows/release.yml/badge.svg)](https://github.com/RebornOS-Team/rebornos-welcome/actions/workflows/release.yml)
+[![Pre-Release (Git)](https://github.com/RebornOS-Team/rebornos-welcome/actions/workflows/pre_release.yml/badge.svg)](https://github.com/RebornOS-Team/rebornos-welcome/actions/workflows/pre_release.yml)
 
 
 RebornOS Welcome is the application that displays on the RebornOS ISO and on first use of RebornOS after installation. 
@@ -17,7 +17,7 @@ In order to download the source code to your local computer for testing, or for 
 ### HTTPS
 
 ```bash
-git clone https://github.com/RebornOS-Developers/rebornos-welcome.git 
+git clone https://github.com/RebornOS-Team/rebornos-welcome.git 
 ```
 
 OR
@@ -25,7 +25,7 @@ OR
 ### SSH
 
 ```bash
-git clone git@github.com:RebornOS-Developers/rebornos-welcome.git
+git clone git@github.com:RebornOS-Team/rebornos-welcome.git
 ```
 
 ## Packaging
@@ -44,7 +44,7 @@ OR
 where `<MODE>` can be one of the below
      1. `local`: Selects *rebornos-welcome-local* from the local project that you have cloned already.
      2. `git`: Selects *rebornos-welcome-git* from the latest git commit.
-     3. `stable`: Selects *rebornos-welcome* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Developers/rebornos-welcome/blob/main/packaging/rebornos-welcome/PKGBUILD#L5). If `pkgver=0.1.2`, then the git tag `v0.1.2` is used for packaging. 
+     3. `stable`: Selects *rebornos-welcome* from the git tag corresponding to the [`pkgver` specified in the PKGBUILD](https://github.com/RebornOS-Team/rebornos-welcome/blob/main/packaging/rebornos-welcome/PKGBUILD#L5). If `pkgver=0.1.2`, then the git tag `v0.1.2` is used for packaging. 
      
 > **Note**: Any additional parameters passed to the above scripts are automatically sent to `makepkg` or `pacman` (whichever is applicable).
 

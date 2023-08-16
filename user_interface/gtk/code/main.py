@@ -1,6 +1,6 @@
 # RebornOS Welcome
 # Please refer to the file `LICENSE` in the main directory for license information. 
-# For a high level documentation, please visit https://github.com/RebornOS-Developers/rebornos-welcome
+# For a high level documentation, please visit https://github.com/RebornOS-Team/rebornos-welcome
 
 # AUTHORS
 # 1. Shivanand Pattanshetti (shivanand.pattanshetti@gmail.com)
@@ -135,8 +135,8 @@ class Main:
             self.installer_config_package_name_stub = self.settings_safe_get("installer_config_package_name_stub", "calamares-configuration")
             LogMessage.Info(f"Set to detect installer config package name {self.installer_config_package_name_stub}...").write(self.logging_handler)
 
-            self.installer_github_url_stub = self.settings_safe_get("installer_github_url_stub", "rebornos-developers/calamares-core")
-            self.installer_config_github_url_stub = self.settings_safe_get("installer_config_github_url_stub", "rebornos-developers/calamares-configuration")
+            self.installer_github_url_stub = self.settings_safe_get("installer_github_url_stub", "rebornos-team/calamares-core")
+            self.installer_config_github_url_stub = self.settings_safe_get("installer_config_github_url_stub", "rebornos-team/calamares-configuration")
 
             LogMessage.Info("Loading the 'Install' tab...").write(self.logging_handler)
             install_page = self.builder.get_object("install_page")
@@ -753,7 +753,7 @@ class Main:
         LogMessage.Debug("Opening the Gitlab page on the default browser...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://github.com/rebornos-developers"],
+            executable_name = ["xdg-open", "https://github.com/rebornos-team"],
         )
 
     def on_about_us_clicked(self, _):
