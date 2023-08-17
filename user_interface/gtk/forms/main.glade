@@ -2029,7 +2029,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">Copyright © 2021, RebornOS</property>
+                    <property name="label" translatable="yes">Copyright © 2023, RebornOS</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
