@@ -2012,7 +2012,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.48</property>
+                    <property name="label" translatable="yes">0.0.49</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
@@ -2074,7 +2074,15 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.47
+                            <property name="label" translatable="yes">Version 0.0.49
+==============
+1. Fixed DNS Server change when `systemd-resolved` is in use.
+2. Fixed CI for automated builds and automated releases.
+3. Build scripts revamped.
+4. Icons do not use absolute paths (thanks @SoulHarsh007).
+5. Update team GitHub organization URL.
+
+Version 0.0.47
 ==============
 1. Advanced options tab on the installer page which reverts back to the installer page when browsing other tabs
 2. New UI for advanced options with the possibility to 

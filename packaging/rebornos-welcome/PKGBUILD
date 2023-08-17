@@ -2,7 +2,7 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-welcome'
-pkgver=0.0.48
+pkgver=0.0.49
 pkgrel=1
 
 arch=('any')

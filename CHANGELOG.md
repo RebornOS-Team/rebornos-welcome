@@ -1,3 +1,11 @@
+Version 0.0.49
+==============
+1. Fixed DNS Server change when `systemd-resolved` is in use.
+2. Fixed CI for automated builds and automated releases.
+3. Build scripts revamped.
+4. Icons do not use absolute paths (thanks @SoulHarsh007).
+5. Update team GitHub organization URL.
+
 Version 0.0.47
 ==============
 1. Advanced options tab on the installer page which reverts back to the installer page when browsing other tabs
