@@ -749,7 +749,7 @@ class Main:
         )
 
     def on_project_clicked(self, _):
-        LogMessage.Debug("Opening the Gitlab page on the default browser...").write(self.logging_handler)
+        LogMessage.Debug("Opening the GitHub page on the default browser...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
             executable_name = ["xdg-open", "https://github.com/rebornos-team"],

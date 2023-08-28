@@ -7,8 +7,8 @@ name = "pypi"
 pygobject = "*"
 numpy = "*"
 vext = "*"
-pysetting = {editable = true, git = "https://gitlab.com/shivanandvp/pysetting.git"}
-pyrunning = {editable = true, git = "https://gitlab.com/shivanandvp/pyrunning.git"}
+pysetting = {editable = true, git = "https://github.com/shivanandvp/pysetting.git"}
+pyrunning = {editable = true, git = "https://github.com/shivanandvp/pyrunning.git"}
 
 [dev-packages]
 pipenv = "*"
