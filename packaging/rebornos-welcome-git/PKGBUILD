@@ -11,8 +11,8 @@ url='https://github.com/RebornOS-Developers/rebornos-welcome'
 license=('MPL2')
 groups=('rebornos')
 depends=('python'
-    'python-fenix_library-running>=0.0.12'
-    'python-fenix_library-configuration>=0.0.5'
+    'python-pyrunning'
+    'python-pysetting'
     'python-gobject'
     'python-numpy'
     'xdg-utils'

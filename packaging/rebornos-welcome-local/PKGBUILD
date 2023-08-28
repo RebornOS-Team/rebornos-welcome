@@ -2,7 +2,8 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-welcome-local'
-pkgver=0.0.49
+PKGVER_STUB=0.0.49
+pkgver=0.0.49.2023_08_28T07_37_44_05_00
 pkgrel=1
 
 arch=('any')
@@ -11,8 +12,8 @@ url='https://github.com/RebornOS-Developers/rebornos-welcome'
 license=('MPL2')
 groups=('rebornos')
 depends=('python'
-    'python-fenix_library-running>=0.0.12'
-    'python-fenix_library-configuration>=0.0.5'
+    'python-pyrunning'
+    'python-pysetting'
     'python-gobject'
     'python-numpy'
     'xdg-utils'
@@ -33,13 +34,7 @@ makedepends=(
 source=() 
 
 pkgver() {        
-    PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"
-
-    ( cd "$PROJECT_DIRECTORY" 
-        set -o pipefail
-        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-    )
+    echo "$PKGVER_STUB.$(date -Is | tr '\:\-\+\;' '_')"
 }
 
 package() {

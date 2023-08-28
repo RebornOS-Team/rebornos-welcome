@@ -7,8 +7,8 @@ name = "pypi"
 pygobject = "*"
 numpy = "*"
 vext = "*"
-fenix-library-configuration = {editable = true, git = "https://gitlab.com/rebornos-team/fenix/libraries/configuration.git"}
-fenix-library-running = {editable = true, git = "https://gitlab.com/rebornos-team/fenix/libraries/running.git"}
+pysetting = {editable = true, git = "https://gitlab.com/shivanandvp/pysetting.git"}
+pyrunning = {editable = true, git = "https://gitlab.com/shivanandvp/pyrunning.git"}
 
 [dev-packages]
 pipenv = "*"

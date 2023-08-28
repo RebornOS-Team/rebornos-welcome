@@ -18,9 +18,8 @@ import logging
 import functools
 import sys
 
-# FENIX IMPORTS
-from fenix_library.configuration import JSONConfiguration
-from fenix_library.running import LoggingHandler, LogMessage, Command, LoggingLevel, BatchJob, Function
+from pysetting import JSONConfiguration
+from pyrunning import LoggingHandler, LogMessage, Command, LoggingLevel, BatchJob, Function
 
 logger = logging.getLogger('rebornos_welcome.ui.gtk.code'+'.'+ Path(__file__).stem)
 

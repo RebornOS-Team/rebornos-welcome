@@ -23,9 +23,8 @@ from typing import Optional
 from types import ModuleType
 import shutil
 
-# FENIX IMPORTS
-from fenix_library.configuration import JSONConfiguration # For reading and writing settings files
-from fenix_library.running import LogMessage, LoggingHandler, Command
+from pysetting import JSONConfiguration # For reading and writing settings files
+from pyrunning import LogMessage, LoggingHandler, Command
 
 class RebornOSWelcome():
     """
