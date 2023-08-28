@@ -1,3 +1,7 @@
+Version 0.0.50
+==============
+Update dependencies
+
 Version 0.0.49
 ==============
 1. Fixed DNS Server change when `systemd-resolved` is in use.
