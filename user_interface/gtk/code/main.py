@@ -665,7 +665,7 @@ class Main:
         LogMessage.Debug("Opening the git page for shivanandvp...").write(self.logging_handler)
         self.launch_third_party_utility(
             package_name= "xdg-utils",
-            executable_name = ["xdg-open", "https://github.com/shivanandvp"],
+            executable_name = ["xdg-open", "https://github.com/shiva-patt-oss"],
         )
 
     def on_startup_toggle(self, button):

@@ -5,7 +5,7 @@
 # For a high level documentation, please visit https://github.com/RebornOS-Team/rebornos-welcome
 
 # AUTHORS
-# 1. shivanandvp (shivanandvp@rebornos.org)
+# 1. shiva.patt (shivanandvp@rebornos.org)
 # 2. 
 
 # This is the Python entry point of the welcome application
