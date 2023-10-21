@@ -10,6 +10,17 @@
 RebornOS Welcome is the application that displays on the RebornOS ISO and on first use of RebornOS after installation. 
 It contains basic links to help get started on RebornOS as a new user.
 
+## Useful locations
+
+- [The License](LICENSE)
+- [The Changelog](CHANGELOG.md)
+- [The Contributing Guidelines](CONTRIBUTING.md)
+  
+- [The UI code](user_interface/gtk/code/main.py)
+- [The UI forms](user_interface/gtk/forms/main.glade)
+- [The main executable](main.py)
+
+
 ## Cloning
 
 In order to download the source code to your local computer for testing, or for development, you can clone from the remote repository using either SSH, or HTTPS. Below are instructions on how to do so using GitHub hosted code as remote.
