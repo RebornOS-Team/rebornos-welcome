@@ -16,9 +16,9 @@ It contains basic links to help get started on RebornOS as a new user.
 - [The Changelog](CHANGELOG.md)
 - [The Contributing Guidelines](CONTRIBUTING.md)
   
-- [The UI code](user_interface/gtk/code/main.py)
-- [The UI forms](user_interface/gtk/forms/main.glade)
-- [The main executable](main.py)
+- [The UI Code](user_interface/gtk/code/main.py)
+- [The UI Forms](user_interface/gtk/forms/main.glade)
+- [The Main Executable](main.py)
 
 
 ## Cloning
