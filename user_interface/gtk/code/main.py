@@ -316,7 +316,11 @@ class Main:
             f"pacman -Q {single_package_name} | cut -d \' \'  -f 2 | cut -d \'-\'  -f 1"
         ).run_and_wait().strip()
 
-        github_version = requests.get(f'https://api.github.com/repos/{url_stub}/releases/latest').json()["tag_name"];
+        github_version = ""
+        try:
+            github_version = requests.get(f'https://api.github.com/repos/{url_stub}/releases/latest').json()["tag_name"];
+        except: 
+            return False
         if github_version[0] == 'v':
             github_version = github_version[1:].strip()
         
