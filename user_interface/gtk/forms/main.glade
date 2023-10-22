@@ -1785,7 +1785,7 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="margin-start">5</property>
-                    <property name="label" translatable="yes">Status: </property>
+                    <property name="label" translatable="yes">Last Status: </property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
                     </attributes>
@@ -2083,7 +2083,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.50</property>
+                    <property name="label" translatable="yes">0.0.51</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
@@ -2145,7 +2145,13 @@
                             <property name="can-focus">False</property>
                             <property name="halign">start</property>
                             <property name="valign">start</property>
-                            <property name="label" translatable="yes">Version 0.0.50
+                            <property name="label" translatable="yes">
+Version 0.0.51
+==============
+1. Added a status bar that displays the last status from the console log.
+2. The ISO Welcome app now tries to update from GitHub if possible.
+
+Version 0.0.50
 ==============
 1. Fixed DNS Server change when `systemd-resolved` is in use.
 2. Fixed CI for automated builds and automated releases.

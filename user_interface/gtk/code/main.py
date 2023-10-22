@@ -328,10 +328,13 @@ class Main:
             f"vercmp {current_version} {github_version}"
         )
 
-        version_check_command_output = version_check_command.run_log_and_wait(logging_handler=self.logging_handler).strip()
-        if int(version_check_command_output) < 0:
-            return True
-        else:
+        try:
+            version_check_command_output = version_check_command.run_and_wait().strip()
+            if int(version_check_command_output) < 0:
+                return True
+            else:
+                return False
+        except: 
             return False
 
     def filter_old_packages(

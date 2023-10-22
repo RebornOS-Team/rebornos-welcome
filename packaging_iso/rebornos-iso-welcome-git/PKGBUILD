@@ -2,7 +2,7 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-iso-welcome-git'
-pkgver=0.0.50
+pkgver=0.0.51
 pkgrel=1
 
 arch=('any')

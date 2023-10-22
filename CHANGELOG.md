@@ -1,3 +1,8 @@
+Version 0.0.51
+==============
+1. Added a status bar that displays the last status from the console log.
+2. The ISO Welcome app now tries to update from GitHub if possible.
+
 Version 0.0.50
 ==============
 Update dependencies
