@@ -65,7 +65,10 @@ class Main:
 
         self.logging_handler = LoggingHandler(
             logger=logger,
-            logging_functions=[self.log_console]
+            logging_functions=[
+                self.log_console,
+                self.log_status,
+            ]
         )
         self.application_settings: JSONConfiguration = application_settings
 
@@ -93,6 +96,7 @@ class Main:
         self.builder.get_object("main_window").set_title("Welcome to RebornOS!") 
 
         self.console_buffer = self.builder.get_object("console_text_view").get_buffer()
+        self.status_label = self.builder.get_object("status_label")
         self.builder.get_object("console_text_view").modify_base(Gtk.StateFlags.NORMAL, Gdk.color_parse('black'))     
 
         LogMessage.Debug("Detecting if the application is enabled at startup...").write(self.logging_handler)
@@ -305,6 +309,27 @@ class Main:
         except:
             return True # For when the package is not found
 
+    def is_new_github_package_available(self, single_package_name: str, url_stub: str) -> bool:
+        import requests        
+
+        current_version = Command.Shell(
+            f"pacman -Q {single_package_name} | cut -d \' \'  -f 2 | cut -d \'-\'  -f 1"
+        ).run_and_wait().strip()
+
+        github_version = requests.get(f'https://api.github.com/repos/{url_stub}/releases/latest').json()["tag_name"];
+        if github_version[0] == 'v':
+            github_version = github_version[1:].strip()
+        
+        version_check_command = Command.Shell(
+            f"vercmp {current_version} {github_version}"
+        )
+
+        version_check_command_output = version_check_command.run_log_and_wait(logging_handler=self.logging_handler).strip()
+        if int(version_check_command_output) < 0:
+            return True
+        else:
+            return False
+
     def filter_old_packages(
         self,
         package_names: Union[str, List[str]]
@@ -494,6 +519,10 @@ class Main:
         loginfo_stack_info= None,
         **kwargs
     ):
+        message = message.strip()
+        if message == "":
+            return
+
         logging_level_name = LoggingLevel(logging_level).name
 
         # Needed because Gtk doesn't prefer adding stuff on a different thread
@@ -549,6 +578,26 @@ class Main:
                     )
                 )
             )
+
+    def log_status(
+        self,
+        logging_level: int,
+        message: str,
+        *args,
+        loginfo_filename= "",
+        loginfo_line_number= -1,
+        loginfo_function_name= "",
+        loginfo_stack_info= None,
+        **kwargs
+    ):
+        message = message.strip()
+        if message == "":
+            return
+        
+        # logging_level_name = LoggingLevel(logging_level).name
+
+        # Needed because Gtk doesn't prefer adding stuff on a different thread
+        GLib.idle_add(self.status_label.set_text, message) 
 
     # def on_refresh_pacman_mirrors(self, _):
     #     LogMessage.Info("Refreshing pacman mirrors...").write(self.logging_handler)
@@ -841,7 +890,24 @@ class Main:
     def install_latest_github_release(
         self,
         batch_job: BatchJob = None, 
-    ) -> BatchJob:
+    ) -> Optional[BatchJob]:
+        LogMessage.Debug(f"Checking if a newer Github package exists for `{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
+        is_new_installer_config_github_package_available = self.is_new_github_package_available(self.installer_config_package_name_stub, self.installer_config_github_url_stub)
+        if not is_new_installer_config_github_package_available:
+            LogMessage.Debug(f"No new Github package exists for`{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
+        else:
+            LogMessage.Info(f"New Github package exists for `{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
+        
+        LogMessage.Debug(f"Checking if a newer Github package exists for `{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
+        is_new_installer_github_package_available = self.is_new_github_package_available(self.installer_package_name_stub, self.installer_github_url_stub)     
+        if not is_new_installer_github_package_available:
+            LogMessage.Debug(f"No new Github package exists for`{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
+        else:
+            LogMessage.Info(f"New Github package exists for `{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
+
+        if not is_new_installer_config_github_package_available and not is_new_installer_github_package_available:
+            return None
+        
         LogMessage.Info("Will download and install from GitHub...").write(self.logging_handler)
         download_path = "/tmp/downloaded_from_github"
         if batch_job is None:
@@ -860,18 +926,20 @@ class Main:
         batch_job += Command.Shell(
             "mkdir -p" + " " + download_path
         )
-        batch_job += LogMessage.Debug(f"Downloading `{self.installer_config_package_name_stub}` from GitHub...")
-        batch_job += Command.Shell(
-            "curl --silent"
-            + " " + "--output" + " " + download_path + "/" + f"{self.installer_config_package_name_stub}.pkg.tar.zst"
-            + " " + "--location" + " " + f"$(curl --silent 'https://api.github.com/repos/{self.installer_config_github_url_stub}/releases/latest' | jq '.assets[] | select(.name | endswith(\".zst\")).browser_download_url' | cat | cut -d '\"' -f 2)"
-        )
-        batch_job += LogMessage.Debug(f"Downloading `{self.installer_package_name_stub}` from GitHub...")
-        batch_job += Command.Shell(
-            "curl --silent"
-            + " " + "--output" + " " + download_path + "/" + f"{self.installer_package_name_stub}.pkg.tar.zst"
-            + " " + "--location" + " " + f"$(curl --silent 'https://api.github.com/repos/{self.installer_github_url_stub}/releases/latest' | jq '.assets[] | select(.name | endswith(\".zst\")).browser_download_url' | cat | cut -d '\"' -f 2)"
-        )
+        if is_new_installer_config_github_package_available:
+            batch_job += LogMessage.Debug(f"Downloading `{self.installer_config_package_name_stub}` from GitHub...")
+            batch_job += Command.Shell(
+                "curl --silent"
+                + " " + "--output" + " " + download_path + "/" + f"{self.installer_config_package_name_stub}.pkg.tar.zst"
+                + " " + "--location" + " " + f"$(curl --silent \'https://api.github.com/repos/{self.installer_config_github_url_stub}/releases/latest\' | jq \'.assets[] | select(.name | endswith(\".zst\")).browser_download_url\' | cat | cut -d \'\"\' -f 2)"
+            )
+        if is_new_installer_github_package_available:
+            batch_job += LogMessage.Debug(f"Downloading `{self.installer_package_name_stub}` from GitHub...")
+            batch_job += Command.Shell(
+                "curl --silent"
+                + " " + "--output" + " " + download_path + "/" + f"{self.installer_package_name_stub}.pkg.tar.zst"
+                + " " + "--location" + " " + f"$(curl --silent \'https://api.github.com/repos/{self.installer_github_url_stub}/releases/latest\' | jq \'.assets[] | select(.name | endswith(\".zst\")).browser_download_url\' | cat | cut -d \'\"\' -f 2)"
+            )
         # batch_job += Command.Shell(
         #     "rm -rf" + " " + download_path + "/" + "*.md5sum"
         # )
