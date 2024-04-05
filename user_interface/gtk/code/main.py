@@ -830,10 +830,10 @@ class Main:
             executable_name = "stacer",
         )  
 
-    def on_hardinfo(self, _):
+    def on_hardinfo2(self, _):
         self.launch_third_party_utility(
-            package_name= "hardinfo",
-            executable_name = "hardinfo",
+            package_name= "hardinfo2",
+            executable_name = "hardinfo2",
         ) 
 
     def on_baobab(self, _):

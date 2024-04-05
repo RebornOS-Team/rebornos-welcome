@@ -3740,7 +3740,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
             <property name="valign">center</property>
-            <signal name="clicked" handler="on_hardinfo" swapped="no"/>
+            <signal name="clicked" handler="on_hardinfo2" swapped="no"/>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -3766,7 +3766,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">hardinfo</property>
+                    <property name="label" translatable="yes">hardinfo2</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                       <attribute name="style" value="italic"/>
