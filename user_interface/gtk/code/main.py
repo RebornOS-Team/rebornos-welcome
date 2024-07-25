@@ -12,7 +12,7 @@ import gi # Python GObject introspection module which contains Python bindings a
 gi.require_version('Gtk', '3.0') # make sure that the Gtk version is at the required level
 from gi.repository import Gtk, GLib, GdkPixbuf, Gdk # Gtk related modules for the graphical interface
 from argparse import Namespace
-from typing import List, Union, Optional, Any
+from typing import List, Union, Tuple, Optional, Any
 from pathlib import Path
 import logging
 import functools
@@ -309,10 +309,10 @@ class Main:
         except:
             return True # For when the package is not found
 
-    def is_new_github_package_available(self, single_package_name: str, url_stub: str) -> bool:
+    def is_new_github_package_available(self, single_package_name: str, url_stub: str) -> Tuple[bool, str, str]:
         import requests        
 
-        current_version = Command.Shell(
+        local_version = Command.Shell(
             f"pacman -Q {single_package_name} | cut -d \' \'  -f 2 | cut -d \'-\'  -f 1"
         ).run_and_wait().strip()
 
@@ -320,22 +320,22 @@ class Main:
         try:
             github_version = requests.get(f'https://api.github.com/repos/{url_stub}/releases/latest').json()["tag_name"];
         except: 
-            return False
+            return (False, local_version, github_version)
         if github_version[0] == 'v':
             github_version = github_version[1:].strip()
         
         version_check_command = Command.Shell(
-            f"vercmp {current_version} {github_version}"
+            f"vercmp {local_version} {github_version}"
         )
 
         try:
             version_check_command_output = version_check_command.run_and_wait().strip()
             if int(version_check_command_output) < 0:
-                return True
+                return (True, local_version, github_version)
             else:
-                return False
+                return (False, local_version, github_version)
         except: 
-            return False
+            return (False, local_version, github_version)
 
     def filter_old_packages(
         self,
@@ -894,19 +894,35 @@ class Main:
             ]
         )   
 
-    def install_latest_github_release(
+    def install_latest_installer_github_release(
         self,
-        batch_job: BatchJob = None, 
+        batch_job: Optional[BatchJob] = None, 
     ) -> Optional[BatchJob]:
         LogMessage.Debug(f"Checking if a newer Github package exists for `{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
-        is_new_installer_config_github_package_available = self.is_new_github_package_available(self.installer_config_package_name_stub, self.installer_config_github_url_stub)
+        (is_new_installer_config_github_package_available, local_version, github_version) = self.is_new_github_package_available(self.installer_config_package_name_stub, self.installer_config_github_url_stub)
+        import re
+        local_version_parts = re.split('[._]', local_version)
+        github_version_parts = re.split('[._]', github_version)
+        # Ensure that a new package is assumed to exist only if there is a new patch version and not more major changes
+        for (local_version_part, github_version_part) in zip(local_version_parts[:-1], github_version_parts[:-1]):
+            if local_version_part != github_version_part:
+                is_new_installer_config_github_package_available = False
+
         if not is_new_installer_config_github_package_available:
             LogMessage.Debug(f"No new Github package exists for`{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
         else:
             LogMessage.Info(f"New Github package exists for `{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
         
         LogMessage.Debug(f"Checking if a newer Github package exists for `{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
-        is_new_installer_github_package_available = self.is_new_github_package_available(self.installer_package_name_stub, self.installer_github_url_stub)     
+        (is_new_installer_github_package_available, local_version, github_version) = self.is_new_github_package_available(self.installer_package_name_stub, self.installer_github_url_stub)     
+        import re
+        local_version_parts = re.split('[._]', local_version)
+        github_version_parts = re.split('[._]', github_version)
+        # Ensure that a new package is assumed to exist only if there is a new patch version and not more major changes
+        for (local_version_part, github_version_part) in zip(local_version_parts[:-1], github_version_parts[:-1]):
+            if local_version_part != github_version_part:
+                is_new_installer_github_package_available = False
+
         if not is_new_installer_github_package_available:
             LogMessage.Debug(f"No new Github package exists for`{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
         else:
@@ -976,7 +992,7 @@ class Main:
                 batch_job= batch_job,
             )
             if self.builder.get_object("use_github_switch").get_active():
-                batch_job = self.install_latest_github_release(batch_job= batch_job)
+                batch_job = self.install_latest_installer_github_release(batch_job= batch_job)
             self.launch_third_party_utility(
                 package_name= [f"{self.installer_config_package_name_stub}", f"{self.installer_package_name_stub}"],
                 executable_name = ["gtk-launch", "calamares_online"],
@@ -1021,7 +1037,7 @@ class Main:
                 batch_job= batch_job
             ) 
             if self.builder.get_object("use_github_switch").get_active():
-                batch_job = self.install_latest_github_release(batch_job= batch_job)            
+                batch_job = self.install_latest_installer_github_release(batch_job= batch_job)            
             self.launch_third_party_utility(
                 package_name= [f"{self.installer_config_package_name_stub}", f"{self.installer_package_name_stub}"],
                 executable_name = ["gtk-launch", "calamares_offline"],
