@@ -907,9 +907,11 @@ class Main:
         for (local_version_part, github_version_part) in zip(local_version_parts[:-1], github_version_parts[:-1]):
             if local_version_part != github_version_part:
                 is_new_installer_config_github_package_available = False
+                LogMessage.Info(f"New Github package exists for`{self.installer_config_package_name_stub}`, but has a major change, so a newer ISO is needed...").write(logging_handler=self.logging_handler)
+                break
 
         if not is_new_installer_config_github_package_available:
-            LogMessage.Debug(f"No new Github package exists for`{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
+            LogMessage.Debug(f"No new compatible Github package exists for`{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
         else:
             LogMessage.Info(f"New Github package exists for `{self.installer_config_package_name_stub}`...").write(logging_handler=self.logging_handler)
         
@@ -922,9 +924,11 @@ class Main:
         for (local_version_part, github_version_part) in zip(local_version_parts[:-1], github_version_parts[:-1]):
             if local_version_part != github_version_part:
                 is_new_installer_github_package_available = False
+                LogMessage.Info(f"New Github package exists for`{self.installer_package_name_stub}`, but has a major change, so a newer ISO is needed...").write(logging_handler=self.logging_handler)
+                break
 
         if not is_new_installer_github_package_available:
-            LogMessage.Debug(f"No new Github package exists for`{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
+            LogMessage.Debug(f"No new compatible Github package exists for`{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
         else:
             LogMessage.Info(f"New Github package exists for `{self.installer_package_name_stub}`...").write(logging_handler=self.logging_handler)
 
