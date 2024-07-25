@@ -1,3 +1,7 @@
+Version 0.0.52
+==============
+1. The ISO Welcome app is set to only update the installer if minor changes like patches are detected (Otherwise the package would have failed to install, and needs a newer ISO).
+
 Version 0.0.51
 ==============
 1. Added a status bar that displays the last status from the console log.
