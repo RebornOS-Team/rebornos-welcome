@@ -16,9 +16,9 @@
   - [ ] [The PKGBUILD for the stable variant of the welcome app](packaging/rebornos-welcome/PKGBUILD)
   - [ ] [The PKGBUILD for the git variant of the welcome app](packaging/rebornos-welcome-git/PKGBUILD)
   - [ ] [The PKGBUILD for the local variant of the welcome app](packaging/rebornos-welcome-local/PKGBUILD)
-  - [ ] [The PKGBUILD for the stable variant of the ISO welcome app](packaging_iso/rebornos-welcome/PKGBUILD)
-  - [ ] [The PKGBUILD for the git variant of the ISO welcome app](packaging_iso/rebornos-welcome-git/PKGBUILD)
-  - [ ] [The PKGBUILD for the local variant of the ISO welcome app](packaging_iso/rebornos-welcome-local/PKGBUILD)
+  - [ ] [The PKGBUILD for the stable variant of the ISO welcome app](packaging_iso/rebornos-iso-welcome/PKGBUILD)
+  - [ ] [The PKGBUILD for the git variant of the ISO welcome app](packaging_iso/rebornos-iso-welcome-git/PKGBUILD)
+  - [ ] [The PKGBUILD for the local variant of the ISO welcome app](packaging_iso/rebornos-iso-welcome-local/PKGBUILD)
 
 - [ ] Commit and push all changes through git, for example `git commit -m "Some message" && git push`
 
