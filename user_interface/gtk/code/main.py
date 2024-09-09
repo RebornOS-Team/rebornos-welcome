@@ -958,14 +958,14 @@ class Main:
             batch_job += Command.Shell(
                 "curl --silent"
                 + " " + "--output" + " " + download_path + "/" + f"{self.installer_config_package_name_stub}.pkg.tar.zst"
-                + " " + "--location" + " " + f"$(curl --silent \'https://api.github.com/repos/{self.installer_config_github_url_stub}/releases/latest\' | jq \'.assets[] | select(.name | endswith(\".zst\")).browser_download_url\' | cat | cut -d \'\"\' -f 2)"
+                + " " + "--location" + " " + f"$(curl --silent \'https://api.github.com/repos/{self.installer_config_github_url_stub}/releases/latest\' | jq \'.assets[] | select(.name | endswith(\".zst\")).browser_download_url\' | grep -v debug | cat | cut -d \'\"\' -f 2)"
             )
         if is_new_installer_github_package_available:
             batch_job += LogMessage.Debug(f"Downloading `{self.installer_package_name_stub}` from GitHub...")
             batch_job += Command.Shell(
                 "curl --silent"
                 + " " + "--output" + " " + download_path + "/" + f"{self.installer_package_name_stub}.pkg.tar.zst"
-                + " " + "--location" + " " + f"$(curl --silent \'https://api.github.com/repos/{self.installer_github_url_stub}/releases/latest\' | jq \'.assets[] | select(.name | endswith(\".zst\")).browser_download_url\' | cat | cut -d \'\"\' -f 2)"
+                + " " + "--location" + " " + f"$(curl --silent \'https://api.github.com/repos/{self.installer_github_url_stub}/releases/latest\' | jq \'.assets[] | select(.name | endswith(\".zst\")).browser_download_url\' | grep -v debug | cat | cut -d \'\"\' -f 2)"
             )
         # batch_job += Command.Shell(
         #     "rm -rf" + " " + download_path + "/" + "*.md5sum"

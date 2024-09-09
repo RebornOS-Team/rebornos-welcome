@@ -1,3 +1,7 @@
+Version 0.0.53
+==============
+1. The auto-update is fixed to filter out an interfering -debug package that seems to be generated in recent builds.
+
 Version 0.0.52
 ==============
 1. The ISO Welcome app is set to only update the installer if minor changes like patches are detected (Otherwise the package would have failed to install, and needs a newer ISO).
