@@ -1,4 +1,4 @@
-Version 0.0.53
+Version 0.0.54
 ==============
 1. The auto-update is fixed to filter out an interfering -debug package that seems to be generated in recent builds.
 

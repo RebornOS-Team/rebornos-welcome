@@ -2,8 +2,8 @@
 # 1. shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname='rebornos-iso-welcome-local'
-PKGVER_STUB=0.0.52
-pkgver=0.0.52
+PKGVER_STUB=0.0.54
+pkgver=0.0.54
 pkgrel=1
 
 arch=('any')
