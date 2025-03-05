@@ -3,7 +3,7 @@
 
 pkgname='rebornos-iso-welcome-local'
 PKGVER_STUB=0.0.54
-pkgver=0.0.54
+pkgver=0.0.54.2025_03_04T20_25_18_06_00
 pkgrel=1
 
 arch=('any')
