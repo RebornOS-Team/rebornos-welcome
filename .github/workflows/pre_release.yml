@@ -29,7 +29,7 @@ jobs:
           sudo -u rebornos sh -c "packaging_iso/build_package.sh git --noconfirm"
       - name: ⬆ Upload Package Artifact
         id: upload_package_step
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with: 
           name: Unstable Package
           path: |
@@ -56,7 +56,7 @@ jobs:
           echo "GIT_VERSION=$GIT_VERSION"
       - name: ⬇ Download Package Artifact
         id: download_package_step         
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: Unstable Package
           path: output
