@@ -261,7 +261,7 @@ class Main:
         self,
         executable_name: Union[str, List[str]],
         detached: bool = False,
-        batch_job: BatchJob = None
+        batch_job: BatchJob | None = None
     ) -> Optional[BatchJob]:
         import subprocess
         import shlex
@@ -276,24 +276,28 @@ class Main:
 
         launch_message = LogMessage.Info("Launching `" + executable_name_joined + "`...")
 
+        run_entity: Command | Function | None = None
         if detached:
-            run_command = Function(
+            run_entity = Function(
                 subprocess.Popen,
                 shlex.split(executable_name_joined),
                 start_new_session=True
             )
         else:
-            run_command =  Command(
+            run_entity =  Command(
                 shlex.split(executable_name_joined)
             )
 
         if batch_job is None:
             launch_message.write(logging_handler=self.logging_handler)
-            run_command.run_log_and_wait(self.logging_handler)
+            if isinstance(run_entity, Command):
+                run_entity.run_log_and_wait(self.logging_handler)
+            elif isinstance(run_entity, Function):
+                run_entity.run_and_log(self.logging_handler)
             return None
         else:
             batch_job += launch_message
-            batch_job += run_command
+            batch_job += run_entity
             return batch_job
 
     def is_package_old(self, single_package_name: str) -> bool:
@@ -359,8 +363,8 @@ class Main:
         package_name: Union[str, List[str]],
         post_install_command: Optional[Union[str, List[str]]] = None,
         update: bool= False,
-        batch_job: BatchJob = None,
-    ) -> Optional[BatchJob]:
+        batch_job: BatchJob | None = None,
+    ) -> BatchJob | None:
         import subprocess
         import shlex
 
@@ -424,20 +428,27 @@ class Main:
             install_message.write(logging_handler=self.logging_handler)
             install_command.run_log_and_wait(self.logging_handler)
             if post_install_command is not None:
-                Command(post_install_command).run_log_and_wait(self.logging_handler)
+                if isinstance(post_install_command, list): 
+                    Command(post_install_command).run_log_and_wait(self.logging_handler)
+                elif isinstance(post_install_command, str):
+                    Command.Shell(post_install_command).run_log_and_wait(self.logging_handler)
             return None
         else:
             batch_job += install_message
             batch_job += install_command
             if post_install_command is not None:
-                batch_job += Command(post_install_command)
+                
+                if isinstance(post_install_command, list): 
+                    batch_job += Command(post_install_command)
+                elif isinstance(post_install_command, str):
+                    batch_job += Command.Shell(post_install_command)
             return batch_job
 
     def uninstall_package(
         self,
         package_name: Union[str, List[str]],
-        batch_job: BatchJob = None,
-    ) -> Optional[BatchJob]:
+        batch_job: BatchJob | None = None,
+    ) -> BatchJob | None:
         import subprocess
         import shlex
 
@@ -490,8 +501,8 @@ class Main:
         post_install_command: Optional[Union[str, List[str]]] = None,
         detached: bool = True,
         update: bool = False,
-        batch_job: BatchJob = None,
-    ) -> BatchJob:        
+        batch_job: BatchJob | None = None,
+    ) -> BatchJob | None:        
         if batch_job is None:            
             self.display_busy()
             batch_job = BatchJob(
