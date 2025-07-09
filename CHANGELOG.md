@@ -1,3 +1,7 @@
+Version 0.0.58
+==============
+1. Remove any remaining pacman database lock on the ISO
+
 Version 0.0.54
 ==============
 1. The auto-update is fixed to filter out an interfering -debug package that seems to be generated in recent builds.

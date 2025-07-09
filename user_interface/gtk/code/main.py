@@ -193,7 +193,7 @@ class Main:
         self.initialized = True 
 
         LogMessage.Info("Starting the event loop...").write(self.logging_handler)
-        Gtk.main() # start the GUI event loop   
+        Gtk.main() # start the GUI event loop
 
     def settings_safe_get(self, key: str, default_value: Any) -> Any :
         try:
@@ -369,7 +369,9 @@ class Main:
         import shlex
 
         if update:          
-            LogMessage.Debug("Checking if newer versions exist for: " + str(package_name)).write(logging_handler=self.logging_handler) 
+            LogMessage.Debug("Checking if newer versions exist for: " + str(package_name)).write(logging_handler=self.logging_handler)
+            if self.is_iso:
+                Command.Shell("pkexec rm /var/lib/pacman/db.lck").run_log_and_wait(self.logging_handler)
             Command(["pkexec", "pacman", "-Sy"]).run_log_and_wait(self.logging_handler)
             package_name = self.filter_old_packages(package_name)
             LogMessage.Debug("Package(s) which need updates: " + str(package_name)).write(logging_handler=self.logging_handler)
@@ -982,6 +984,9 @@ class Main:
         #     "rm -rf" + " " + download_path + "/" + "*.md5sum"
         # )
         batch_job += LogMessage.Debug("Installing downloaded files...")
+        batch_job += Command.Shell(
+            "pkexec rm /var/lib/pacman/db.lck"
+        )
         batch_job += Command.Shell(
             "pkexec pacman -U --noconfirm" + " " + download_path + "/" + "*.pkg.tar.*",
         )
