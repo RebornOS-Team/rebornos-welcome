@@ -2083,7 +2083,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">5</property>
                     <property name="margin-bottom">5</property>
-                    <property name="label" translatable="yes">0.0.58</property>
+                    <property name="label" translatable="yes">0.0.59</property>
                     <attributes>
                       <attribute name="font-desc" value="Open Sans 11"/>
                     </attributes>
@@ -3238,7 +3238,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
     <property name="orientation">vertical</property>
     <signal name="map" handler="on_utilities_page_shown" swapped="no"/>
     <child>
-      <!-- n-columns=3 n-rows=5 -->
+      <!-- n-columns=3 n-rows=4 -->
       <object class="GtkGrid">
         <property name="visible">True</property>
         <property name="can-focus">False</property>
@@ -3303,7 +3303,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">0</property>
-            <property name="top-attach">4</property>
+            <property name="top-attach">3</property>
           </packing>
         </child>
         <child>
@@ -3358,7 +3358,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">1</property>
-            <property name="top-attach">3</property>
+            <property name="top-attach">2</property>
           </packing>
         </child>
         <child>
@@ -3413,7 +3413,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">0</property>
-            <property name="top-attach">3</property>
+            <property name="top-attach">2</property>
           </packing>
         </child>
         <child>
@@ -3468,7 +3468,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">2</property>
-            <property name="top-attach">3</property>
+            <property name="top-attach">2</property>
           </packing>
         </child>
         <child>
@@ -3523,7 +3523,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">0</property>
-            <property name="top-attach">2</property>
+            <property name="top-attach">1</property>
           </packing>
         </child>
         <child>
@@ -3578,7 +3578,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">1</property>
-            <property name="top-attach">2</property>
+            <property name="top-attach">1</property>
           </packing>
         </child>
         <child>
@@ -3633,7 +3633,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">2</property>
-            <property name="top-attach">2</property>
+            <property name="top-attach">1</property>
           </packing>
         </child>
         <child>
@@ -3688,7 +3688,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">0</property>
-            <property name="top-attach">1</property>
+            <property name="top-attach">0</property>
           </packing>
         </child>
         <child>
@@ -3743,7 +3743,7 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">1</property>
-            <property name="top-attach">1</property>
+            <property name="top-attach">0</property>
           </packing>
         </child>
         <child>
@@ -3798,64 +3798,6 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">2</property>
-            <property name="top-attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="halign">center</property>
-            <property name="valign">start</property>
-            <signal name="clicked" handler="on_rebornos_fire" swapped="no"/>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="margin-start">43</property>
-                <property name="margin-end">43</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">RebornOS FIRE</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Open Sans 11"/>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">rebornos-fire</property>
-                    <attributes>
-                      <attribute name="font-desc" value="Open Sans 11"/>
-                      <attribute name="style" value="italic"/>
-                    </attributes>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-              </object>
-            </child>
-            <style>
-              <class name="special-button"/>
-            </style>
-          </object>
-          <packing>
-            <property name="left-attach">1</property>
             <property name="top-attach">0</property>
           </packing>
         </child>
@@ -3911,14 +3853,8 @@ Clicking on one of the buttons under "Utilities" will install the application (i
           </object>
           <packing>
             <property name="left-attach">2</property>
-            <property name="top-attach">4</property>
+            <property name="top-attach">3</property>
           </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
         </child>
         <child>
           <placeholder/>
